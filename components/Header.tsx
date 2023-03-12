@@ -1,9 +1,28 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import {BellIcon, MagnifyingGlassIcon} from "@heroicons/react/24/solid";
+import {useState, useEffect} from "react";
 
 function Header() {
-    return <header>
+
+    const [isScrolled, setIsScrolled] = useState(false);
+
+    useEffect(() => {
+        const handeScroll = () => {
+            if (window.scrollY > 0) {
+                setIsScrolled(true)
+            } else {
+                setIsScrolled(false)
+            }
+        }
+        window.addEventListener("scroll", handeScroll)
+
+        return () => {
+            window.removeEventListener('scroll', handeScroll)
+        }
+    }, [])
+
+    return <header className={`${isScrolled && 'bg-red-500'}`}>
         <div className="flex items-center space-x-2 md:space-x-10">
             <Image src="/ministock-logo.png"
                    width={100}
@@ -27,7 +46,11 @@ function Header() {
             <BellIcon className="h-6 w-6"/>
 
             <Link href="/account">
-                <Image src="" alt="Profile Image"/>
+                <Image
+                    src="/default-profile-picture.png"
+                    alt="Profile Image"
+                    width="25"
+                    height="25"/>
             </Link>
         </div>
     </header>
