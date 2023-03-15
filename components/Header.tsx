@@ -5,7 +5,7 @@ import {useState, useEffect} from "react";
 
 function Header() {
 
-    const [isScrolled, setIsScrolled] = useState(false);
+    const [isScrolled, setIsScrolled] = useState(false)
 
     useEffect(() => {
         const handeScroll = () => {
@@ -22,7 +22,7 @@ function Header() {
         }
     }, [])
 
-    return <header className={`${isScrolled && 'bg-red-500'}`}>
+    return <header className={`${isScrolled && 'bg-[#141414]'}`}>
         <div className="flex items-center space-x-2 md:space-x-10">
             <Image src="/ministock-logo.png"
                    width={100}
