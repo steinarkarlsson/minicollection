@@ -1,27 +1,41 @@
-# Next.js + Tailwind CSS Example
+# Minicollector
 
-This example shows how to use [Tailwind CSS](https://tailwindcss.com/) [(v3.2)](https://tailwindcss.com/blog/tailwindcss-v3-2) with Next.js. It follows the steps outlined in the official [Tailwind docs](https://tailwindcss.com/docs/guides/nextjs).
+This website is built with Next.js and Tailwind CSS, and deployed with Vercel. 
+It is a modern database of miniatures and a tracking tool for miniature collections. 
+The latest UX/UI technologies have been utilized to provide users with a seamless experience.
 
-## Deploy your own
+## Features
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example) or preview live with [StackBlitz](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-tailwindcss)
+* ### Released Features
+  *
+* ### Unreleased Features
+  * Browse a vast collection of miniatures and miniature sets.
+  * Create an account to track your miniature collection.
+  * View detailed information about each miniature, including factions and specifications.
+  * Search for specific miniatures using keywords or filters.
+  * Share your collection and wishlist with others.
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-tailwindcss&project-name=with-tailwindcss&repository-name=with-tailwindcss)
+## Technologies Used
 
-## How to use
+* [Next.js](https://nextjs.org/) - A React-based framework for building server-side rendered applications.
+* [Tailwind CSS](https://tailwindcss.com/) - A utility-first CSS framework for rapidly building custom user interfaces.
+* [Vercel](https://vercel.com/dashboard) - A cloud platform for serverless deployment of web applications.
 
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init), [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/), or [pnpm](https://pnpm.io) to bootstrap the example:
+## Getting Started
 
-```bash
-npx create-next-app --example with-tailwindcss with-tailwindcss-app
+To run this website locally, follow these steps:
+
+* Clone the repository: 
+
+```Bash 
+git clone https://github.com/Devonquendi/minicollection.git
 ```
-
-```bash
-yarn create next-app --example with-tailwindcss with-tailwindcss-app
+* Install the dependencies: 
+```Bash
+npm install
 ```
-
-```bash
-pnpm create next-app --example with-tailwindcss with-tailwindcss-app
+* Run the development server:
+```Bash
+npm run dev
 ```
-
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+* Open http://localhost:3000 in your browser.
