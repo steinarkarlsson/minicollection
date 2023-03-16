@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import {BellIcon, MagnifyingGlassIcon} from "@heroicons/react/24/solid";
+import { MagnifyingGlassIcon} from "@heroicons/react/24/solid";
 import {useState, useEffect} from "react";
 
 function Header() {
@@ -38,14 +38,11 @@ function Header() {
                 <li className="headerLink">My Stock</li>
             </ul>
         </div>
-        <div>
+
+        <div className="flex items-center space-x-3">
             <MagnifyingGlassIcon className="hidden h-6 w-6 sm:inline"/>
 
-            <p className="hidden lg:inline">Kids</p>
-
-            <BellIcon className="h-6 w-6"/>
-
-            <Link href="/account">
+            <Link href="">
                 <Image
                     src="/default-profile-picture.png"
                     alt="Profile Image"
