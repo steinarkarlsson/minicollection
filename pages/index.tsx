@@ -1,6 +1,7 @@
 import type {NextPage} from 'next'
 import Head from 'next/head'
 import Header from "../components/Header";
+import MiniCardGrid from "../components/MiniCardGrid";
 
 const Home: NextPage = () => {
     return (
@@ -9,17 +10,18 @@ const Home: NextPage = () => {
                 <title>Mini Collection</title>
                 <link rel="icon" href="/favicon.ico"/>
             </Head>
+
+            {/*--Appbar--*/}
             <Header/>
+
             <main>
-                {/*    Banner */}
+                {/* Search widget */}
                 <section>
-                    {/*    Row */}
-                    {/*    Row */}
+                    <MiniCardGrid/>
                 </section>
             </main>
-            {/*    Modal*/}
+            {/* Modal */}
         </div>
     )
 }
-
 export default Home
