@@ -5,15 +5,12 @@ import MiniCardGrid from "../components/MiniCardGrid";
 
 const Home: NextPage = () => {
     return (
-        <div className="relative h-screen bg-gradient-to-b from-gray-900/10 to-[#222222] lg:h-[140vh]">
+        <div className="relative h-screen bg-gradient-to-b from-gray-900/10 to-[#444444] lg:h-[140vh]">
             <Head>
                 <title>Mini Collection</title>
                 <link rel="icon" href="/favicon.ico"/>
             </Head>
-
-            {/*--Appbar--*/}
             <Header/>
-
             <main>
 
                 {/* Search widget */}
