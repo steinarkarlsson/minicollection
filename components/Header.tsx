@@ -1,11 +1,11 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { MagnifyingGlassIcon} from "@heroicons/react/24/solid";
+import {MagnifyingGlassIcon} from "@heroicons/react/24/solid";
 import {useState, useEffect} from "react";
 
 function Header() {
 
-    const [isScrolled, setIsScrolled] = useState(false)
+    const [isScrolled, setIsScrolled] = useState(false);
 
     useEffect(() => {
         const handeScroll = () => {
@@ -35,14 +35,15 @@ function Header() {
                 <li className="headerLink">Miniatures</li>
                 <li className="headerLink">Sets</li>
                 <li className="headerLink">Terrain</li>
-                <li className="headerLink">My Stock</li>
+                <li className="headerLink">My Collection</li>
             </ul>
         </div>
-
-        <div className="flex items-center space-x-3">
+        <div>
             <MagnifyingGlassIcon className="hidden h-6 w-6 sm:inline"/>
 
-            <Link href="">
+            <p className="hidden lg:inline"></p>
+
+            <Link href="/account">
                 <Image
                     src="/default-profile-picture.png"
                     alt="Profile Image"
