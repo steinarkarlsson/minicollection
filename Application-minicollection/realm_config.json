@@ -1,0 +1,8 @@
+{
+    "app_id": "application-minicollection-gnmuc",
+    "config_version": 20210101,
+    "name": "Application-minicollection",
+    "location": "AU",
+    "provider_region": "aws-ap-southeast-2",
+    "deployment_model": "LOCAL"
+}
