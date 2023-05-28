@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import {BellIcon, MagnifyingGlassIcon} from "@heroicons/react/24/solid";
+import {MagnifyingGlassIcon} from "@heroicons/react/24/solid";
 import {useState, useEffect} from "react";
 
 function Header() {
@@ -22,7 +22,7 @@ function Header() {
         }
     }, [])
 
-    return <header className={`${isScrolled && 'bg-red-500'}`}>
+    return <header className={`${isScrolled && 'bg-[#141414]'}`}>
         <div className="flex items-center space-x-2 md:space-x-10">
             <Image src="/ministock-logo.png"
                    width={100}
@@ -35,15 +35,13 @@ function Header() {
                 <li className="headerLink">Miniatures</li>
                 <li className="headerLink">Sets</li>
                 <li className="headerLink">Terrain</li>
-                <li className="headerLink">My Stock</li>
+                <li className="headerLink">My Collection</li>
             </ul>
         </div>
         <div>
             <MagnifyingGlassIcon className="hidden h-6 w-6 sm:inline"/>
 
-            <p className="hidden lg:inline">Kids</p>
-
-            <BellIcon className="h-6 w-6"/>
+            <p className="hidden lg:inline"></p>
 
             <Link href="/account">
                 <Image
