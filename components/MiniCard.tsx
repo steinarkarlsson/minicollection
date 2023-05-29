@@ -7,17 +7,24 @@ interface Props {
 
 function MiniCard({figure}:Props){
     return (
-        <div className="relative h-28 min-w-[180px]">
+        <div className="max-w-sm rounded shadow-lg hover:bg-gray-800 transition delay-75 duration-400 ease-in-out">
         <Image
             src={`https://storage.googleapis.com/minicollection`+ figure.image}
-            className="rounded-sm object-cover md:rounded"
+            className="max-h-fit max-w-full object-cover"
             alt=""
             width={200}
             height={100}
         />
-            <h3>{figure.mainName}</h3>
-            <h4>{figure.faction}</h4>
-    </div>
+        <div className="px-6 py-4">
+
+            <div className="font-bold text-xl mb-2">{figure.mainName}</div>
+            <p className="text-gray-700 text-base"></p>
+        </div>
+            <div className="px-6 pt-4 pb-2">
+            <span
+                className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{figure.faction}</span>
+            </div>
+            </div>
     )
 }
 

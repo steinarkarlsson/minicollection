@@ -1,4 +1,3 @@
-import type {NextPage} from 'next'
 import Head from 'next/head'
 import Header from "../components/Header";
 import MiniCardGrid from "../components/MiniCardGrid";
@@ -24,9 +23,6 @@ const Home = ({ figures }: Props) => {
                 <main className="relative pl-4 pb-24  lg:space-y-24 lg:pl-16 mt-10">
                     <section className="md:space-y-24 mt-10">
                         <MiniCardGrid title={"Miniatures"} figures={figures}/>
-                        <MiniCardGrid title={"Sets"} figures={figures}/>
-                        <MiniCardGrid title={"Terrain"} figures={figures}/>
-                        <MiniCardGrid title={"Books"} figures={figures}/>
                     </section>
                 </main>
         </div>
