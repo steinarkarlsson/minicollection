@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import Link from 'next/link'
 import {MagnifyingGlassIcon} from "@heroicons/react/24/solid";
 import {useState, useEffect} from "react";
 
@@ -39,13 +38,12 @@ function Header() {
 
             <p className="hidden lg:inline"></p>
 
-            <Link href="/account">
                 <Image
                     src="/default-profile-picture.png"
                     alt="Profile Image"
                     width="25"
-                    height="25"/>
-            </Link>
+                    height="25"
+                    className="rounded-full"/>
         </div>
     </header>
 }
