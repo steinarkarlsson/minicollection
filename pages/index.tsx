@@ -6,7 +6,7 @@ import {Figure} from "../typings";
 import {useRecoilValue} from "recoil";
 import {modalState} from "../atoms/modalAtom";
 import React from "react";
-import {Modal} from "@mui/material";
+import Modal from "../components/Modal";
 
 interface Props {
     figures: Figure[]
@@ -17,7 +17,7 @@ const Home = ({ figures }: Props) => {
     const showModal = useRecoilValue(modalState)
 
     return (
-        <div className={`relative h-screen bg-gradient-to-b lg:h-[140vh]}`}>
+        <div className={`relative h-screen bg-gradient-to-b lg:h-[140vh]} ${showModal && '!h-screen overflow-hidden'}`}>
             <Head>
                 <title>Mini Collection</title>
                 <link rel="icon" href="/favicon.ico"/>
