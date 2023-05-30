@@ -5,26 +5,31 @@ interface Props {
     figure: Figure
 }
 
-function MiniCard({figure}:Props){
+function MiniCard({figure}: Props) {
     return (
-        <div className="w-55 h-70 rounded shadow-lg hover:bg-gray-800 transition delay-75 duration-400 ease-in-out">
-        <Image
-            src={`https://storage.googleapis.com/minicollection`+ figure.image}
-            className="max-w-fit max-w-fit object-cover"
-            alt=""
-            width={200}
-            height={100}
-        />
-        <div className="px-6 py-4">
-
-            <div className="font-bold text-m mb-2 text-wrap">{figure.mainName}</div>
-            <p className="text-gray-700 text-base"></p>
-        </div>
+        <div className="m-2 w-60 border-2 border-gray-700 rounded-md shadow-lg hover:bg-gray-800 transition delay-75 duration-400 ease-in-out">
+            <div className="h-60 flex flex-col justify-center items-center">
+                <div className="flex justify-center">
+                    <Image
+                        src={`https://storage.googleapis.com/minicollection` + figure.image}
+                        className="h-60 w-auto"
+                        alt=""
+                        width={500}
+                        height={500}
+                    />
+                </div>
+            </div>
+            <div className="px-6">
+                <div className="text-m text-wrap">
+                    {figure.mainName}
+                </div>
+            </div>
             <div className="px-6 pt-4 pb-2">
-            <span
-                className="inline-block bg-gray-200 rounded-full px-3 py-1 text-xs font-semibold text-gray-700 mr-2 mb-2">{figure.faction}</span>
+                <span className="inline-block bg-gray-800 rounded-full px-3 py-1 text-xs font-semibold text-gray-400">
+                    {figure.faction}
+                </span>
             </div>
-            </div>
+        </div>
     )
 }
 
