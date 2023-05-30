@@ -1,13 +1,24 @@
 import Image from "next/image";
 import {Figure} from "../typings";
+import {useRecoilState} from "recoil";
+import {figureState, modalState} from "../atoms/modalAtom";
 
 interface Props {
     figure: Figure
 }
 
 function MiniCard({figure}: Props) {
+
+    const [showModal, setShowModal] = useRecoilState(modalState)
+    const [currentFigure, setCurrentFigure] = useRecoilState(figureState)
+
     return (
-        <div className="m-2 w-60 border-2 border-gray-700 rounded-md shadow-lg hover:bg-gray-800 transition delay-75 duration-400 ease-in-out">
+        <div className="m-2 w-60 border-2 border-gray-700 rounded-md shadow-lg hover:bg-gray-800 transition delay-75 duration-400 ease-in-out"
+             onClick={() => {
+                 setCurrentFigure(figure)
+                 setShowModal(true)
+             }}
+        >
             <div className="h-60 flex flex-col justify-center items-center">
                 <div className="flex justify-center">
                     <Image
