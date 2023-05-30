@@ -3,6 +3,10 @@ import Header from "../components/Header";
 import MiniCardGrid from "../components/MiniCardGrid";
 import connectToDatabase from '../db'
 import {Figure} from "../typings";
+import {useRecoilValue} from "recoil";
+import {modalState} from "../atoms/modalAtom";
+import React from "react";
+import {Modal} from "@mui/material";
 
 interface Props {
     figures: Figure[]
@@ -10,8 +14,7 @@ interface Props {
 
 const Home = ({ figures }: Props) => {
 
-    console.log(figures)
-    console.log(figures[0].mainName)
+    const showModal = useRecoilValue(modalState)
 
     return (
         <div className={`relative h-screen bg-gradient-to-b lg:h-[140vh]}`}>
@@ -25,6 +28,7 @@ const Home = ({ figures }: Props) => {
                         <MiniCardGrid title={"Miniatures"} figures={figures}/>
                     </section>
                 </main>
+            {showModal && <Modal/>}
         </div>
     )
 }
