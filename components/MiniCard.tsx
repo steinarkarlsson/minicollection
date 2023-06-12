@@ -21,13 +21,13 @@ function MiniCard({figure}: Props) {
         >
             <div className="h-60 flex flex-col justify-center items-center">
                 <div className="flex justify-center">
-                    <Image
-                        src={`https://storage.googleapis.com/minicollection` + figure.image}
-                        className="h-60 w-auto"
-                        alt=""
-                        width={500}
-                        height={500}
-                    />
+                    {/*<Image*/}
+                    {/*    src={`${figure.image}`}*/}
+                    {/*    className="h-60 w-auto"*/}
+                    {/*    alt=""*/}
+                    {/*    width={500}*/}
+                    {/*    height={500}*/}
+                    {/*/>*/}
                 </div>
             </div>
             <div className="px-6">
