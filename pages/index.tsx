@@ -43,7 +43,7 @@ const client = createClient(
     }
 );
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
     const figures = await client.fetch(`*[_type == "figure"]`);
     return {
         props: {
