@@ -1,10 +1,20 @@
 import MuiModal from '@mui/material/Modal';
-import {modalState} from "../atoms/modalAtom";
+import {figureState, modalState} from "../atoms/modalAtom";
 import {useRecoilState} from "recoil";
 import {XMarkIcon} from "@heroicons/react/20/solid";
+import {Character, Faction, Figure, Print, ReleaseWave, Set, Terrain} from "../typings";
 
-function Modal() {
+interface Props {
+    figure: Figure
+    sets: Set[]
+    character: Character[]
+    faction: Faction[]
+    releaseWaves: ReleaseWave
+}
+
+function Modal({faction}: Props) {
     const [showModal, setShowModal] = useRecoilState(modalState)
+    const [figure, setFigure] = useRecoilState(figureState)
 
     const handleClose = () => {
         setShowModal(false)
@@ -17,6 +27,10 @@ function Modal() {
                 <XMarkIcon className="h-6 w-6"/>
             </button>
             <div>
+                <p>{figure?.mainName}</p>
+                <p>{figure?.faction?._ref}</p>
+                <p>{figure?.material}</p>
+                <p>{figure?.releaseWave?._ref}</p>
 
             </div>
         </>
