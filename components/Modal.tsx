@@ -14,7 +14,7 @@ interface Props {
 
 function Modal({faction}: Props) {
     const [showModal, setShowModal] = useRecoilState(modalState)
-    const [figure, setFigure] = useRecoilState(figureState)
+    const [figure] = useRecoilState(figureState)
 
     const handleClose = () => {
         setShowModal(false)
@@ -28,9 +28,6 @@ function Modal({faction}: Props) {
             </button>
             <div>
                 <p>{figure?.mainName}</p>
-                <p>{figure?.faction?._ref}</p>
-                <p>{figure?.material}</p>
-                <p>{figure?.releaseWave?._ref}</p>
 
             </div>
         </>
