@@ -1,14 +1,11 @@
 import Head from 'next/head'
 import Header from "../components/Header";
 import MiniCardGrid from "../components/MiniCardGrid";
-import {Figure, Set, Terrain, Print, Character, Faction, ReleaseWave} from "../typings";
+import {Character, Faction, Figure, Print, ReleaseWave, Set, Terrain} from "../typings";
 import {useRecoilValue} from "recoil";
 import {modalState} from "../atoms/modalAtom";
 import React from "react";
-import Modal from "../components/Modal";
 import {createClient} from "next-sanity";
-import imageUrlBuilder from '@sanity/image-url'
-import {props} from "sanity/src/core/preview/utils/props";
 
 interface Props {
     figure: Figure[]
@@ -20,7 +17,7 @@ interface Props {
     releaseWave: ReleaseWave[]
 }
 
-const Home = ({figure, set, terrain, print, character, faction, releaseWave}: Props) => {
+const Home = ({figure, faction}: Props) => {
 
     const showModal = useRecoilValue(modalState)
 
@@ -33,10 +30,9 @@ const Home = ({figure, set, terrain, print, character, faction, releaseWave}: Pr
             <Header/>
             <main className="relative pl-4 pb-24  lg:space-y-24 lg:pl-16 mt-10">
                 <section className="md:space-y-24 mt-10">
-                    <MiniCardGrid title={"Miniatures"} figures={figure}/>
+                    <MiniCardGrid title={"Miniatures"} figures={figure} factions={faction}/>
                 </section>
             </main>
-            {/*{showModal && <Modal figure={figure} faction={faction} character{character} set={set} releaseWave={releaseWave} />}*/}
         </div>
     )
 }

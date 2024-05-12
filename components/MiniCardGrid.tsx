@@ -1,24 +1,29 @@
-import {Figure} from "../typings";
+import {Faction, Figure} from "../typings";
 import MiniCard from "./MiniCard";
+
 interface Props {
     title: string
     figures: Figure[]
+    factions: Faction[]
 }
-function MiniCardGrid({title,figures}:Props) {
+
+function MiniCardGrid({title, figures}: Props) {
     return (
-        <div className="space-y-0.5 md:space-y-2 pt-16">
-            <h2 className="w-56 cursor-pointer text-sm font-semibold text-[#e5e5e5] transition duration-200 hover:text-white md:text-2xl">{title}</h2>
-            <div className="group relative md:-ml-1">
-                <div className="flex flex-wrap space-x-0.5 md:space-x-2.5 md:p-2">
-                    {figures.map((figure) => (
-                            <MiniCard
+        <>
+            <div className="space-y-0.5 md:space-y-2 pt-16">
+                <h2 className="w-56cursor-pointer text-sm font-semibold text-[#e5e5e5] transition duration-200 hover:text-white md:text-2xl">{title}</h2>
+                <div className="group relative md:-ml-1">
+                    <div className="flex flex-wrap">
+                        {figures.map((figure) => (
+                            (<MiniCard
                                 key={figure.mainName}
                                 figure={figure}
-                            />
-                    ))}
+                            />)
+                        ))}
+                    </div>
                 </div>
             </div>
-        </div>
+        </>
     )
 }
 

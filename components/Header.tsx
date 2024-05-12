@@ -41,8 +41,10 @@ function Header() {
                 <Image
                     src="/default-profile-picture.png"
                     alt="Profile Image"
-                    width="25"
-                    height="25"
+                    width={0}
+                    height={0}
+                    sizes="100vw"
+                    style={{ width: '25', height: 'auto' }}
                     className="rounded-full"/>
         </div>
     </header>
