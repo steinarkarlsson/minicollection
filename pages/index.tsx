@@ -4,8 +4,9 @@ import MiniCardGrid from "../components/MiniCardGrid";
 import {Character, Faction, Figure, Print, ReleaseWave, Set, Terrain} from "../typings";
 import {useRecoilValue} from "recoil";
 import {modalState} from "../atoms/modalAtom";
-import React from "react";
+import React, {useEffect} from "react";
 import {createClient} from "next-sanity";
+import SearchBar from "../components/SearchBar";
 
 interface Props {
     figure: Figure[]
@@ -17,12 +18,26 @@ interface Props {
     releaseWave: ReleaseWave[]
 }
 
-const Home = ({figure, faction}: Props) => {
+const Home = ({figure, faction, releaseWave}: Props) => {
 
-    const showModal = useRecoilValue(modalState)
+    const [searchTerm, setSearchTerm] = React.useState<String>('')
+    const [selectedFaction, setselectedFaction] = React.useState<Faction>(faction[0])
+    const [selectedReleaseWave, setselectedReleaseWave] = React.useState<ReleaseWave>(releaseWave[0])
+
+    const handleSearchTermChange = (event:Event) => {
+        setSearchTerm(event.target?.value);
+    }
+
+    const handleFactionChange = (newFaction:Faction) => {
+        setselectedFaction(newFaction);
+    }
+
+    const handleReleaseWaveChange = (newReleaseWave:ReleaseWave) => {
+        setselectedReleaseWave(newReleaseWave);
+    }
 
     return (
-        <div className={`relative h-screen bg-gradient-to-b lg:h-[140vh]} ${showModal && '!h-screen overflow-hidden'}`}>
+        <div className='relative h-screen bg-gradient-to-b lg:h-[140vh]} !h-screen overflow-hidden'>
             <Head>
                 <title>Mini Collection</title>
                 <link rel="icon" href="/favicon.ico"/>
@@ -30,6 +45,15 @@ const Home = ({figure, faction}: Props) => {
             <Header/>
             <main className="relative pl-4 pb-24  lg:space-y-24 lg:pl-16 mt-10">
                 <section className="md:space-y-24 mt-10">
+                    <SearchBar
+                    searchTerm={searchTerm}
+                    handleSearchTermChange={handleSearchTermChange}
+                    factions={faction}
+                    selectedFaction={selectedFaction}
+                    handleFactionChange={handleFactionChange}
+                    releaseWaves={releaseWave}
+                    selectedReleaseWave={selectedReleaseWave}
+                    handleReleaseWaveChange={handleReleaseWaveChange}/>
                     <MiniCardGrid title={"Miniatures"} figures={figure} factions={faction}/>
                 </section>
             </main>
