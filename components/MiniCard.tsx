@@ -32,11 +32,13 @@ function MiniCard({figure}: Props) {
             </div>
             <div className="px-6 pt-4 pb-2">
                 <span className="inline-block bg-gray-800 rounded-full px-3 py-1 text-xs font-semibold text-gray-400">
+                    {figure.faction?.name}
                 </span>
             </div>
             <div className="px-6 pt-4 pb-2">
-                    <span className="inline-block bg-gray-800 rounded-full px-3 py-1 text-xs font-semibold text-gray-400">
-                    {figure.releaseWave?._ref}
+                    <span
+                        className="inline-block bg-gray-800 rounded-full px-3 py-1 text-xs font-semibold text-gray-400">
+                    {figure.releaseWave?.name}
                 </span>
             </div>
         </div>

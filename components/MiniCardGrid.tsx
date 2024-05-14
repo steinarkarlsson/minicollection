@@ -1,10 +1,9 @@
-import {Faction, Figure} from "../typings";
+import {Figure} from "../typings";
 import MiniCard from "./MiniCard";
 
 interface Props {
     title: string
     figures: Figure[]
-    factions: Faction[]
 }
 
 function MiniCardGrid({title, figures}: Props) {

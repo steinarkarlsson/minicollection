@@ -1,58 +1,52 @@
 import React from 'react';
-import {Button, Select, TextField, useTheme} from "@mui/material";
+import {useTheme} from "@mui/material";
 import {Faction, ReleaseWave} from "../typings";
+import {useForm} from "react-hook-form";
 
 type searchBarProps = {
     searchTerm: string,
-    handleSearchTermChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
     factions: Faction[],
     selectedFaction: Faction,
-    handleFactionChange: (event: React.ChangeEvent<{name?: string, value: string}>) => void,
     releaseWaves: ReleaseWave[],
     selectedReleaseWave: ReleaseWave,
-    handleReleaseWaveChange: (event: React.ChangeEvent<{name?: string, value: string}>) => void,
 }
 
-function SearchBar({searchTerm, handleSearchTermChange, factions, selectedFaction, handleFactionChange, releaseWaves, selectedReleaseWave, handleReleaseWaveChange}:searchBarProps) {
+function SearchBar({searchTerm, factions, selectedFaction, releaseWaves, selectedReleaseWave}: searchBarProps) {
     const theme = useTheme()
-    const [searchInput, setSearchInput] = React.useState('')
 
-    const inputStyle = {background:'#1C2025', border:'#434D5B', color:'#C7D0DD', width:'300px', margin:'10px'}
+    const inputStyle = {background: '#1C2025', border: '#434D5B', color: '#C7D0DD', width: '300px', margin: '10px'}
 
+    const {
+        register,
+        handleSubmit,
+        formState: {errors},
+    } = useForm();
 
     return (
-        <div>
-            <TextField
-                label="Name"
-                color="primary"
-                value={searchTerm}
-                onChange={handleSearchTermChange}
-                sx={inputStyle}
-            />
-            <Select
-                label="Faction"
-                sx={inputStyle}
-                value={selectedFaction}
-                onChange={handleFactionChange}
-            >
-                {factions.map((faction) => (
-                    <option id={faction._id} value={faction.name}>{faction.name}</option>
-                ))}
-            </Select>
-            <Select
-                label="Release Wave"
-                sx={inputStyle}
-                value={selectedReleaseWave}
-                onChange={handleReleaseWaveChange}
-            >
-                {releaseWaves.map((releaseWave) => (
-                    <option id={releaseWave._id} value={releaseWave.name}>{releaseWave.name}</option>
-                ))}
-            </Select>
-            <Button id='searchButton' sx={{color:'#fff', border:'#434D5B'}}>Search</Button>
-        </div>
-    )
+        <form onSubmit={handleSubmit((data) => console.log(data))}>
 
+            <label>Search</label>
+            <input {...register('searchTerm')} value={searchTerm} style={inputStyle}/>
+
+            <label>Faction</label>
+            <select {...register('faction', {required: true})} >
+                {factions.map((faction) => (
+                    <option key={faction._id} value={selectedFaction.name}>{faction.name}</option>
+                ))}
+            </select>
+            {errors.faction && <p>Faction is required</p>}
+
+            <label>Release Wave</label>
+            <select {...register('releaseWave')} >
+                {releaseWaves.map((releaseWave) => (
+                    <option key={releaseWave.name} value={selectedReleaseWave.name}>{releaseWave.name}</option>
+                ))}
+            </select>
+            {errors.releaseWave && <p>Please enter number for age.</p>}
+
+            <input type="submit"/>
+        </form>
+    )
 }
 
 export default SearchBar;
