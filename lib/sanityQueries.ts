@@ -1,10 +1,10 @@
 import {createClient} from "next-sanity";
-import {GridFigure, Figure} from "../typings";
+import {GridFigure, Figure, ReleaseWave, Faction} from "../typings";
 
 export const client = createClient(
     {
-        projectId: process.env.SANITY_PROJECTID,
-        dataset: process.env.SANITY_DATASET,
+        projectId: '4llymfg7',
+        dataset: 'production',
         apiVersion: "2023-06-12",
         useCdn: false
     }
@@ -34,10 +34,6 @@ export async function getAllCollections() {
 
 export async function getFigureGridInfo(searchFilter?: string, factionFilter?: string, releaseWaveFilter?: string) {
 
-    searchFilter = 'númenor';
-    factionFilter = 'Númenor';
-    releaseWaveFilter = 'The Fellowship of the Ring (2001)';
-
     const results = await client.fetch(`*[
             _type == "figure" 
             && mainName match $searchFilter
@@ -53,11 +49,17 @@ export async function getFigureGridInfo(searchFilter?: string, factionFilter?: s
         factionFilter,
         releaseWaveFilter,
     });
-    console.log(results)
     return results as GridFigure[];
 }
 
+export async function getFactions() {
+    return await client.fetch(`*[_type == "faction"]`) as Faction[];
+}
+
+export async function getReleaseWaves() {
+    return await client.fetch(`*[_type == "releaseWave"]`) as ReleaseWave[];
+}
+
 export async function getFigureDetails(id: string) {
-    const figure = await client.fetch(`*[_type == "figure" && _id == $id]`, {id});
-    return figure as Figure;
+    return await client.fetch(`*[_type == "figure" && _id == $id]`, {id}) as Figure;
 }
