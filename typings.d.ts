@@ -34,7 +34,7 @@ export interface GridFigure {
         }
     }
     releaseWave?: { name: string }
-    faction?: { name:string }
+    faction?: { name:string }[]
 }
 
 export interface Set {
