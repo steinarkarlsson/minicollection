@@ -3,8 +3,8 @@ import {Faction, Figure, GridFigure, ReleaseWave} from "../typings";
 
 export const client = createClient(
     {
-        projectId: '4llymfg7',
-        dataset: 'production',
+        projectId: process.env.NEXT_PUBLIC_SANITY_PROJECTID as string,
+        dataset: process.env.NEXT_PUBLIC_SANITY_DATASET as string,
         apiVersion: "2023-06-12",
         useCdn: false
     }
