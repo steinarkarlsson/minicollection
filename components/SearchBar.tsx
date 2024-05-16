@@ -47,7 +47,8 @@ function SearchBar({
             <input {...register('searchTerm')} value={searchTerm} style={inputStyle} onChange={handleSearchChange}/>
 
             <label>Faction</label>
-            <select {...register('faction', {required: true})} onChange={handleFactionChange}>
+            <select {...register('faction')} onChange={handleFactionChange}>
+                <option key="" value=""></option>
                 {factions.map((faction) => (
                     <option key={faction._id} value={faction.name}>{faction.name}</option>
                 ))}
@@ -55,6 +56,7 @@ function SearchBar({
 
             <label>Release Wave</label>
             <select {...register('releaseWave')} onChange={handleReleaseWaveChange}>
+                <option key="" value=""></option>
                 {releaseWaves.map((releaseWave) => (
                     <option key={releaseWave.name} value={releaseWave.name}>{releaseWave.name}</option>
                 ))}

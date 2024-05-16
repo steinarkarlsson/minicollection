@@ -29,16 +29,18 @@ function MiniCard({figure}: Props) {
                     {figure.mainName}
                 </div>
             </div>
-            {figure.faction?.map((faction,index) => (
-                <div key={index} className="px-6 pt-4 pb-2">
-                <span className="inline-block bg-gray-800 rounded-full px-3 py-1 text-xs font-semibold text-gray-400">
+            <div className="flex flex-row pt-4 pb-2">
+                {figure.faction?.map((faction, index) => (
+                    <div key={index} className="px-1">
+                <span className="inline-block bg-gray-800 rounded-full px-3 py-1 text-xs font-semibold text-gray-400 w-auto whitespace-nowrap">
                     {faction.name}
                 </span>
-                </div>
-            ))}
-            <div className="px-6 pt-4 pb-2">
+                    </div>
+                ))}
+            </div>
+            <div className="px-1 pt-4 pb-2">
                     <span
-                        className="inline-block bg-gray-800 rounded-full px-3 py-1 text-xs font-semibold text-gray-400">
+                        className="inline-block bg-gray-800 rounded-full px-3 py-1 text-xs font-semibold text-gray-400 whitespace-nowrap">
                     {figure.releaseWave?.name}
                 </span>
             </div>

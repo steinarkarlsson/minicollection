@@ -1,5 +1,5 @@
 import {createClient} from "next-sanity";
-import {GridFigure, Figure, ReleaseWave, Faction} from "../typings";
+import {Faction, Figure, GridFigure, ReleaseWave} from "../typings";
 
 export const client = createClient(
     {
@@ -32,13 +32,17 @@ export async function getAllCollections() {
     };
 }
 
-export async function getFigureGridInfo(searchFilter?: string, factionFilter?: string, releaseWaveFilter?: string) {
+export async function getFigureGridInfo(searchFilter: string = '', factionFilter: string = '', releaseWaveFilter: string = '') {
+
+    const searchString = searchFilter ? `&& mainName match $searchFilter` : ``;
+    const factionString = factionFilter ? `&& $factionFilter in faction[]->name` : ``;
+    const releaseWaveString = releaseWaveFilter ? `&& releaseWave->name== $releaseWaveFilter` : ``;
 
     const results = await client.fetch(`*[
             _type == "figure" 
-            && mainName match $searchFilter
-            && $factionFilter in faction[]->name 
-            && releaseWave->name== $releaseWaveFilter
+            ${searchString}
+            ${factionString} 
+            ${releaseWaveString}
             ] | order(releaseWave-> {name}) 
             {
                 mainName, 
@@ -47,7 +51,7 @@ export async function getFigureGridInfo(searchFilter?: string, factionFilter?: s
                 faction[]->{name}}`, {
         searchFilter,
         factionFilter,
-        releaseWaveFilter,
+        releaseWaveFilter
     });
     return results as GridFigure[];
 }
