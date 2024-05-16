@@ -2,10 +2,10 @@ import MuiModal from '@mui/material/Modal';
 import {figureState, modalState} from "../atoms/modalAtom";
 import {useRecoilState} from "recoil";
 import {XMarkIcon} from "@heroicons/react/20/solid";
-import {Character, Faction, Figure, Print, ReleaseWave, Set, Terrain} from "../typings";
+import {Character, Faction, GridFigure, ReleaseWave, Set} from "../typings";
 
 interface Props {
-    figure: Figure
+    figure: GridFigure
     sets: Set[]
     character: Character[]
     faction: Faction[]

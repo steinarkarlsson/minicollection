@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import {useTheme} from "@mui/material";
 import {Faction, ReleaseWave} from "../typings";
 import {useForm} from "react-hook-form";
+import {z} from 'zod';
 
 type searchBarProps = {
     searchTerm: string,
@@ -11,8 +12,19 @@ type searchBarProps = {
     selectedReleaseWave: ReleaseWave,
 }
 
+const SearchBarSchema = z.object({
+    searchTerm: z.string().optional(),
+    faction: z.object({
+        name: z.string(),
+    }).optional(),
+    releaseWave: z.object({
+        name: z.string(),
+    }).optional()
+});
+
+export type SearchBarFormData = z.infer<typeof SearchBarSchema>;
+
 function SearchBar({searchTerm, factions, selectedFaction, releaseWaves, selectedReleaseWave}: searchBarProps) {
-    const theme = useTheme()
 
     const inputStyle = {background: '#1C2025', border: '#434D5B', color: '#C7D0DD', width: '300px', margin: '10px'}
 
@@ -20,11 +32,14 @@ function SearchBar({searchTerm, factions, selectedFaction, releaseWaves, selecte
         register,
         handleSubmit,
         formState: {errors},
-    } = useForm();
+    } = useForm<SearchBarFormData>();
+
+    const onSubmit = useCallback((data: SearchBarFormData) => {
+        console.log(data)
+    }, [])
 
     return (
-        <form onSubmit={handleSubmit((data) => console.log(data))}>
-
+        <form onSubmit={handleSubmit(onSubmit)}>
             <label>Search</label>
             <input {...register('searchTerm')} value={searchTerm} style={inputStyle}/>
 
@@ -42,7 +57,6 @@ function SearchBar({searchTerm, factions, selectedFaction, releaseWaves, selecte
                     <option key={releaseWave.name} value={selectedReleaseWave.name}>{releaseWave.name}</option>
                 ))}
             </select>
-            {errors.releaseWave && <p>Please enter number for age.</p>}
 
             <input type="submit"/>
         </form>

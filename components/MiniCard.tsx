@@ -1,8 +1,8 @@
 import Image from "next/image";
-import {Figure} from "../typings";
+import {GridFigure} from "../typings";
 
 interface Props {
-    figure: Figure
+    figure: GridFigure
 }
 
 function MiniCard({figure}: Props) {

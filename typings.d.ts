@@ -1,6 +1,6 @@
 import {ObjectId} from "bson";
 
-export interface FigureFull {
+export interface Figure {
     _id: ObjectId
     type?: string
     releaseWave?: {
@@ -24,7 +24,7 @@ export interface FigureFull {
     }
 }
 
-export interface Figure {
+export interface GridFigure {
     mainName: string
     image?: {
         _type: string,

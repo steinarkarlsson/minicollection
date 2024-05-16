@@ -1,6 +1,4 @@
-import Image from 'next/image'
-import {MagnifyingGlassIcon} from "@heroicons/react/24/solid";
-import {useState, useEffect} from "react";
+import {useEffect, useState} from "react";
 
 function Header() {
 
@@ -32,20 +30,6 @@ function Header() {
                 <li className="headerLink">Terrain</li>
                 <li className="headerLink">My Collection</li>
             </ul>
-        </div>
-        <div>
-            <MagnifyingGlassIcon className="hidden h-6 w-6 sm:inline"/>
-
-            <p className="hidden lg:inline"></p>
-
-                <Image
-                    src="/default-profile-picture.png"
-                    alt="Profile Image"
-                    width={0}
-                    height={0}
-                    sizes="100vw"
-                    style={{ width: '25', height: 'auto' }}
-                    className="rounded-full"/>
         </div>
     </header>
 }

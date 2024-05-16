@@ -1,12 +1,12 @@
 import Head from 'next/head'
 import Header from "../components/Header";
 import MiniCardGrid from "../components/MiniCardGrid";
-import {Figure} from "../typings";
+import {GridFigure} from "../typings";
 import React from "react";
 import {getFigureGridInfo} from "../lib/sanityQueries";
 
 interface Props {
-    figures: Figure[]
+    figures: GridFigure[]
 }
 
 const Home = ({figures}: Props) => {
@@ -14,8 +14,6 @@ const Home = ({figures}: Props) => {
     //const [selectedFaction, setselectedFaction] = React.useState<Faction>(faction[0])
     //const [selectedReleaseWave, setselectedReleaseWave] = React.useState<ReleaseWave>(releaseWave[0])
 
-    //  const figures = getFigureGridInfo();
-    // console.log(figures)
     return (
         <div className='relative h-screen bg-gradient-to-b lg:h-[140vh]} !h-screen overflow-hidden'>
             <Head>
@@ -25,13 +23,6 @@ const Home = ({figures}: Props) => {
             <Header/>
             <main className="relative pl-4 pb-24  lg:space-y-24 lg:pl-16 mt-10">
                 <section className="md:space-y-24 mt-10">
-                    {/*<SearchBar*/}
-                    {/* searchTerm={searchTerm}*/}
-                    {/* factions={faction}*/}
-                    {/* selectedFaction={selectedFaction}*/}
-                    {/* releaseWaves={releaseWave}*/}
-                    {/* selectedReleaseWave={selectedReleaseWave}*/}
-                    {/*>*/}
                     <MiniCardGrid title={"Miniatures"} figures={figures}/>
                 </section>
             </main>

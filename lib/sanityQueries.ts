@@ -1,5 +1,5 @@
 import {createClient} from "next-sanity";
-import {Figure} from "../typings";
+import {GridFigure, Figure} from "../typings";
 
 export const client = createClient(
     {
@@ -32,7 +32,32 @@ export async function getAllCollections() {
     };
 }
 
-export async function getFigureGridInfo() {
-    const results = await client.fetch(`*[_type == "figure" ]{mainName, image, releaseWave->{name}, faction->{name}}`);
-    return results as Figure[];
+export async function getFigureGridInfo(searchFilter?: string, factionFilter?: string, releaseWaveFilter?: string) {
+
+    searchFilter = 'númenor';
+    factionFilter = 'Númenor';
+    releaseWaveFilter = 'The Fellowship of the Ring (2001)';
+
+    const results = await client.fetch(`*[
+            _type == "figure" 
+            && mainName match $searchFilter
+            && $factionFilter in faction[]->name 
+            && releaseWave->name== $releaseWaveFilter
+            ] | order(releaseWave-> {name}) 
+            {
+                mainName, 
+                image, 
+                releaseWave->{name}, 
+                faction[]->{name}}`, {
+        searchFilter,
+        factionFilter,
+        releaseWaveFilter,
+    });
+    console.log(results)
+    return results as GridFigure[];
+}
+
+export async function getFigureDetails(id: string) {
+    const figure = await client.fetch(`*[_type == "figure" && _id == $id]`, {id});
+    return figure as Figure;
 }
