@@ -34,6 +34,7 @@ export async function getAllCollections() {
 
 export async function getFigureGridInfo(searchFilter: string = '', factionFilter: string = '', releaseWaveFilter: string = '') {
 
+    console.log(client.config);
     const searchString = searchFilter ? `&& mainName match $searchFilter` : ``;
     const factionString = factionFilter ? `&& $factionFilter in faction[]->name` : ``;
     const releaseWaveString = releaseWaveFilter ? `&& releaseWave->name== $releaseWaveFilter` : ``;

@@ -32,7 +32,7 @@ const Home = ({figures, factions, releaseWaves}: Props) => {
 
     }
 
-    async function updateData (data:SearchBarFormData) {
+    async function handleFigureChange (data:SearchBarFormData) {
         const newFigures = await getFigureGridInfo(data.searchTerm, data.faction, data.releaseWave)
         console.log(newFigures)
         setFilteredFigures(newFigures);
@@ -41,7 +41,7 @@ const Home = ({figures, factions, releaseWaves}: Props) => {
     const onSubmit = useCallback((data: SearchBarFormData) => {
         console.log('submitting search')
         console.log(data)
-        updateData(data)
+        handleFigureChange(data)
     }, [])
 
     return (
@@ -73,10 +73,8 @@ const Home = ({figures, factions, releaseWaves}: Props) => {
 export default Home
 
 export async function getServerSideProps() {
+    const figures = await getFigureGridInfo();
     const factions = await getFactions();
     const releaseWaves = await getReleaseWaves();
-    // console.log(factions);
-    // console.log(releaseWaves);
-    const figures = await getFigureGridInfo();
     return {props: {figures,factions,releaseWaves}}
 }
