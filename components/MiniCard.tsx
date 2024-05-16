@@ -22,7 +22,6 @@ function MiniCard({figure}: Props) {
                             height={500}
                         />
                     ) : null}
-
                 </div>
             </div>
             <div className="px-6">
@@ -30,11 +29,13 @@ function MiniCard({figure}: Props) {
                     {figure.mainName}
                 </div>
             </div>
-            <div className="px-6 pt-4 pb-2">
+            {figure.faction?.map((faction,index) => (
+                <div key={index} className="px-6 pt-4 pb-2">
                 <span className="inline-block bg-gray-800 rounded-full px-3 py-1 text-xs font-semibold text-gray-400">
-                    {figure.faction?.name}
+                    {faction.name}
                 </span>
-            </div>
+                </div>
+            ))}
             <div className="px-6 pt-4 pb-2">
                     <span
                         className="inline-block bg-gray-800 rounded-full px-3 py-1 text-xs font-semibold text-gray-400">
