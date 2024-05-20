@@ -15,7 +15,7 @@ function MiniCardGrid({title, figures}: Props) {
                     <div className="flex flex-wrap">
                         {figures.map((figure) => (
                             (<MiniCard
-                                key={figure.mainName}
+                                key={`${figure.mainName}-${figure.releaseWave?.name}`}
                                 figure={figure}
                             />)
                         ))}
