@@ -1,14 +1,5 @@
-import {createClient} from "next-sanity";
 import {Faction, Figure, GridFigure, ReleaseWave} from "../typings";
-
-export const client = createClient(
-    {
-        projectId: process.env.NEXT_PUBLIC_SANITY_PROJECTID as string,
-        dataset: process.env.NEXT_PUBLIC_SANITY_DATASET as string,
-        apiVersion: "2023-06-12",
-        useCdn: false
-    }
-);
+import {client} from "./client";
 
 export async function getAllCollections() {
     const figure = await client.fetch(`*[_type == "figure"]`);
@@ -34,7 +25,6 @@ export async function getAllCollections() {
 
 export async function getFigureGridInfo(searchFilter: string = '', factionFilter: string = '', releaseWaveFilter: string = '') {
 
-    console.log(client.config);
     const searchString = searchFilter ? `&& mainName match $searchFilter || character[]->name match $searchFilter` : ``;
     const factionString = factionFilter ? `&& $factionFilter in faction[]->name` : ``;
     const releaseWaveString = releaseWaveFilter ? `&& releaseWave->name== $releaseWaveFilter` : ``;
