@@ -73,8 +73,12 @@ const Home = ({figures, factions, releaseWaves}: Props) => {
 export default Home
 
 export async function getServerSideProps() {
-    const figures = await getFigureGridInfo();
-    const factions = await getFactions();
-    const releaseWaves = await getReleaseWaves();
-    return {props: {figures,factions,releaseWaves}}
+    try {
+        const figures = await getFigureGridInfo();
+        const factions = await getFactions();
+        const releaseWaves = await getReleaseWaves();
+        return {props: {figures, factions, releaseWaves}}
+    } catch (e) {
+        console.error(e)
+    }
 }
