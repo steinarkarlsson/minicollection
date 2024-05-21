@@ -50,8 +50,8 @@ const Home = ({figures, factions, releaseWaves}: Props) => {
                 <link rel="icon" href="/favicon.ico"/>
             </Head>
             <Header/>
-            <main className="relative pl-4 pb-24  lg:space-y-24 lg:pl-16 mt-10">
-                <section className="md:space-y-24 mt-10">
+            <main className="relative mt-10 pb-24 pl-4 lg:space-y-24 lg:pl-16">
+                <section className="mt-10 md:space-y-24">
                     <SearchBar
                         factions={factions}
                         releaseWaves={releaseWaves}

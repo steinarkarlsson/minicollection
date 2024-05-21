@@ -45,7 +45,7 @@ function SearchBar({
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="pt-10">
             <label className={labelStyle}>Search</label>
-            <input {...register('searchTerm')} value={searchTerm} className={inputStyle} onChange={handleSearchChange}/>
+            <input {...register('searchTerm')} value={searchTerm} className={inputStyle} onChange={handleSearchChange} />
 
             <label className={labelStyle}>Faction</label>
             <select {...register('faction')} onChange={handleFactionChange} className={inputStyle}>
@@ -63,7 +63,7 @@ function SearchBar({
                 ))}
             </select>
 
-            <input type="submit" className="rounded-lg bg-gray-700 h-10 w-24 text-lg hover:bg-gray-600 transition duration-300"/>
+            <input type="submit" className="h-10 w-24 rounded-lg bg-gray-700 text-lg transition duration-300 hover:bg-gray-600"/>
         </form>
     )
 }
