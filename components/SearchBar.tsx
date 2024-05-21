@@ -44,7 +44,7 @@ function SearchBar({
     } = useForm<SearchBarFormData>();
 
     return (
-        <div className="flex justify-center pt-10">
+        <div className="flex justify-center pt-16">
             <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col md:flex-row">
                 <div className={groupStyle}>
                     <label className={labelStyle}>Search</label>
