@@ -2,7 +2,7 @@ import Head from 'next/head'
 import Header from "../components/Header";
 import MiniCardGrid from "../components/MiniCardGrid";
 import {Faction, GridFigure, ReleaseWave} from "../typings";
-import React, {useCallback} from "react";
+import React from "react";
 import {getFactions, getFigureGridInfo, getReleaseWaves} from "../lib/sanityQueries";
 import SearchBar, {SearchBarFormData} from "../components/SearchBar";
 
@@ -17,6 +17,7 @@ const Home = ({figures, factions, releaseWaves}: Props) => {
     const [searchFilter, setSearchFilter] = React.useState<string>('')
     const [factionFilter, setFactionFilter] = React.useState<string>('')
     const [releaseWaveFilter, setReleaseWaveFilter] = React.useState<string>('')
+    const [isLoading, setIsLoading] = React.useState<boolean>(false)
 
     const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
         console.log('setting search:', e.target.value)
@@ -32,17 +33,15 @@ const Home = ({figures, factions, releaseWaves}: Props) => {
 
     }
 
-    async function handleFigureChange (data:SearchBarFormData) {
+    const onSubmit = async (data: SearchBarFormData) => {
+        setIsLoading(true)
+        console.log('submitting search')
+        console.log(data)
         const newFigures = await getFigureGridInfo(data.searchTerm, data.faction, data.releaseWave)
+        setIsLoading(false)
         console.log(newFigures)
         setFilteredFigures(newFigures);
     }
-
-    const onSubmit = useCallback((data: SearchBarFormData) => {
-        console.log('submitting search')
-        console.log(data)
-        handleFigureChange(data)
-    }, [])
 
     return (
         <div className='relative h-screen bg-gradient-to-b lg:h-[140vh]} !h-screen'>
@@ -64,7 +63,7 @@ const Home = ({figures, factions, releaseWaves}: Props) => {
                         handleSearchChange={handleSearch}
                         onSubmit={onSubmit}
                     />
-                    <MiniCardGrid title={"Miniatures"} figures={filteredFigures}/>
+                    {isLoading ? <p>Loading</p> : <MiniCardGrid title={"Miniatures"} figures={filteredFigures}/>}
                 </section>
             </main>
         </div>
