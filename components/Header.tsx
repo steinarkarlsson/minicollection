@@ -1,4 +1,5 @@
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
+import Image from "next/image";
 
 function Header() {
 
@@ -19,17 +20,13 @@ function Header() {
         }
     }, [])
 
-    return <header className={`${isScrolled && 'bg-[#141414]'}`}>
-        <div className="flex items-center space-x-2 md:space-x-10">
-            <p>Mini Collection</p>
-
-            <ul className="hidden space-x-4 md:flex">
-                <li className="headerLink">Home</li>
-                <li className="headerLink">Miniatures</li>
-                <li className="headerLink">Sets</li>
-                <li className="headerLink">Terrain</li>
-                <li className="headerLink">My Collection</li>
-            </ul>
+    return <header className={`flex justify-center ${isScrolled && 'bg-[#141414]'}`}>
+        <div className="flex items-center">
+            <Image src="/icon.png" width="60" height="60" alt="logo"/>
+            <div className="flex flex-col">
+            <p className="text-2xl">Mini Collection</p>
+            <p className="">A Strategy Battle Game Collectors Archive</p>
+            </div>
         </div>
     </header>
 }

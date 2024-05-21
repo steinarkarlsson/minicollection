@@ -2,17 +2,14 @@ import {GridFigure} from "../typings";
 import MiniCard from "./MiniCard";
 
 interface Props {
-    title: string
     figures: GridFigure[]
 }
 
-function MiniCardGrid({title, figures}: Props) {
+function MiniCardGrid({figures}: Props) {
     return (
         <>
-            <div className="pt-16 space-y-0.5 md:space-y-2">
-                <h2 className="w-56cursor-pointer text-sm font-semibold text-[#e5e5e5] transition duration-200 hover:text-white md:text-2xl">{title}</h2>
-                <div className="relative group md:-ml-1">
-                    <div className="flex flex-wrap">
+                <div className="flex">
+                    <div className="flex justify-center flex-wrap">
                         {figures.map((figure) => (
                             (<MiniCard
                                 key={`${figure.mainName}-${figure.releaseWave?.name}`}
@@ -21,7 +18,6 @@ function MiniCardGrid({title, figures}: Props) {
                         ))}
                     </div>
                 </div>
-            </div>
         </>
     )
 }

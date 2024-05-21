@@ -5,6 +5,7 @@ import {Faction, GridFigure, ReleaseWave} from "../typings";
 import React from "react";
 import {getFactions, getFigureGridInfo, getReleaseWaves} from "../lib/sanityQueries";
 import SearchBar, {SearchBarFormData} from "../components/SearchBar";
+import Spinner from "../components/Spinner";
 
 interface Props {
     figures: GridFigure[],
@@ -46,8 +47,8 @@ const Home = ({figures, factions, releaseWaves}: Props) => {
     return (
         <div className='relative h-screen bg-gradient-to-b lg:h-[140vh]} !h-screen'>
             <Head>
-                <title>Mini Collection</title>
-                <link rel="icon" href="/favicon.ico"/>
+                <title >Mini Collection</title>
+                <link rel="icon" href="/icon.png"/>
             </Head>
             <Header/>
             <main className="relative mt-10 pb-24 pl-4 lg:space-y-24 lg:pl-16">
@@ -63,7 +64,7 @@ const Home = ({figures, factions, releaseWaves}: Props) => {
                         handleSearchChange={handleSearch}
                         onSubmit={onSubmit}
                     />
-                    {isLoading ? <p>Loading</p> : <MiniCardGrid title={"Miniatures"} figures={filteredFigures}/>}
+                    {isLoading ? <Spinner/> : <MiniCardGrid figures={filteredFigures}/>}
                 </section>
             </main>
         </div>

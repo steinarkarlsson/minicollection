@@ -33,8 +33,9 @@ function SearchBar({
                        onSubmit
                    }: searchBarProps) {
 
-    const inputStyle = "bg-gray-800 w-70 h-12 text-lg rounded-md m-4 scrollbar scrollbar-thumb-gray-500 scrollbar-track-gray-800 scrollbar-thumb-rounded-full scrollbar-track-rounded-full hover:bg-gray-700 transition duration-200";
-    const labelStyle = "text-lg text-gray-400";
+    const inputStyle = "flex bg-gray-800 w-full h-12 text-lg rounded-md scrollbar scrollbar-thumb-gray-500 scrollbar-track-gray-800 scrollbar-thumb-rounded-full scrollbar-track-rounded-full hover:bg-gray-700 transition duration-200 lg:w-90";
+    const labelStyle = "flex text-lg text-gray-400";
+    const groupStyle = "p-2";
 
     const {
         register,
@@ -43,28 +44,37 @@ function SearchBar({
     } = useForm<SearchBarFormData>();
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className="pt-10">
-            <label className={labelStyle}>Search</label>
-            <input {...register('searchTerm')} value={searchTerm} className={inputStyle} onChange={handleSearchChange} />
-
-            <label className={labelStyle}>Faction</label>
-            <select {...register('faction')} onChange={handleFactionChange} className={inputStyle}>
-                <option key="" value=""></option>
-                {factions.map((faction) => (
-                    <option key={faction._id} value={faction.name}>{faction.name}</option>
-                ))}
-            </select>
-
-            <label className={labelStyle}>Release Wave</label>
-            <select {...register('releaseWave')} onChange={handleReleaseWaveChange} className={inputStyle}>
-                <option key="" value=""></option>
-                {releaseWaves.map((releaseWave) => (
-                    <option key={releaseWave.name} value={releaseWave.name}>{releaseWave.name}</option>
-                ))}
-            </select>
-
-            <input type="submit" className="h-10 w-24 rounded-lg bg-gray-700 text-lg transition duration-300 hover:bg-gray-600"/>
-        </form>
+        <div className="flex justify-center pt-10">
+            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col md:flex-row">
+                <div className={groupStyle}>
+                    <label className={labelStyle}>Search</label>
+                    <input {...register('searchTerm')} value={searchTerm} className={inputStyle}
+                           onChange={handleSearchChange}/>
+                </div>
+                <div className={groupStyle}>
+                    <label className={labelStyle}>Faction</label>
+                    <select {...register('faction')} onChange={handleFactionChange} className={inputStyle}>
+                        <option key="" value=""></option>
+                        {factions.map((faction) => (
+                            <option key={faction._id} value={faction.name}>{faction.name}</option>
+                        ))}
+                    </select>
+                </div>
+                <div className={groupStyle}>
+                    <label className={labelStyle}>Release Wave</label>
+                    <select {...register('releaseWave')} onChange={handleReleaseWaveChange} className={inputStyle}>
+                        <option key="" value=""></option>
+                        {releaseWaves.map((releaseWave) => (
+                            <option key={releaseWave.name} value={releaseWave.name}>{releaseWave.name}</option>
+                        ))}
+                    </select>
+                </div>
+                <div className="pt-10">
+                    <input type="submit"
+                           className="h-10 w-24 rounded-lg bg-gray-700 text-lg transition duration-300 hover:bg-gray-600"/>
+                </div>
+            </form>
+        </div>
     )
 }
 

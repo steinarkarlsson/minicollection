@@ -9,26 +9,22 @@ function MiniCard({figure}: Props) {
 
     return (
         <div
-            className="m-2 mx-2 w-60 rounded-md border-2 border-gray-700 pt-2 shadow-lg transition delay-75 ease-in-out duration-400 hover:bg-gray-900"
+            className="m-2 mx-2 w-60 rounded-md border-2 border-gray-700 pt-2 shadow-lg transition delay-75 ease-in-out duration-400 hover:bg-gray-900 overflow-hidden"
         >
             <div className="flex h-60 flex-col items-center justify-center">
-                <div className="flex justify-center">
                     {figure.image && figure.image.asset ? (
                         <Image
                             src={`https://cdn.sanity.io/images/4llymfg7/production/${figure.image.asset._ref.slice(6).slice(0, -4)}.png`}
-                            className="h-60 w-auto"
+                            className="max-h-full w-full object-contain"
                             alt=""
-                            width={500}
-                            height={500}
+                            width={236}
+                            height={240}
                         />
                     ) : null}
-                </div>
             </div>
-            <div className="px-6">
-                <div className="text-m text-wrap">
+                <div className="px-6 text-m text-wrap">
                     {figure.mainName}
                 </div>
-            </div>
             <div className="flex flex-row pt-4 pb-2">
                 {figure.faction?.map((faction, index) => (
                     <div key={index} className="px-1">
