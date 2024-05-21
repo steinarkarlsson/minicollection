@@ -20,6 +20,7 @@ function MiniCard({figure}: Props) {
                         alt=""
                         width={236}
                         height={240}
+                        style={{ height: 'auto' }}
                     />
                 ) : null}
             </div>
