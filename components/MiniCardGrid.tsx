@@ -9,7 +9,7 @@ function MiniCardGrid({figures}: Props) {
     return (
         <>
                 <div className="flex">
-                    <div className="flex justify-center flex-wrap">
+                    <div className="flex flex-wrap justify-center">
                         {figures.map((figure) => (
                             (<MiniCard
                                 key={`${figure.mainName}-${figure.releaseWave?.name}`}

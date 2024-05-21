@@ -33,7 +33,7 @@ function SearchBar({
                        onSubmit
                    }: searchBarProps) {
 
-    const inputStyle = "flex bg-gray-800 w-full h-12 text-lg rounded-md scrollbar scrollbar-thumb-gray-500 scrollbar-track-gray-800 scrollbar-thumb-rounded-full scrollbar-track-rounded-full hover:bg-gray-700 transition duration-200 lg:w-90";
+    const inputStyle = "flex bg-gray-800 w-full h-12 text-lg pl-3 rounded-md scrollbar scrollbar-thumb-gray-500 scrollbar-track-gray-800 scrollbar-thumb-rounded-full scrollbar-track-rounded-full hover:bg-gray-700 transition duration-200 lg:w-90";
     const labelStyle = "flex text-lg text-gray-400";
     const groupStyle = "p-2";
 
