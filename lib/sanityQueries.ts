@@ -29,7 +29,7 @@ export async function getFigureGridInfo(searchFilter: string = '', factionFilter
     const factionString = factionFilter ? `&& $factionFilter in faction[]->name` : ``;
     const releaseWaveString = releaseWaveFilter ? `&& releaseWave->name== $releaseWaveFilter` : ``;
 
-    const results = await client.fetch(`*[_type == "figure" ${searchString} ${factionString} ${releaseWaveString}] | order( defined(image.asset) desc, type, character[]->name, faction[]->name, releaseWave-> name) {mainName, image, releaseWave->{name}, faction[]->{name}}`, {
+    const results = await client.fetch(`*[_type == "figure" ${searchString} ${factionString} ${releaseWaveString}] | order( defined(image.asset) desc, type, character[]->name, faction[]->name, releaseWave-> name)[0...50] {mainName, image, releaseWave->{name}, faction[]->{name}}`, {
         searchFilter,
         factionFilter,
         releaseWaveFilter
