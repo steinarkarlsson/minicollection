@@ -9,6 +9,7 @@ export default NextAuth({
         }),
         // Add other providers as needed
     ],
+
     //database: process.env.DATABASE_URL,
     // Add additional NextAuth configuration as needed
 });

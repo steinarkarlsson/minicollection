@@ -47,7 +47,7 @@ const Home = ({figures, factions, releaseWaves}: Props) => {
     return (
         <div className='relative h-screen bg-gradient-to-b lg:h-[140vh]} !h-screen'>
             <Head>
-                <title >Mini Collection</title>
+                <title>Mini Collection</title>
                 <link rel="icon" href="/icon.png"/>
             </Head>
             <Header/>
