@@ -6,6 +6,7 @@ import React from "react";
 import {getFactions, getFigureGridInfo, getReleaseWaves} from "../lib/sanityQueries";
 import SearchBar, {SearchBarFormData} from "../components/SearchBar";
 import Spinner from "../components/Spinner";
+import {supabase} from "../lib/supabase";
 
 interface Props {
     figures: GridFigure[],
@@ -24,14 +25,15 @@ const Home = ({figures, factions, releaseWaves}: Props) => {
         console.log('setting search:', e.target.value)
         setSearchFilter(e.target.value)
     }
+
     const handleFactionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         console.log('setting faction:', e.target.value)
         setFactionFilter(e.target.value)
     }
+
     const handleReleaseWaveChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         console.log('setting releaseWave:', e.target.value)
         setReleaseWaveFilter(e.target.value)
-
     }
 
     const onSubmit = async (data: SearchBarFormData) => {
@@ -43,6 +45,18 @@ const Home = ({figures, factions, releaseWaves}: Props) => {
         console.log(newFigures)
         setFilteredFigures(newFigures);
     }
+
+     const setNewView = async () => {
+        const { data, error} = await supabase
+            .from('views')
+            .insert({
+                name:'hello there'
+            })
+         if(data) console.log(data);
+         if(error) console.log(error.message);
+     };
+
+    setNewView();
 
     return (
         <div className='relative h-screen bg-gradient-to-b lg:h-[140vh]} !h-screen'>
