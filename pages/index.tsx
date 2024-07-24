@@ -7,6 +7,7 @@ import {getFactions, getFigureGridInfo, getReleaseWaves} from "../lib/sanityQuer
 import SearchBar, {SearchBarFormData} from "../components/SearchBar";
 import Spinner from "../components/Spinner";
 import {supabase} from "../lib/supabase";
+import { useSession, signIn, signOut } from "next-auth/react"
 
 interface Props {
     figures: GridFigure[],
@@ -20,6 +21,8 @@ const Home = ({figures, factions, releaseWaves}: Props) => {
     const [factionFilter, setFactionFilter] = React.useState<string>('')
     const [releaseWaveFilter, setReleaseWaveFilter] = React.useState<string>('')
     const [isLoading, setIsLoading] = React.useState<boolean>(false)
+    const { data: session } = useSession()
+
 
     const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
         console.log('setting search:', e.target.value)
@@ -46,17 +49,17 @@ const Home = ({figures, factions, releaseWaves}: Props) => {
         setFilteredFigures(newFigures);
     }
 
-     const setNewView = async () => {
-        const { data, error} = await supabase
-            .from('views')
-            .insert({
-                name:'hello there'
-            })
-         if(data) console.log(data);
-         if(error) console.log(error.message);
-     };
+     // const setNewView = async () => {
+     //    const { data, error} = await supabase
+     //        .from('views')
+     //        .insert({
+     //            name:'hello there'
+     //        })
+     //     if(data) console.log(data);
+     //     if(error) console.log(error.message);
+     // };
 
-    setNewView();
+    // setNewView();
 
     return (
         <div className='relative h-screen bg-gradient-to-b lg:h-[140vh]} !h-screen'>

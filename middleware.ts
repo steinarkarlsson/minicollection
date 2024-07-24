@@ -14,9 +14,9 @@ export async function middleware(req: NextRequest) {
 
     console.log(session)
 
-    if(!session){
-        return NextResponse.rewrite(new URL('login', req.url));
-    }
+    // if(!session){
+    //     return NextResponse.rewrite(new URL('login', req.url));
+    // }
     return res;
 }
 

@@ -16,11 +16,10 @@ function MiniCard({figure}: Props) {
                 {figure.image && figure.image.asset ? (
                     <Image
                         src={`https://cdn.sanity.io/images/4llymfg7/production/${figure.image.asset._ref.slice(6).slice(0, -4)}.png`}
-                        className="max-h-full w-full object-contain"
                         alt=""
-                        width={236}
-                        height={240}
-                        style={{ height: 'auto' }}
+                        width={136}
+                        height={140}
+                        style={{objectFit: 'cover', width:'auto', height:'auto'}}
                     />
                 ) : null}
             </div>

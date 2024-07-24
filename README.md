@@ -32,10 +32,10 @@ git clone https://github.com/Devonquendi/minicollection.git
 ```
 * Install the dependencies: 
 ```Bash
-npm install
+yarn
 ```
 * Run the development server:
 ```Bash
-npm run dev
+yarn run dev
 ```
 * Open http://localhost:3000 in your browser.
