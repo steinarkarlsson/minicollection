@@ -4,17 +4,13 @@ export interface Figure {
     _id: ObjectId
     type?: string
     releaseWave?: {
-        _ref: string
-        _type: string
+        name: string
     }
-    _type: string
     mainName: string
     material?: string[]
     faction?: {
-        _ref: string
-        _type: string
-        _key:string
-    }
+        name: string
+    }[]
     image?: {
         _type: string,
         asset?: {
@@ -22,6 +18,9 @@ export interface Figure {
             _type: string
         }
     }
+    character?:{
+        name: string
+    }[]
 }
 
 export interface GridFigure {

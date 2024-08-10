@@ -61,5 +61,5 @@ export async function getFigureDetails(_id: string) {
     type,
     material,
     character[]->{name},
-    }`, {_id}) as Figure;
+    }`, {_id}) as Figure[];
 }

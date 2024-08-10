@@ -15,10 +15,9 @@ function Modal() {
 
     useEffect(() => {
         if (!selectedGridFigure) return;
-        const figureDetails = getFigureDetails(selectedGridFigure._id).then((figureDetails) => {
+        const figureDetails = getFigureDetails(`${selectedGridFigure._id}`).then((figureDetails) => {
             setDetailedFigure(figureDetails[0]);
             setIsLoading(false)
-            console.log(figureDetails[0])
         });
         console.log('figure Details: ', figureDetails);
 
