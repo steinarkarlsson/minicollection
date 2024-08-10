@@ -6,7 +6,6 @@ import React from "react";
 import {getFactions, getFigureGridInfo, getReleaseWaves} from "../lib/sanityQueries";
 import SearchBar, {SearchBarFormData} from "../components/SearchBar";
 import Spinner from "../components/Spinner";
-import { useSession, signIn, signOut } from "next-auth/react"
 
 interface Props {
     figures: GridFigure[],
@@ -20,7 +19,6 @@ const Home = ({figures, factions, releaseWaves}: Props) => {
     const [factionFilter, setFactionFilter] = React.useState<string>('')
     const [releaseWaveFilter, setReleaseWaveFilter] = React.useState<string>('')
     const [isLoading, setIsLoading] = React.useState<boolean>(false)
-    const { data: session } = useSession()
 
 
     const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
