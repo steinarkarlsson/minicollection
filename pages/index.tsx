@@ -38,12 +38,9 @@ const Home = ({figures, factions, releaseWaves}: Props) => {
 
     const onSubmit = async (data: SearchBarFormData) => {
         setIsLoading(true)
-        console.log('submitting search')
-        console.log(data)
         const newFigures = await getFigureGridInfo(data.searchTerm, data.faction, data.releaseWave)
-        setIsLoading(false)
-        console.log(newFigures)
         setFilteredFigures(newFigures);
+        setIsLoading(false)
     }
 
     return (
