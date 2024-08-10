@@ -18,7 +18,7 @@ function MiniCard({figure}: Props) {
                         alt=""
                         width={136}
                         height={140}
-                        style={{objectFit: 'cover', width:'auto', height:'auto'}}
+                        style={{objectFit: 'contain', width:'auto', maxHeight:'100%'}}
                     />
                 ) : null}
             </div>
