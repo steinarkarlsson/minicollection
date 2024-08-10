@@ -1,6 +1,5 @@
 import Image from "next/image";
 import {GridFigure} from "../typings";
-import ActionButton from "./ActionButton";
 
 interface Props {
     figure: GridFigure
@@ -10,7 +9,7 @@ function MiniCard({figure}: Props) {
 
     return (
         <div
-            className="relative m-2 mx-2 w-60 overflow-hidden rounded-md border-2 border-gray-700 pt-2 shadow-lg transition delay-75 ease-in-out group duration-400 hover:bg-gray-900"
+            className="relative m-2 mx-2 w-60 overflow-hidden rounded-md border-2 border-gray-700 pt-2 shadow-lg transition delay-75 ease-in-out group duration-400 hover:bg-gray-900 hover:border-gray-500"
         >
             <div className="flex h-60 flex-col items-center justify-center">
                 {figure.image && figure.image.asset ? (
@@ -42,12 +41,12 @@ function MiniCard({figure}: Props) {
                     {figure.releaseWave?.name}
                 </span>
             </div>
-            <div className="absolute top-0 right-0 m-2 hidden group-hover:flex">
-                <div className="flex flex-col">
-                    <ActionButton label="Own" children="+"/>
-                    <ActionButton label="Like" children="♥"/>
-                </div>
-            </div>
+            {/*<div className="absolute top-0 right-0 m-2 hidden group-hover:flex">*/}
+            {/*    <div className="flex flex-col">*/}
+            {/*        <ActionButton label="Own" children="+"/>*/}
+            {/*        <ActionButton label="Like" children="♥"/>*/}
+            {/*    </div>*/}
+            {/*</div>*/}
 
         </div>
     )
