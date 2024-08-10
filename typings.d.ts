@@ -72,4 +72,5 @@ export interface ReleaseWave {
     _id: ObjectId
     _type: string
     name: string
+    releaseDate: string
 }

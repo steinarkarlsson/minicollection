@@ -38,7 +38,7 @@ function MiniCard({ figure }: Props) {
             <div className="flex flex-row pt-4 pb-2">
                 {figure.faction?.map((faction, index) => (
                     <div key={index} className="px-1">
-                        <span className="inline-block w-auto whitespace-nowrap rounded-full bg-gray-800 px-3 py-1 text-xs font-semibold text-gray-400">
+                        <span className="inline-block w-auto whitespace-nowrap rounded-full bg-gray-800 px-3 pb-1 text-xs font-semibold text-gray-400">
                             {faction.name}
                         </span>
                     </div>

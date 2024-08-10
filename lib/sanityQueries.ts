@@ -29,7 +29,7 @@ export async function getFigureGridInfo(searchFilter: string = '', factionFilter
     const factionString = factionFilter ? `&& $factionFilter in faction[]->name` : ``;
     const releaseWaveString = releaseWaveFilter ? `&& releaseWave->name== $releaseWaveFilter` : ``;
 
-    const results = await sanityClient.fetch(`*[_type == "figure" ${searchString} ${factionString} ${releaseWaveString}] | order(defined(image.asset) desc, type, character[]->name, faction[]->name, releaseWave->name)[0...${count}] {
+    const results = await sanityClient.fetch(`*[_type == "figure" ${searchString} ${factionString} ${releaseWaveString}] | order(releaseWave->releaseDate desc, type, mainName, defined(image.asset) desc, faction[]->name)[0...${count}] {
         _id,
         mainName,
         image,
@@ -44,11 +44,11 @@ export async function getFigureGridInfo(searchFilter: string = '', factionFilter
 }
 
 export async function getFactions() {
-    return await sanityClient.fetch(`*[_type == "faction"]`) as Faction[];
+    return await sanityClient.fetch(`*[_type == "faction"] | order(alignment desc, name asc)`) as Faction[];
 }
 
 export async function getReleaseWaves() {
-    return await sanityClient.fetch(`*[_type == "releaseWave"]`) as ReleaseWave[];
+    return await sanityClient.fetch(`*[_type == "releaseWave"] | order(releaseDate desc)`) as ReleaseWave[];
 }
 
 export async function getFigureDetails(_id: string) {

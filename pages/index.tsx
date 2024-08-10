@@ -22,17 +22,14 @@ const Home = ({figures, factions, releaseWaves}: Props) => {
 
 
     const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-        console.log('setting search:', e.target.value)
         setSearchFilter(e.target.value)
     }
 
     const handleFactionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        console.log('setting faction:', e.target.value)
         setFactionFilter(e.target.value)
     }
 
     const handleReleaseWaveChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        console.log('setting releaseWave:', e.target.value)
         setReleaseWaveFilter(e.target.value)
     }
 
@@ -44,14 +41,14 @@ const Home = ({figures, factions, releaseWaves}: Props) => {
     }
 
     return (
-        <div className='relative h-screen bg-gradient-to-b lg:h-[140vh]} !h-screen'>
+        <div className='relative h-screen bg-gradient-to-b lg:h-[140vh] !h-screen'>
             <Head>
                 <title>Mini Collection</title>
                 <link rel="icon" href="/icon.png"/>
             </Head>
             <Header/>
-            <main className="relative mt-10 pb-24 pl-4 lg:space-y-24 lg:pl-16">
-                <section className="mt-10 md:space-y-24">
+            <main className="relative mt-10 pl-4 lg:space-y-20 lg:pl-16">
+                <section className="mt-10 space-y-2 md:space-y-5">
                     <SearchBar
                         factions={factions}
                         releaseWaves={releaseWaves}
@@ -69,6 +66,8 @@ const Home = ({figures, factions, releaseWaves}: Props) => {
                             searchFilter={searchFilter}
                             factionFilter={factionFilter}
                             releaseWaveFilter={releaseWaveFilter}
+                            factions={factions}
+                            releaseWaves={releaseWaves}
                             />
                     }
                 </section>
