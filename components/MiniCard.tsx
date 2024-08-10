@@ -1,15 +1,25 @@
 import Image from "next/image";
-import {GridFigure} from "../typings";
+import { GridFigure } from "../typings";
+import { useRecoilState } from 'recoil';
+import { modalState, figureState } from '../atoms/modalAtom';
 
 interface Props {
     figure: GridFigure
 }
 
-function MiniCard({figure}: Props) {
+function MiniCard({ figure }: Props) {
+    const [, setShowModal] = useRecoilState(modalState);
+    const [, setFigure] = useRecoilState(figureState);
+
+    const handleClick = () => {
+        setFigure(figure);
+        setShowModal(true);
+    };
 
     return (
         <div
-            className="relative m-2 mx-2 w-60 overflow-hidden rounded-md border-2 border-gray-700 pt-2 shadow-lg transition delay-75 ease-in-out group duration-400 hover:bg-gray-900 hover:border-gray-500"
+            className="group relative m-2 mx-2 w-60 overflow-hidden rounded-md pt-2 shadow-xl hover:shadow-yellow-50 transition delay-75 ease-in-out duration-400 border-2  border-gray-800 hover:border-white"
+            onClick={handleClick}
         >
             <div className="flex h-60 flex-col items-center justify-center">
                 {figure.image && figure.image.asset ? (
@@ -18,7 +28,7 @@ function MiniCard({figure}: Props) {
                         alt=""
                         width={136}
                         height={140}
-                        style={{objectFit: 'contain', width:'auto', maxHeight:'100%'}}
+                        style={{ objectFit: 'contain', width: 'auto', maxHeight: '100%' }}
                     />
                 ) : null}
             </div>
@@ -28,28 +38,19 @@ function MiniCard({figure}: Props) {
             <div className="flex flex-row pt-4 pb-2">
                 {figure.faction?.map((faction, index) => (
                     <div key={index} className="px-1">
-                <span
-                    className="inline-block w-auto whitespace-nowrap rounded-full bg-gray-800 px-3 py-1 text-xs font-semibold text-gray-400">
-                    {faction.name}
-                </span>
+                        <span className="inline-block w-auto whitespace-nowrap rounded-full bg-gray-800 px-3 py-1 text-xs font-semibold text-gray-400">
+                            {faction.name}
+                        </span>
                     </div>
                 ))}
             </div>
             <div className="px-1 pt-4 pb-2">
-                    <span
-                        className="inline-block whitespace-nowrap rounded-full bg-gray-800 px-3 py-1 text-xs font-semibold text-gray-400">
+                <span className="inline-block whitespace-nowrap rounded-full bg-gray-800 px-3 py-1 text-xs font-semibold text-gray-400">
                     {figure.releaseWave?.name}
                 </span>
             </div>
-            {/*<div className="absolute top-0 right-0 m-2 hidden group-hover:flex">*/}
-            {/*    <div className="flex flex-col">*/}
-            {/*        <ActionButton label="Own" children="+"/>*/}
-            {/*        <ActionButton label="Like" children="♥"/>*/}
-            {/*    </div>*/}
-            {/*</div>*/}
-
         </div>
-    )
+    );
 }
 
-export default MiniCard
+export default MiniCard;

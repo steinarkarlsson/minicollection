@@ -1,7 +1,8 @@
-import {GridFigure} from "../typings";
+import { GridFigure } from "../typings";
 import MiniCard from "./MiniCard";
-import {useEffect, useState} from 'react';
-import {getFigureGridInfo} from '../lib/sanityQueries';
+import { useEffect, useState } from 'react';
+import { getFigureGridInfo } from '../lib/sanityQueries';
+import Modal from './Modal';
 
 interface MiniCardGridProps {
     figures: GridFigure[]
@@ -28,8 +29,7 @@ function useScrollToEnd(callback: () => void) {
     }, [])
 }
 
-
-function MiniCardGrid({releaseWaveFilter, searchFilter, factionFilter}:MiniCardGridProps) {
+function MiniCardGrid({ releaseWaveFilter, searchFilter, factionFilter }: MiniCardGridProps) {
     const [displayedFigures, setDisplayedFigures] = useState<GridFigure[]>([])
     const [count, setCount] = useState<number>(32)
 
@@ -44,14 +44,13 @@ function MiniCardGrid({releaseWaveFilter, searchFilter, factionFilter}:MiniCardG
     })
 
     return (
-                    <div className="flex flex-wrap justify-center">
-                        {displayedFigures.map((figure) => (
-                            <MiniCard figure={figure} key={
-                                figure.mainName + figure.releaseWave?.name
-                            }/>
-                        ))}
-                    </div>
+        <div className="flex flex-wrap justify-center">
+            {displayedFigures.map((figure) => (
+                <MiniCard figure={figure} key={figure.mainName + figure.releaseWave?.name} />
+            ))}
+            <Modal />
+        </div>
     )
 }
 
-export default MiniCardGrid
+export default MiniCardGrid;
