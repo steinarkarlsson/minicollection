@@ -29,7 +29,13 @@ export async function getFigureGridInfo(searchFilter: string = '', factionFilter
     const factionString = factionFilter ? `&& $factionFilter in faction[]->name` : ``;
     const releaseWaveString = releaseWaveFilter ? `&& releaseWave->name== $releaseWaveFilter` : ``;
 
-    const results = await sanityClient.fetch(`*[_type == "figure" ${searchString} ${factionString} ${releaseWaveString}] | order( defined(image.asset) desc, type, character[]->name, faction[]->name, releaseWave-> name)[0...${count}] {mainName, image, releaseWave->{name}, faction[]->{name}}`, {
+    const results = await sanityClient.fetch(`*[_type == "figure" ${searchString} ${factionString} ${releaseWaveString}] | order(defined(image.asset) desc, type, character[]->name, faction[]->name, releaseWave->name)[0...${count}] {
+        _id,
+        mainName,
+        image,
+        releaseWave->{name},
+        faction[]->{name}
+    }`, {
         searchFilter,
         factionFilter,
         releaseWaveFilter
@@ -45,6 +51,15 @@ export async function getReleaseWaves() {
     return await sanityClient.fetch(`*[_type == "releaseWave"]`) as ReleaseWave[];
 }
 
-export async function getFigureDetails(id: string) {
-    return await sanityClient.fetch(`*[_type == "figure" && _id == $id]`, {id}) as Figure;
+export async function getFigureDetails(_id: string) {
+    return await sanityClient.fetch(`*[_type == "figure" && _id == $_id] {
+    _id,
+    mainName,
+    image,
+    releaseWave->{name},
+    faction[]->{name},
+    type,
+    material,
+    character[]->{name},
+    }`, {_id}) as Figure;
 }

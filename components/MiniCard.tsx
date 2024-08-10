@@ -18,7 +18,7 @@ function MiniCard({ figure }: Props) {
 
     return (
         <div
-            className="group relative m-2 mx-2 w-60 overflow-hidden rounded-md pt-2 shadow-xl hover:shadow-yellow-50 transition delay-75 ease-in-out duration-400 border-2  border-gray-800 hover:border-white"
+            className="group relative m-2 mx-2 w-60 overflow-hidden rounded-md pt-2 shadow-xl hover:shadow-yellow-200 transition delay-75 ease-in-out duration-600 border-2  border-gray-800 hover:border-white"
             onClick={handleClick}
         >
             <div className="flex h-60 flex-col items-center justify-center">

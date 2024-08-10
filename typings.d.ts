@@ -25,6 +25,7 @@ export interface Figure {
 }
 
 export interface GridFigure {
+    _id: ObjectId
     mainName: string
     image?: {
         _type: string,
