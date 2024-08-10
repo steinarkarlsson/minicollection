@@ -63,7 +63,14 @@ const Home = ({figures, factions, releaseWaves}: Props) => {
                         handleSearchChange={handleSearch}
                         onSubmit={onSubmit}
                     />
-                    {isLoading ? <Spinner/> : <MiniCardGrid figures={filteredFigures}/>}
+                    {isLoading ? <Spinner/> :
+                        <MiniCardGrid
+                            figures={filteredFigures}
+                            searchFilter={searchFilter}
+                            factionFilter={factionFilter}
+                            releaseWaveFilter={releaseWaveFilter}
+                            />
+                    }
                 </section>
             </main>
         </div>

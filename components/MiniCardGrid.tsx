@@ -3,8 +3,11 @@ import MiniCard from "./MiniCard";
 import {useEffect, useState} from 'react';
 import {getFigureGridInfo} from '../lib/sanityQueries';
 
-interface Props {
+interface MiniCardGridProps {
     figures: GridFigure[]
+    searchFilter: string
+    factionFilter: string
+    releaseWaveFilter: string
 }
 
 function useScrollToEnd(callback: () => void) {
@@ -26,21 +29,17 @@ function useScrollToEnd(callback: () => void) {
 }
 
 
-function MiniCardGrid({figures}: Props) {
+function MiniCardGrid({releaseWaveFilter, searchFilter, factionFilter}:MiniCardGridProps) {
     const [displayedFigures, setDisplayedFigures] = useState<GridFigure[]>([])
     const [count, setCount] = useState<number>(32)
-    const [isLoading, setIsLoading] = useState<boolean>(false)
 
     useEffect(() => {
-        setIsLoading(true)
-        getFigureGridInfo('', '', '', count).then((figures) => {
+        getFigureGridInfo(searchFilter, factionFilter, releaseWaveFilter, count).then((figures) => {
             setDisplayedFigures(figures)
-            setIsLoading(false)
         })
     }, [count]);
 
     useScrollToEnd(() => {
-        setIsLoading(true)
         setCount(prevCount => prevCount + 32)
     })
 
