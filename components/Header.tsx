@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
 import Image from "next/image";
-import LoginButton from "./LoginButton";
 
 function Header() {
 
@@ -29,7 +28,6 @@ function Header() {
                 <p className="text-xs lg:text-md">A Strategy Battle Game Collectors Archive</p>
             </div>
         </div>
-        <LoginButton/>
     </header>
 }
 
