@@ -6,6 +6,7 @@ import React from "react";
 import {getFactions, getFigureGridInfo, getReleaseWaves} from "../lib/sanityQueries";
 import SearchBar, {SearchBarFormData} from "../components/SearchBar";
 import Spinner from "../components/Spinner";
+import Welcome from '../components/Welcome';
 
 interface Props {
     figures: GridFigure[],
@@ -47,33 +48,37 @@ const Home = ({figures, factions, releaseWaves}: Props) => {
                 <link rel="icon" href="/icon.png"/>
             </Head>
             <Header/>
-            <main className="relative mt-10 pl-4 lg:space-y-20 lg:pl-16">
+            <main className="relative mt-10 lg:space-y-20">
                 <section className="mt-10 space-y-2 md:space-y-5">
-                    <SearchBar
-                        factions={factions}
-                        releaseWaves={releaseWaves}
-                        searchTerm={searchFilter}
-                        selectedFaction={factionFilter}
-                        selectedReleaseWave={releaseWaveFilter}
-                        handleReleaseWaveChange={handleReleaseWaveChange}
-                        handleFactionChange={handleFactionChange}
-                        handleSearchChange={handleSearch}
-                        onSubmit={onSubmit}
-                    />
-                    {isLoading ? <Spinner/> :
-                        <MiniCardGrid
-                            figures={filteredFigures}
-                            searchFilter={searchFilter}
-                            factionFilter={factionFilter}
-                            releaseWaveFilter={releaseWaveFilter}
+                </section>
+                    <section className="mt-10 space-y-2 md:space-y-5">
+                        <Welcome/>
+                        <SearchBar
                             factions={factions}
                             releaseWaves={releaseWaves}
+                            searchTerm={searchFilter}
+                            selectedFaction={factionFilter}
+                            selectedReleaseWave={releaseWaveFilter}
+                            handleReleaseWaveChange={handleReleaseWaveChange}
+                            handleFactionChange={handleFactionChange}
+                            handleSearchChange={handleSearch}
+                            onSubmit={onSubmit}
+                        />
+
+                        {isLoading ? <Spinner/> :
+                            <MiniCardGrid
+                                figures={filteredFigures}
+                                searchFilter={searchFilter}
+                                factionFilter={factionFilter}
+                                releaseWaveFilter={releaseWaveFilter}
+                                factions={factions}
+                                releaseWaves={releaseWaves}
                             />
-                    }
-                </section>
+                        }
+                    </section>
             </main>
         </div>
-    )
+)
 }
 export default Home
 

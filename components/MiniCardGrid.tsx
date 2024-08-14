@@ -52,7 +52,7 @@ function MiniCardGrid({releaseWaveFilter, searchFilter, factionFilter, releaseWa
                     {displayedFigures.some(figure => figure.releaseWave?.name === releaseWave.name) ? (
                         <>
                             <hr className="my-12 h-px border-t-0 bg-transparent bg-gradient-to-r from-transparent via-gray-400 to-transparent opacity-25 dark:via-gray-400"/>
-                            <div className="text-2xl lg:text-3xl pt-5 lg:mx-24">{releaseWave.name}</div>
+                            <div className="text-2xl lg:text-3xl pt-5 pl-5 lg:mx-24">{releaseWave.name}</div>
                             <div className="flex flex-wrap justify-center">
                                 {displayedFigures.map((figure) => (
                                     figure.releaseWave?.name === releaseWave.name ?
