@@ -13,13 +13,13 @@ interface MiniCardGridProps {
     releaseWaves: ReleaseWave[]
 }
 
-function useScrollToEnd(callback: () => void) {
+function useScrollToEnd(callback: () => void, isLoading: boolean) {
     useEffect(() => {
         const handleScroll = () => {
             const currentPosition = window.scrollY;
             const botttomPosition = document.documentElement.scrollHeight - window.innerHeight - 50;
 
-            if (currentPosition >= botttomPosition) {
+            if (currentPosition >= botttomPosition && !isLoading) {
                 callback()
             }
         }
@@ -28,22 +28,24 @@ function useScrollToEnd(callback: () => void) {
         return () => {
             window.removeEventListener('scroll', handleScroll);
         }
-    }, [])
+    }, [isLoading])
 }
 
 function MiniCardGrid({releaseWaveFilter, searchFilter, factionFilter, releaseWaves}: MiniCardGridProps) {
     const [displayedFigures, setDisplayedFigures] = useState<GridFigure[]>([])
     const [count, setCount] = useState<number>(32)
+    const [isLoading, setIsLoading] = useState<boolean>(false)
 
     useEffect(() => {
         getFigureGridInfo(searchFilter, factionFilter, releaseWaveFilter, count).then((figures) => {
             setDisplayedFigures(figures)
+            setIsLoading(false);
         })
     }, [count]);
 
     useScrollToEnd(() => {
-        setCount(prevCount => prevCount + 32)
-    })
+        setCount(prevCount => prevCount + 6)
+    }, isLoading)
 
     return (
         <>

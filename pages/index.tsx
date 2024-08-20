@@ -51,20 +51,20 @@ const Home = ({figures, factions, releaseWaves}: Props) => {
             <main className="relative mt-10 lg:space-y-20">
                 <section className="mt-10 space-y-2 md:space-y-5">
                 </section>
-                    <section className="mt-10 space-y-2 md:space-y-5">
-                        <Welcome/>
-                        <SearchBar
-                            factions={factions}
-                            releaseWaves={releaseWaves}
-                            searchTerm={searchFilter}
-                            selectedFaction={factionFilter}
-                            selectedReleaseWave={releaseWaveFilter}
-                            handleReleaseWaveChange={handleReleaseWaveChange}
-                            handleFactionChange={handleFactionChange}
-                            handleSearchChange={handleSearch}
-                            onSubmit={onSubmit}
-                        />
-
+                <section className="mt-10 space-y-2 md:space-y-5 p-4">
+                    <Welcome/>
+                    <SearchBar
+                        factions={factions}
+                        releaseWaves={releaseWaves}
+                        searchTerm={searchFilter}
+                        selectedFaction={factionFilter}
+                        selectedReleaseWave={releaseWaveFilter}
+                        handleReleaseWaveChange={handleReleaseWaveChange}
+                        handleFactionChange={handleFactionChange}
+                        handleSearchChange={handleSearch}
+                        onSubmit={onSubmit}
+                    />
+                    <div className='flex flex-col border-2'>
                         {isLoading ? <Spinner/> :
                             <MiniCardGrid
                                 figures={filteredFigures}
@@ -75,10 +75,11 @@ const Home = ({figures, factions, releaseWaves}: Props) => {
                                 releaseWaves={releaseWaves}
                             />
                         }
-                    </section>
+                    </div>
+                </section>
             </main>
         </div>
-)
+    )
 }
 export default Home
 
