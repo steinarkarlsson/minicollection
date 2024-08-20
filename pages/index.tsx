@@ -64,7 +64,7 @@ const Home = ({figures, factions, releaseWaves}: Props) => {
                         handleSearchChange={handleSearch}
                         onSubmit={onSubmit}
                     />
-                    <div className='flex flex-col border-2'>
+                    <div className='flex flex-col'>
                         {isLoading ? <Spinner/> :
                             <MiniCardGrid
                                 figures={filteredFigures}
