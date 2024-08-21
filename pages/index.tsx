@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import Header from "../components/Header";
+import Header from "../components/header/Header";
 import MiniCardGrid from "../components/MiniCardGrid";
 import {Faction, GridFigure, ReleaseWave} from "../typings";
 import React from "react";
