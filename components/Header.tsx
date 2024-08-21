@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import Image from "next/image";
+import GoogleSignIn from './GoogleSignIn';
 
 function Header() {
 
@@ -41,6 +42,7 @@ function Header() {
                 </div>
             </div>
         </div>
+        <GoogleSignIn/>
     </header>
 }
 
