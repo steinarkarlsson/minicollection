@@ -1,4 +1,3 @@
-import React from 'react';
 import {Faction, ReleaseWave} from "../typings";
 import {useForm} from "react-hook-form";
 import {z} from 'zod';

@@ -1,6 +1,5 @@
 import '../styles/globals.css'
 import Header from "../components/header/Header";
-import React from "react";
 
 export const metadata = {
     title: 'Mini Collection',

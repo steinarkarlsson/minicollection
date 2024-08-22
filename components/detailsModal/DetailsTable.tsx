@@ -1,4 +1,3 @@
-import React from 'react';
 import {Box, Table, TableContainer} from "@mui/material";
 import DetailsTableRow from './DetailsTableRow';
 import {Figure} from "../../typings";
