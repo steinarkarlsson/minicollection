@@ -1,3 +1,4 @@
+'use client'
 import {Faction, GridFigure, ReleaseWave} from "../typings";
 import MiniCard from "./MiniCard";
 import {useEffect, useState} from 'react';
