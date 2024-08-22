@@ -1,44 +1,81 @@
-'use client';
+import React from 'react';
+import {Faction, ReleaseWave} from "../typings";
+import {useForm} from "react-hook-form";
+import {z} from 'zod';
 
-import React, { useState } from 'react';
-import { Faction, ReleaseWave, SearchBarFormData } from '../typings';
-
-interface SearchBarProps {
-    factions: Faction[];
-    releaseWaves: ReleaseWave[];
-    searchTerm: string;
-    selectedFaction: string;
-    selectedReleaseWave: string;
+type searchBarProps = {
+    searchTerm: string,
+    factions: Faction[],
+    selectedFaction: string,
+    releaseWaves: ReleaseWave[],
+    selectedReleaseWave: string,
+    handleFactionChange: (e: React.ChangeEvent<HTMLSelectElement>) => void,
+    handleReleaseWaveChange: (e: React.ChangeEvent<HTMLSelectElement>) => void,
+    handleSearchChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
+    onSubmit: (data: SearchBarFormData) => void
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({
-                                                 factions,
-                                                 releaseWaves,
-                                                 searchTerm,
-                                                 selectedFaction,
-                                                 selectedReleaseWave
-                                             }) => {
-    const [formData, setFormData] = useState<SearchBarFormData>({
-        searchTerm,
-        selectedFaction,
-        selectedReleaseWave
-    });
+const SearchBarSchema = z.object({
+    searchTerm: z.string().optional(),
+    faction: z.string().optional(),
+    releaseWave: z.string().optional()
+});
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-        const { name, value } = e.target;
-        setFormData(prevState => ({ ...prevState, [name]: value }));
-    };
+export type SearchBarFormData = z.infer<typeof SearchBarSchema>;
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        // Handle form submit
-    };
+function SearchBar({
+                       searchTerm,
+                       factions,
+                       releaseWaves,
+                       handleFactionChange,
+                       handleReleaseWaveChange,
+                       handleSearchChange,
+                       onSubmit
+                   }: searchBarProps) {
+
+    const inputStyle = "flex bg-gray-800 w-full h-12 text-lg pl-3 rounded-md scrollbar scrollbar-thumb-gray-500 scrollbar-track-gray-800 scrollbar-thumb-rounded-full scrollbar-track-rounded-full hover:bg-gray-700 transition duration-200 lg:w-90";
+    const labelStyle = "flex text-lg text-gray-400";
+    const groupStyle = "p-2";
+
+    const {
+        register,
+        handleSubmit,
+        formState: {},
+    } = useForm<SearchBarFormData>();
 
     return (
-        <form onSubmit={handleSubmit}>
-            {/* Form fields for searchTerm, selectedFaction, selectedReleaseWave */}
-        </form>
-    );
-};
+        <div className="flex justify-center pt-16">
+            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col md:flex-row">
+                <div className={groupStyle}>
+                    <label className={labelStyle}>Search</label>
+                    <input {...register('searchTerm')} value={searchTerm} className={inputStyle}
+                           onChange={handleSearchChange}/>
+                </div>
+                <div className={groupStyle}>
+                    <label className={labelStyle}>Faction</label>
+                    <select {...register('faction')} onChange={handleFactionChange} className={inputStyle}>
+                        <option key="" value=""></option>
+                        {factions.map((faction) => (
+                            <option key={faction._id} value={faction.name}>{faction.name}</option>
+                        ))}
+                    </select>
+                </div>
+                <div className={groupStyle}>
+                    <label className={labelStyle}>Release Wave</label>
+                    <select {...register('releaseWave')} onChange={handleReleaseWaveChange} className={inputStyle}>
+                        <option key="" value=""></option>
+                        {releaseWaves.map((releaseWave) => (
+                            <option key={releaseWave.name} value={releaseWave.name}>{releaseWave.name}</option>
+                        ))}
+                    </select>
+                </div>
+                <div className="pt-10">
+                    <input type="submit"
+                           className="h-10 w-24 rounded-lg bg-gray-700 text-lg transition duration-300 hover:bg-gray-600"/>
+                </div>
+            </form>
+        </div>
+    )
+}
 
 export default SearchBar;

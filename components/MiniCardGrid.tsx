@@ -60,7 +60,7 @@ function MiniCardGrid({releaseWaveFilter, searchFilter, factionFilter, releaseWa
                                 {displayedFigures.map((figure) => (
                                     figure.releaseWave?.name === releaseWave.name ?
                                         <MiniCard figure={figure}
-                                                  key={figure.mainName + figure.releaseWave?.name}/> : null
+                                                  key={figure.mainName + figure._id}/> : null
                                 ))}
                             </div>
                         </>
