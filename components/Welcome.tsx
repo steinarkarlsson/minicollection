@@ -1,4 +1,3 @@
-import React from 'react';
 import MailchimpForm from './MailchimpForm';
 
 const Welcome: React.FC = () => {

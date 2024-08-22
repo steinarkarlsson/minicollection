@@ -1,19 +1,11 @@
 // File: privacyPolicy.tsx
 
-import React from 'react';
 import Head from 'next/head';
 import Header from '../components/header/Header';
-
-const labelStyle = "text-lg text-gray-400";
-
 
 const PrivacyPolicy = () => {
     return (
         <div className='flex h-screen bg-gradient-to-b lg:h-[140vh]} !h-screen'>
-            {/*<Head>*/}
-            {/*    <title>Mini Collection</title>*/}
-            {/*    <link rel="icon" href="/icon.png"/>*/}
-            {/*</Head>*/}
             <Header/>
         <div>
             <Head>
