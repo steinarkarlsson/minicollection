@@ -3,7 +3,8 @@ import {getFactions, getFigureGridInfo, getReleaseWaves} from "../lib/sanityQuer
 import Welcome from '../components/Welcome';
 import Link from "next/link";
 import Search from "../components/Search";
-import {Select} from "@mui/material";
+import {MenuItem, Select} from "@mui/material";
+import {ClearFilters} from "../components/ClearFilters";
 
 export default async function Home({searchParams}: {
     searchParams: { [key: string]: string | string[] | undefined }
@@ -16,14 +17,13 @@ export default async function Home({searchParams}: {
     const factions = await getFactions();
     const releaseWaves = await getReleaseWaves();
 
-    const inputStyle = "flex bg-gray-800 w-full h-12 text-lg pl-3 rounded-md scrollbar scrollbar-thumb-gray-500 scrollbar-track-gray-800 scrollbar-thumb-rounded-full scrollbar-track-rounded-full hover:bg-gray-700 transition duration-200 lg:w-90";
-    const labelStyle = "flex text-lg text-gray-400";
-    const groupStyle = "p-2";
+    // const inputStyle = "flex bg-gray-800 w-full h-12 text-lg pl-3 rounded-md scrollbar scrollbar-thumb-gray-500 scrollbar-track-gray-800 scrollbar-thumb-rounded-full scrollbar-track-rounded-full hover:bg-gray-700 transition duration-200 lg:w-90";
+    // const labelStyle = "flex text-lg text-gray-400";
+    // const groupStyle = "p-2";
 
     return (
-        <div className="mt-10 space-y-2 md:space-y-5 p-4">
+        <div className="flex flex-col items-center mt-10 space-y-2 md:space-y-5 p-4">
             <Welcome/>
-
             {/*<div className="flex justify-center pt-16">*/}
             {/*    <form onSubmit={handleSubmit(data => console.log(data))} className="flex flex-col md:flex-row">*/}
             {/*        <div className={groupStyle}>*/}
@@ -58,45 +58,71 @@ export default async function Home({searchParams}: {
             {/*    </form>*/}
             {/*</div>*/}
 
-            <Search searchFilter={searchFilter}/>
-            <Select variant='standard'>
-                {factions.map((faction) => (
-                    <ul>
-                        <Link
-                            href={{
-                                pathname: '/',
-                                query: {
-                                    ...(searchFilter ? {searchFilter} : {}),
-                                    factionFilter: `${faction.name}`,
-                                    ...(releaseWaveFilter ? {releaseWaveFilter} : {}),
-                                }
-                        }}
-                        >
-                            {faction.name}
-                        </Link>
-                    </ul>
-                ))}
-            </Select>
+            <div
+                className='flex flex-col lg:flex-row justify-center items-center p-2 space-y-4 lg:space-y-0 lg:space-x-10 w-full xl:w-2/3 border-2'>
+                <Search searchFilter={searchFilter}/>
 
-            <Select variant='standard'>
-                {releaseWaves.map((releaseWave) => (
-                    <ul>
-                        <Link
-                            href={{
-                                pathname: '/',
-                                query: {
-                                    ...(searchFilter ? {searchFilter} : {}),
-                                    ...(factionFilter ? {factionFilter} : {}),
-                                    releaseWaveFilter: `${releaseWave.name}`,
-                                }
-                            }}
+                <Select
+                    variant='filled'
+                    label='Faction'
+                    className='flex bg-gray-800 text-white w-full h-12 text-lg rounded-md scrollbar scrollbar-thumb-gray-500 scrollbar-track-gray-800 scrollbar-thumb-rounded-full scrollbar-track-rounded-full hover:bg-gray-700 transition duration-200'
+                >
+                    {factions.map((faction) => (
+                        <MenuItem
+                            value={faction.name}
+                            key={faction._id}
                         >
-                            {releaseWave.name}
-                        </Link>
-                    </ul>
-                ))}
-            </Select>
-
+                            <Link
+                                href={{
+                                    pathname: '/',
+                                    query: {
+                                        ...(searchFilter ? {searchFilter} : {}),
+                                        factionFilter: `${faction.name}`,
+                                        ...(releaseWaveFilter ? {releaseWaveFilter} : {}),
+                                    }
+                                }}
+                            >
+                                {faction.name}
+                            </Link>
+                        </MenuItem>
+                        // <ul>
+                        //     <Link
+                        //         href={{
+                        //             pathname: '/',
+                        //             query: {
+                        //                 ...(searchFilter ? {searchFilter} : {}),
+                        //                 factionFilter: `${faction.name}`,
+                        //                 ...(releaseWaveFilter ? {releaseWaveFilter} : {}),
+                        //             }
+                        //         }}
+                        //     >
+                        //         {faction.name}
+                        //     </Link>
+                        // </ul>
+                    ))}
+                </Select>
+                <Select variant='outlined'
+                        className='flex bg-gray-800 w-full h-12 text-lg rounded-md scrollbar scrollbar-thumb-gray-500 scrollbar-track-gray-800 scrollbar-thumb-rounded-full scrollbar-track-rounded-full hover:bg-gray-700 transition duration-200'
+                >
+                    {releaseWaves.map((releaseWave) => (
+                        <ul>
+                            <Link
+                                href={{
+                                    pathname: '/',
+                                    query: {
+                                        ...(searchFilter ? {searchFilter} : {}),
+                                        ...(factionFilter ? {factionFilter} : {}),
+                                        releaseWaveFilter: `${releaseWave.name}`,
+                                    }
+                                }}
+                            >
+                                {releaseWave.name}
+                            </Link>
+                        </ul>
+                    ))}
+                </Select>
+                <ClearFilters/>
+            </div>
             <div className='flex flex-col'>
                 <MiniCardGrid
                     figures={figures}

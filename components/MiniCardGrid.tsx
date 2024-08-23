@@ -42,7 +42,7 @@ function MiniCardGrid({releaseWaveFilter, searchFilter, factionFilter, releaseWa
             setDisplayedFigures(figures)
             setIsLoading(false);
         })
-    }, [count]);
+    }, [count, searchFilter, factionFilter, releaseWaveFilter]);
 
     useScrollToEnd(() => {
         setCount(prevCount => prevCount + 6)
