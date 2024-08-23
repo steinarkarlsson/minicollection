@@ -1,8 +1,9 @@
 'use client'
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 
 const MailchimpForm = () => {
     const [isClient, setIsClient] = useState(false);
+    const [email, setEmail] = useState('');
 
     useEffect(() => {
         setIsClient(true);
@@ -22,24 +23,27 @@ const MailchimpForm = () => {
                     <div id="flex flex-row container mc_embed_signup_scroll">
                         <div className="flex mc-field-group">
                             <label htmlFor="mce-EMAIL">Email Address</label>
-                            <input type="email" name="EMAIL" className="required email flex bg-gray-800 w-full h-12 rounded-md hover:bg-gray-700 transition duration-200 lg:w-90
-                      " id="mce-EMAIL" required/>
+                            <input
+                                type="email"
+                                name="EMAIL"
+                                className="required email flex bg-gray-800 w-full h-12 rounded-md hover:bg-gray-700 transition duration-200 lg:w-90"
+                                id="mce-EMAIL"
+                                required
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                            />
                         </div>
 
                         <div id="mce-responses" className="flex clear foot">
-                            <div className="response" id="mce-error-response" style={{display: 'none'}}></div>
-                            <div className="response" id="mce-success-response" style={{display: 'none'}}></div>
-                        </div>
-
-                        <div aria-hidden="true" style={{position: 'absolute', left: '-5000px'}} className="flex ">
-                            <input type="text" name="b_f18ce3fc44cd3f6e7478d303b_1ef27549d2" value=""/>
+                            <div className="response" id="mce-error-response" style={{ display: 'none' }}></div>
+                            <div className="response" id="mce-success-response" style={{ display: 'none' }}></div>
                         </div>
 
                         <div className="flex optionalParent mt-5">
                             <div className="clear foot">
                                 <input type="submit" name="subscribe" id="mc-embedded-subscribe"
                                        className="flex justify-center items-center h-10 w-24 rounded-lg bg-gray-700 text-md transition duration-300 hover:bg-gray-600"
-                                       value="Subscribe"/>
+                                       value="Subscribe" />
                             </div>
                         </div>
                     </div>
