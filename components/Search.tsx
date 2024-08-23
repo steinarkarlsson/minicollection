@@ -9,7 +9,7 @@ const Search = ({ searchFilter }: { searchFilter?: string }) => {
     const router = useRouter()
     const initialRender = useRef(true)
 
-    const [text, setText] = useState(searchFilter)
+    const [text, setText] = useState(searchFilter || '')
     const [query] = useDebounce(text, 500)
 
     useEffect(() => {

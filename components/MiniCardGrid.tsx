@@ -51,7 +51,7 @@ function MiniCardGrid({releaseWaveFilter, searchFilter, factionFilter, releaseWa
     return (
         <>
             {releaseWaves.map((releaseWave) => (
-                <>
+                <div key={releaseWave.name}>
                     {displayedFigures.some(figure => figure.releaseWave?.name === releaseWave.name) ? (
                         <>
                             <hr className="my-12 h-px border-t-0 bg-transparent bg-gradient-to-r from-transparent via-gray-400 to-transparent opacity-25 dark:via-gray-400"/>
@@ -60,13 +60,12 @@ function MiniCardGrid({releaseWaveFilter, searchFilter, factionFilter, releaseWa
                                 {displayedFigures.map((figure) => (
                                     figure.releaseWave?.name === releaseWave.name ?
                                         <MiniCard figure={figure}
-                                                  key={figure.mainName + figure._id}/> : null
+                                                  key={figure.mainName + releaseWave.name + figure._id}/> : null
                                 ))}
                             </div>
                         </>
                     ) : null}
-
-                </>
+                </div>
             ))}
             <DetailsModal/>
         </>
