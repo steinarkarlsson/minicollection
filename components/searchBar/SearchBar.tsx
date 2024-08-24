@@ -1,9 +1,6 @@
 import React from 'react';
 import {Faction, ReleaseWave} from "../../typings";
 import Search from "./Search";
-import {Select} from "@mui/material";
-import Link from "next/link";
-import {ClearFilters} from "./ClearFilters";
 import {FactionSelect} from "./FactionSelect";
 import {ReleaseWaveSelect} from "./ReleaseWaveSelect";
 
@@ -27,9 +24,8 @@ export function SearchBar({
         <div
             className='flex flex-col lg:flex-row justify-center items-center p-2 space-y-4 lg:space-y-0 lg:space-x-10 w-full xl:w-2/3'>
             <Search searchFilter={searchFilter}/>
-            <FactionSelect filterObject={factions} searchFilter={searchFilter} factionFilter={factionFilter} releaseWaveFilter={releaseWaveFilter}/>
-            <ReleaseWaveSelect filterObject={releaseWaves} searchFilter={searchFilter} factionFilter={factionFilter} releaseWaveFilter={releaseWaveFilter}/>
-            <ClearFilters/>
+            <FactionSelect filterObject={factions} searchFilter={searchFilter} releaseWaveFilter={releaseWaveFilter}/>
+            <ReleaseWaveSelect filterObject={releaseWaves} searchFilter={searchFilter} factionFilter={factionFilter}/>
         </div>
     )
 }

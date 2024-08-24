@@ -4,7 +4,13 @@ import {useEffect, useRef, useState} from 'react'
 import {useRouter} from 'next/navigation'
 import {useDebounce} from 'use-debounce'
 
-const Search = ({searchFilter}: { searchFilter?: string }) => {
+interface SearchProps {
+    searchFilter?: string,
+    factionFilter?: string,
+    releaseWaveFilter?: string,
+}
+
+const Search = ({searchFilter, factionFilter, releaseWaveFilter}: SearchProps) => {
     const router = useRouter()
     const initialRender = useRef(true)
 
@@ -17,10 +23,12 @@ const Search = ({searchFilter}: { searchFilter?: string }) => {
             return
         }
 
+        const url = `?${releaseWaveFilter ? `releaseWaveFilter=${releaseWaveFilter}` : ''}${factionFilter ? `&factionFilter=${factionFilter}` : ''}${factionFilter || releaseWaveFilter ? '&' : ''}`;
+
         if (!query) {
-            router.push(`/`)
+            router.push(`/${url}`)
         } else {
-            router.replace(`/?searchFilter=${query}`)
+            router.push(`${url}searchFilter=${query}`);
         }
     }, [query])
 
