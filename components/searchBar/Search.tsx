@@ -26,7 +26,7 @@ const Search = ({searchFilter, factionFilter, releaseWaveFilter}: SearchProps) =
         const url = `?${releaseWaveFilter ? `releaseWaveFilter=${releaseWaveFilter}` : ''}${factionFilter ? `&factionFilter=${factionFilter}` : ''}${factionFilter || releaseWaveFilter ? '&' : ''}`;
 
         if (!query) {
-            router.push(`/${url}`)
+            router.push(`/miniatures${url}`)
         } else {
             router.push(`${url}searchFilter=${query}`);
         }
