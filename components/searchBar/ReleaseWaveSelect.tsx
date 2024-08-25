@@ -27,8 +27,6 @@ export function ReleaseWaveSelect({filterObject, searchFilter, factionFilter}: R
             router.push(query);
         }
     };
-    console.log(filterObject)
-
     return (
         <Autocomplete
             className='bg-gray-800 text-white w-full h-12 text-lg rounded-md scrollbar scrollbar-thumb-gray-500 scrollbar-track-gray-800 scrollbar-thumb-rounded-full scrollbar-track-rounded-full hover:bg-gray-700 transition duration-200'

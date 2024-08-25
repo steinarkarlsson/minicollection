@@ -28,7 +28,6 @@ export function FactionSelect({filterObject, searchFilter, releaseWaveFilter}: F
             router.push(query);
         }
     };
-    console.log(filterObject)
 
     return (
         <Autocomplete
