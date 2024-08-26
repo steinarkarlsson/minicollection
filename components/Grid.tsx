@@ -13,8 +13,6 @@ interface GridProps {
 }
 
 export default function Grid({items, releaseWaves, type}: GridProps) {
-
-    console.log(items)
     return (
         <>
             {releaseWaves.map((releaseWave) => (
