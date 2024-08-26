@@ -1,9 +1,7 @@
 'use client'
 import {Figure, ReleaseWave, Set} from "../typings";
-import {useEffect, useState} from 'react';
 import DetailsModal from './detailsModal/DetailsModal';
 import ItemCard from "./ItemCard";
-import {getFigureGridInfo} from "../lib/sanityQueries";
 
 interface GridProps {
     type: 'miniature' | 'set' | 'terrain' | 'print'
@@ -12,24 +10,6 @@ interface GridProps {
     releaseWaves: ReleaseWave[]
     factionFilter: string
     releaseWaveFilter: string
-}
-
-function useScrollToEnd(callback: () => void, isLoading: boolean) {
-    useEffect(() => {
-        const handleScroll = () => {
-            const currentPosition = window.scrollY;
-            const bottomPosition = document.documentElement.scrollHeight - window.innerHeight - 50;
-
-            if (currentPosition >= bottomPosition && !isLoading) {
-                callback()
-            }
-        }
-
-        window.addEventListener('scroll', handleScroll);
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        }
-    }, [isLoading])
 }
 
 export default function Grid({items, releaseWaves, type}: GridProps) {

@@ -1,7 +1,6 @@
 import {Box, Table, TableContainer} from "@mui/material";
 import DetailsTableRow from './DetailsTableRow';
-import {Figure, Set} from "../../typings";
-import ItemDetailsTableRow from "./ItemDetailsTableRow";
+import {Set} from "../../typings";
 
 export default function SetDetailsTable({set}: { set: Set | null }) {
     return (

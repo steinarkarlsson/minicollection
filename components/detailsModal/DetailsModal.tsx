@@ -3,7 +3,6 @@ import {itemState, modalState} from "../../atoms/modalAtom";
 import {useRecoilState} from "recoil";
 import {Grid} from '@mui/material';
 import Image from 'next/image';
-import {getFigureDetails} from '../../lib/sanityQueries';
 import {useEffect, useState} from 'react';
 import {Figure} from '../../typings';
 import DetailsTable from './DetailsTable';
@@ -51,11 +50,17 @@ function DetailsModal({type}: DetailsModalProps) {
                                                 alt={detailedItem.mainName}
                                                 width={600}
                                                 height={600}
-                                                style={{objectFit: 'contain', width: '300px', height: '400px', paddingTop:'20px'}}
+                                                style={{
+                                                    objectFit: 'contain',
+                                                    width: '300px',
+                                                    height: '400px',
+                                                    paddingTop: '20px'
+                                                }}
                                             />
                                         ) : null}
                                         <Grid item className='flex'>
-                                            {type === 'set' ? <SetDetailsTable set={detailedItem}/> : <DetailsTable figure={detailedItem}/>
+                                            {type === 'set' ? <SetDetailsTable set={detailedItem}/> :
+                                                <DetailsTable figure={detailedItem}/>
                                             }
                                         </Grid>
                                     </Grid>
