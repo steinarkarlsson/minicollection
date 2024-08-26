@@ -1,5 +1,5 @@
 'use client'
-import {GridFigure, ReleaseWave, Set} from "../typings";
+import {Figure, ReleaseWave, Set} from "../typings";
 import {useEffect, useState} from 'react';
 import DetailsModal from './detailsModal/DetailsModal';
 import ItemCard from "./ItemCard";
@@ -7,7 +7,7 @@ import {getFigureGridInfo} from "../lib/sanityQueries";
 
 interface GridProps {
     type: 'miniature' | 'set' | 'terrain' | 'print'
-    items: GridFigure[] | Set[]
+    items: Figure[] | Set[]
     searchFilter: string
     releaseWaves: ReleaseWave[]
     factionFilter: string
@@ -18,9 +18,9 @@ function useScrollToEnd(callback: () => void, isLoading: boolean) {
     useEffect(() => {
         const handleScroll = () => {
             const currentPosition = window.scrollY;
-            const botttomPosition = document.documentElement.scrollHeight - window.innerHeight - 50;
+            const bottomPosition = document.documentElement.scrollHeight - window.innerHeight - 50;
 
-            if (currentPosition >= botttomPosition && !isLoading) {
+            if (currentPosition >= bottomPosition && !isLoading) {
                 callback()
             }
         }
@@ -32,19 +32,13 @@ function useScrollToEnd(callback: () => void, isLoading: boolean) {
     }, [isLoading])
 }
 
-function Grid({items, releaseWaves}: GridProps) {
-    const [displayedItems, setDisplayedItems] = useState([])
-    const [count, setCount] = useState<number>(32)
-    const [isLoading, setIsLoading] = useState<boolean>(false)
+export default function Grid({items, releaseWaves, type}: GridProps) {
 
-    useScrollToEnd(() => {
-        setCount(prevCount => prevCount + 6)
-    }, isLoading)
-
+    console.log(items)
     return (
         <>
             {releaseWaves.map((releaseWave) => (
-                <>
+                <div key={releaseWave.name}>
                     {items.some(item => item.releaseWave?.name === releaseWave.name) ? (
                         <div key={releaseWave.name}>
                             <hr className="my-12 h-px border-t-0 bg-transparent bg-gradient-to-r from-transparent via-gray-400 to-transparent opacity-25 dark:via-gray-400"/>
@@ -61,11 +55,10 @@ function Grid({items, releaseWaves}: GridProps) {
                             </div>
                         </div>
                     ) : null}
-                </>
+                </div>
             ))}
-            <DetailsModal/>
+            <DetailsModal type={type}/>
         </>
     )
 }
 
-export default Grid;
