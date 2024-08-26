@@ -1,7 +1,6 @@
-import {ObjectId} from "bson";
 
 export interface Figure {
-    _id: ObjectId
+    _id: string
     type?: string
     releaseWave?: {
         name: string

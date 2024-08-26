@@ -1,6 +1,5 @@
 import Grid from "../../components/Grid";
 import {getReleaseWaves, getSets} from "../../lib/sanityQueries";
-import {SetSearchBar} from "../../components/searchBar/SetSearchBar";
 
 export default async function Sets({searchParams}: {
     searchParams: { [key: string]: string | string[] | undefined }
@@ -13,8 +12,9 @@ export default async function Sets({searchParams}: {
 
     return (
         <div className="flex flex-col items-center mt-10 space-y-2 md:space-y-5 p-4">
-            <SetSearchBar searchFilter={searchFilter} releaseWaveFilter={releaseWaveFilter} releaseWaves={releaseWaves} />
-            <Grid type='set' items={sets} searchFilter={searchFilter || ''} releaseWaves={releaseWaves} factionFilter={''} releaseWaveFilter={releaseWaveFilter || ''}/>
+            {/*<SetSearchBar searchFilter={searchFilter} releaseWaveFilter={releaseWaveFilter} releaseWaves={releaseWaves} />*/}
+            <Grid type='set' items={sets} searchFilter={searchFilter || ''} releaseWaves={releaseWaves}
+                  factionFilter={''} releaseWaveFilter={releaseWaveFilter || ''}/>
         </div>
     )
 }

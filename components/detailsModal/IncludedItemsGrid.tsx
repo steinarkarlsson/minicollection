@@ -11,10 +11,10 @@ const IncludedItemsGrid: React.FC<IncludedItemsTableProps> = ({item}) => {
             {/*Miniature Section*/}
             {item.figures && item.figures.length > 0 ?
                 <div>
-                    <div className='text-xl border-2'> Included Miniatures
+                    <div className='text-xl'> Included Miniatures
                         ({item.figures ? item.figures.length : null})
                     </div>
-                    <div className="flex flex-wrap justify-center border-2">
+                    <div className="flex flex-wrap justify-center">
                         {item.figures.map((figure) => (
                             <IncludedItemCard figure={figure} key={figure._id}/>
                         ))}
