@@ -1,6 +1,7 @@
 import {Box, Table, TableContainer} from "@mui/material";
 import DetailsTableRow from './DetailsTableRow';
 import {Figure} from "../../typings";
+
 function DetailsTable({figure}: {figure : Figure | null }) {
     return (
         <TableContainer component={Box}>
