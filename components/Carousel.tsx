@@ -9,15 +9,15 @@ interface CarouselProps {
 
 export default function Carousel({items, type}: CarouselProps) {
 
-    const typeTitle = type === 'figure' ? 'Miniatures' : 'Sets'
+    const typeTitle = type === 'figure' ? 'Miniatures' : 'Sets (WIP)'
     const link = type === 'figure' ? '/miniatures' : '/sets'
-
+    const itemNumber = type === 'figure' ? 5 : 4
 
     return (
-        <div className='flex flex-col'>
-            <Link href={link} className='flex text-4xl hover:decoration-90'>Browse all {typeTitle}</Link>
-            <div className='flex flex-row w-full overflow-hidden'>
-                {items.slice(0,5).map((item) => (
+        <div className='flex flex-col justify-start'>
+            <Link href={link} className='flex text-2xl m-5 lg:text-4xl justify-center lg:justify-start underline'>Browse all {typeTitle}</Link>
+            <div className='flex flex-wrap w-full'>
+                {items.slice(0,itemNumber).map((item) => (
                     <div key={item.mainName}>
                         <ItemCard item={item} type={type}/>
                     </div>

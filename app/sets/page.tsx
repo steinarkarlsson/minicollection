@@ -1,15 +1,20 @@
 import Grid from "../../components/Grid";
 import {getReleaseWaves, getSets} from "../../lib/sanityQueries";
+import {SetSearchBar} from "../../components/searchBar/SetSearchBar";
 
-export default async function Sets() {
+export default async function Sets({searchParams}: {
+    searchParams: { [key: string]: string | string[] | undefined }
+}) {
+    const searchFilter = typeof searchParams.searchFilter === 'string' ? searchParams.searchFilter : undefined;
+    const releaseWaveFilter = typeof searchParams.releaseWaveFilter === 'string' ? searchParams.releaseWaveFilter : undefined;
 
     const sets = await getSets();
     const releaseWaves = await getReleaseWaves();
 
     return (
-        <div>
-            <h1 className='text-3xl'>All sets</h1>
-            <Grid type='set' items={sets} searchFilter={''} releaseWaves={releaseWaves} factionFilter={''} releaseWaveFilter={''}/>
+        <div className="flex flex-col items-center mt-10 space-y-2 md:space-y-5 p-4">
+            <SetSearchBar searchFilter={searchFilter} releaseWaveFilter={releaseWaveFilter} releaseWaves={releaseWaves} />
+            <Grid type='set' items={sets} searchFilter={searchFilter || ''} releaseWaves={releaseWaves} factionFilter={''} releaseWaveFilter={releaseWaveFilter || ''}/>
         </div>
     )
 }

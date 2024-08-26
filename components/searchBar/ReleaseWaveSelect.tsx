@@ -8,7 +8,7 @@ import {useRouter} from "next/navigation";
 interface ReleaseWaveSelectProps {
     filterObject: ReleaseWave[],
     searchFilter: string | undefined,
-    factionFilter: string | undefined,
+    factionFilter?: string | undefined,
 }
 
 export function ReleaseWaveSelect({filterObject, searchFilter, factionFilter}: ReleaseWaveSelectProps) {

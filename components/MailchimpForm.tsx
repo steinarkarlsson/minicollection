@@ -7,7 +7,7 @@ let mailChimpHTMLContent: string;
 mailChimpHTMLContent = '<div id="mc_embed_shell">\n' +
     '      <link href="//cdn-images.mailchimp.com/embedcode/classic-061523.css" rel="stylesheet" type="text/css">\n' +
     '  <style type="text/css">\n' +
-    '        #mc_embed_signup{ false;clear:left; font:14px Helvetica,Arial,sans-serif; width: 500px;}\n' +
+    '        #mc_embed_signup{ false;clear:left; font:14px Helvetica,Arial,sans-serif;}\n' +
     '        /* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.\n' +
     '           We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */\n' +
     '</style>\n' +

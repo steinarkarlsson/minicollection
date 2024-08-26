@@ -9,8 +9,10 @@ export default async function Home() {
     return (
         <div className="flex flex-col items-center mt-10 space-y-2 md:space-y-5 p-4">
             <Welcome/>
-            <Carousel items={figures} type={'figure'}/>
-            <Carousel items={sets} type={'set'}/>
+            <div className="flex flex-col">
+                <Carousel items={figures} type={'figure'}/>
+                <Carousel items={sets} type={'set'}/>
+            </div>
         </div>
     );
 }
