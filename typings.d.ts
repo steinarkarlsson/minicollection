@@ -51,7 +51,14 @@ export interface Set {
     releaseWave?: { name: string }
     faction?: { name:string }[]
     figures: {
-        _ref: string
+        mainName:string,
+        image?: {
+            _type: string,
+            asset?: {
+                _ref: string,
+                _type: string
+            }
+        }
     }[]
     print: {
         _ref: string
