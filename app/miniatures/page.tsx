@@ -8,7 +8,6 @@ export default async function Miniatures({searchParams}: {
     const searchFilter = typeof searchParams.searchFilter === 'string' ? searchParams.searchFilter : undefined;
     const factionFilter = typeof searchParams.factionFilter === 'string' ? searchParams.factionFilter : undefined;
     const releaseWaveFilter = typeof searchParams.releaseWaveFilter === 'string' ? searchParams.releaseWaveFilter : undefined;
-    const selectedFigure = typeof searchParams.figure === 'string' ? searchParams.figure : undefined;
 
     const figures = await getFigureGridInfo();
     const factions = await getFactions();
@@ -31,7 +30,6 @@ export default async function Miniatures({searchParams}: {
                     releaseWaveFilter={releaseWaveFilter || ''}
                     factions={factions}
                     releaseWaves={releaseWaves}
-                    selectedFigure={selectedFigure}
                 />
             </div>
         </div>
