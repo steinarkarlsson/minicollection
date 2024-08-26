@@ -12,7 +12,6 @@ interface MiniCardGridProps {
     releaseWaveFilter: string
     factions: Faction[]
     releaseWaves: ReleaseWave[]
-    selectedFigure: Figure
 }
 
 function useScrollToEnd(callback: () => void, isLoading: boolean) {
