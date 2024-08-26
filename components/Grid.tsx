@@ -4,7 +4,7 @@ import DetailsModal from './detailsModal/DetailsModal';
 import ItemCard from "./ItemCard";
 
 interface GridProps {
-    type: 'miniature' | 'set' | 'terrain' | 'print'
+    type: 'figure' | 'set'
     items: Figure[] | Set[]
     searchFilter: string
     releaseWaves: ReleaseWave[]

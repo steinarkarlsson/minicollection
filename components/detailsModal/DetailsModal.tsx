@@ -3,7 +3,7 @@ import {itemState, modalState} from "../../atoms/modalAtom";
 import {useRecoilState} from "recoil";
 import Image from 'next/image';
 import {useEffect, useState} from 'react';
-import {Figure} from '../../typings';
+import {Figure, Set} from '../../typings';
 import DetailsTable from './DetailsTable';
 import Spinner from "../Spinner";
 import SetDetailsTable from "./SetDetailsTable";
@@ -13,10 +13,12 @@ interface DetailsModalProps {
     type: 'figure' | 'set'
 }
 
+type ModalType = Figure | Set | null;
+
 function DetailsModal({type}: DetailsModalProps) {
     const [showModal, setShowModal] = useRecoilState(modalState);
     const [selectedItem] = useRecoilState(itemState);
-    const [detailedItem, setdetailedItem] = useState<Figure | Set | null>(null);
+    const [detailedItem, setdetailedItem] = useState<ModalType>(null);
     const [isLoading, setIsLoading] = useState<boolean>(true);
 
     useEffect(() => {
@@ -45,7 +47,7 @@ function DetailsModal({type}: DetailsModalProps) {
                                     <div className='flex'>
                                         <p className="text-2xl font-bold">{detailedItem?.mainName}</p>
                                     </div>
-                                    <div container spacing={2}
+                                    <div
                                          className='flex flex-col justify-center lg:space-x-10 lg:flex-row'>
                                         {detailedItem && detailedItem.image?.asset ? (
                                             <Image
@@ -61,13 +63,13 @@ function DetailsModal({type}: DetailsModalProps) {
                                                 }}
                                             />
                                         ) : null}
-                                        <div item className='flex'>
-                                            {type === 'set' ? <SetDetailsTable set={detailedItem}/> :
+                                        <div className='flex'>
+                                            {type === 'set' ? <SetDetailsTable set={detailedItem as Set}/> :
                                                 <DetailsTable figure={detailedItem}/>
                                             }
                                         </div>
                                     </div>
-                                    {type === 'set' ? <IncludedItemsGrid item={detailedItem}/> : null}
+                                    {type === 'set' ? <IncludedItemsGrid item={detailedItem as Set}/> : null}
                                     <button
                                         className="modal-close fixed lg:absolute top-8 right-14 px-4 bg-gray-100 p-3 rounded-lg text-black hover:bg-gray-200"
                                         onClick={handleClose}>Close
