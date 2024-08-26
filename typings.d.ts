@@ -50,6 +50,7 @@ export interface Set {
     releaseWave?: { name: string }
     faction?: { name:string }[]
     figures: {
+        _id: string,
         mainName:string,
         image?: {
             _type: string,

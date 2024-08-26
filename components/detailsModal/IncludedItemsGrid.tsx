@@ -1,8 +1,8 @@
-import {Figure, Set} from "../../typings";
+import {Set} from "../../typings";
 import IncludedItemCard from "./IncludedItemCard";
 
 interface IncludedItemsTableProps {
-    item: Figure | Set;
+    item: Set;
 }
 
 const IncludedItemsGrid: React.FC<IncludedItemsTableProps> = ({item}) => {
