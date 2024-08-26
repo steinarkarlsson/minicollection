@@ -1,7 +1,6 @@
-import {ObjectId} from "bson";
 
 export interface Figure {
-    _id: ObjectId
+    _id: string
     type?: string
     releaseWave?: {
         name: string
@@ -51,7 +50,15 @@ export interface Set {
     releaseWave?: { name: string }
     faction?: { name:string }[]
     figures: {
-        _ref: string
+        _id: string,
+        mainName:string,
+        image?: {
+            _type: string,
+            asset?: {
+                _ref: string,
+                _type: string
+            }
+        }
     }[]
     print: {
         _ref: string

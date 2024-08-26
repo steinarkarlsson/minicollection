@@ -1,9 +1,9 @@
-import {GridFigure, Set} from "../typings";
+import {Figure, Set} from "../typings";
 import ItemCard from "./ItemCard";
 import Link from "next/link";
 
 interface CarouselProps {
-    items: GridFigure[] | Set[]
+    items: Figure[] | Set[]
     type: 'figure' | 'set'
 }
 

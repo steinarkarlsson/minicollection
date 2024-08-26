@@ -1,12 +1,12 @@
 'use client'
-import {Faction, GridFigure, ReleaseWave} from "../typings";
+import {Faction, Figure, ReleaseWave} from "../typings";
 import MiniCard from "./MiniCard";
 import {useEffect, useState} from 'react';
 import {getFigureGridInfo} from '../lib/sanityQueries';
 import DetailsModal from './detailsModal/DetailsModal';
 
 interface MiniCardGridProps {
-    figures: GridFigure[]
+    figures: Figure[]
     searchFilter: string
     factionFilter: string
     releaseWaveFilter: string
@@ -18,9 +18,9 @@ function useScrollToEnd(callback: () => void, isLoading: boolean) {
     useEffect(() => {
         const handleScroll = () => {
             const currentPosition = window.scrollY;
-            const botttomPosition = document.documentElement.scrollHeight - window.innerHeight - 50;
+            const bottomPosition = document.documentElement.scrollHeight - window.innerHeight - 50;
 
-            if (currentPosition >= botttomPosition && !isLoading) {
+            if (currentPosition >= bottomPosition && !isLoading) {
                 callback()
             }
         }
@@ -33,7 +33,7 @@ function useScrollToEnd(callback: () => void, isLoading: boolean) {
 }
 
 function MiniCardGrid({releaseWaveFilter, searchFilter, factionFilter, releaseWaves}: MiniCardGridProps) {
-    const [displayedFigures, setDisplayedFigures] = useState<GridFigure[]>([])
+    const [displayedFigures, setDisplayedFigures] = useState<Figure[]>([])
     const [count, setCount] = useState<number>(32)
     const [isLoading, setIsLoading] = useState<boolean>(false)
 
@@ -67,7 +67,7 @@ function MiniCardGrid({releaseWaveFilter, searchFilter, factionFilter, releaseWa
                     ) : null}
                 </div>
             ))}
-            <DetailsModal/>
+            <DetailsModal type={'figure'}/>
         </>
     )
 }
