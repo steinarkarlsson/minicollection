@@ -1,5 +1,5 @@
 
-function Privacy () {
+export default function Privacy () {
     return (
         <div className='flex h-screen bg-gradient-to-b lg:h-[140vh]} !h-screen'>
             <div>
@@ -16,5 +16,3 @@ function Privacy () {
         </div>
     );
 };
-
-export default Privacy;
