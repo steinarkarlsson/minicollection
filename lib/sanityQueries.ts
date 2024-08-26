@@ -72,7 +72,7 @@ export async function getReleaseWaves() {
 }
 
 export async function getSets() {
-    return await sanityClient.fetch(`*[_type == "set"] {
+    return await sanityClient.fetch(`*[_type == "set"] | order(defined(image.asset) desc) {
         _id,
         mainName,
         image,
@@ -81,7 +81,7 @@ export async function getSets() {
 }
 
 export async function getFigureDetails(_id: string) {
-    return await sanityClient.fetch(`*[_type == "figure" && _id == $_id] {
+    return await sanityClient.fetch(`*[_type == "figure" && _id == $_id]{
     _id,
     mainName,
     image,

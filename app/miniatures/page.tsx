@@ -1,6 +1,6 @@
 import MiniCardGrid from "../../components/MiniCardGrid";
 import {getFactions, getFigureGridInfo, getReleaseWaves} from "../../lib/sanityQueries";
-import {SearchBar} from "../../components/searchBar/SearchBar";
+import {MiniatureSearchBar} from "../../components/searchBar/MiniatureSearchBar";
 
 export default async function Miniatures({searchParams}: {
     searchParams: { [key: string]: string | string[] | undefined }
@@ -15,7 +15,7 @@ export default async function Miniatures({searchParams}: {
 
     return (
         <div className="flex flex-col items-center mt-10 space-y-2 md:space-y-5 p-4">
-            <SearchBar
+            <MiniatureSearchBar
                 searchFilter={searchFilter}
                 factionFilter={factionFilter}
                 releaseWaveFilter={releaseWaveFilter}
