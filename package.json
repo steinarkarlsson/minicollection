@@ -29,6 +29,7 @@
     "react-icons": "^4.8.0",
     "recoil": "^0.7.7",
     "tailwind-scrollbar": "^3.1.0",
+    "use-debounce": "^10.0.3",
     "v1": "^1.0.0",
     "zod": "^3.23.8"
   },

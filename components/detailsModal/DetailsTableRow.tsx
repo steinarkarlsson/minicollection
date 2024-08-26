@@ -1,5 +1,3 @@
-import React from 'react';
-
 interface DetailsTableRowProps {
     header: string;
     data: string | undefined;

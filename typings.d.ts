@@ -41,6 +41,36 @@ export interface Set {
     _id: ObjectId
     _type: string
     mainName: string
+    image?: {
+        _type: string,
+        asset?: {
+            _ref: string,
+            _type: string
+        }
+    }
+    releaseWave?: { name: string }
+    faction?: { name:string }[]
+    figures: {
+        _ref: string
+    }[]
+    print: {
+        _ref: string
+    }[]
+    terrain: {
+        _ref: string
+    }[]
+    description: {
+        _type: string
+        children: {
+            text: string
+        }[]
+    }[]
+}
+
+export interface GridSet {
+    _id: ObjectId
+    _type: string
+    mainName: string
 }
 
 export interface Terrain {
@@ -49,7 +79,19 @@ export interface Terrain {
     mainName: string
 }
 
+export interface GridTerrain {
+    _id: ObjectId
+    _type: string
+    mainName: string
+}
+
 export interface Print {
+    _id: ObjectId
+    _type: string
+    mainName: string
+}
+
+export interface GridPrint {
     _id: ObjectId
     _type: string
     mainName: string

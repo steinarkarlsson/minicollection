@@ -1,17 +1,17 @@
 'use client'
-import {Faction, GridFigure, ReleaseWave} from "../typings";
-import MiniCard from "./MiniCard";
+import {GridFigure, ReleaseWave, Set} from "../typings";
 import {useEffect, useState} from 'react';
-import {getFigureGridInfo} from '../lib/sanityQueries';
 import DetailsModal from './detailsModal/DetailsModal';
+import ItemCard from "./ItemCard";
+import {getFigureGridInfo} from "../lib/sanityQueries";
 
-interface MiniCardGridProps {
-    figures: GridFigure[]
+interface GridProps {
+    type: 'miniature' | 'set' | 'terrain' | 'print'
+    items: GridFigure[] | Set[]
     searchFilter: string
+    releaseWaves: ReleaseWave[]
     factionFilter: string
     releaseWaveFilter: string
-    factions: Faction[]
-    releaseWaves: ReleaseWave[]
 }
 
 function useScrollToEnd(callback: () => void, isLoading: boolean) {
@@ -32,17 +32,10 @@ function useScrollToEnd(callback: () => void, isLoading: boolean) {
     }, [isLoading])
 }
 
-function MiniCardGrid({releaseWaveFilter, searchFilter, factionFilter, releaseWaves}: MiniCardGridProps) {
-    const [displayedFigures, setDisplayedFigures] = useState<GridFigure[]>([])
+function Grid({items, releaseWaves}: GridProps) {
+    const [displayedItems, setDisplayedItems] = useState([])
     const [count, setCount] = useState<number>(32)
     const [isLoading, setIsLoading] = useState<boolean>(false)
-
-    useEffect(() => {
-        getFigureGridInfo(searchFilter, factionFilter, releaseWaveFilter, count).then((figures) => {
-            setDisplayedFigures(figures)
-            setIsLoading(false);
-        })
-    }, [count, searchFilter, factionFilter, releaseWaveFilter]);
 
     useScrollToEnd(() => {
         setCount(prevCount => prevCount + 6)
@@ -51,25 +44,28 @@ function MiniCardGrid({releaseWaveFilter, searchFilter, factionFilter, releaseWa
     return (
         <>
             {releaseWaves.map((releaseWave) => (
-                <div key={releaseWave.name}>
-                    {displayedFigures.some(figure => figure.releaseWave?.name === releaseWave.name) ? (
-                        <>
+                <>
+                    {items.some(item => item.releaseWave?.name === releaseWave.name) ? (
+                        <div key={releaseWave.name}>
                             <hr className="my-12 h-px border-t-0 bg-transparent bg-gradient-to-r from-transparent via-gray-400 to-transparent opacity-25 dark:via-gray-400"/>
                             <div className="text-2xl lg:text-3xl pt-5 pl-5 lg:mx-24">{releaseWave.name}</div>
                             <div className="flex flex-wrap justify-center">
-                                {displayedFigures.map((figure) => (
-                                    figure.releaseWave?.name === releaseWave.name ?
-                                        <MiniCard figure={figure}
-                                                  key={figure.mainName + releaseWave.name + figure._id}/> : null
+                                {items.map((item) => (
+                                    item.releaseWave?.name === releaseWave.name ?
+                                        <ItemCard
+                                            item={item}
+                                            type={"set"}
+                                            key={item.mainName + releaseWave.name + item._id}
+                                        /> : null
                                 ))}
                             </div>
-                        </>
+                        </div>
                     ) : null}
-                </div>
+                </>
             ))}
             <DetailsModal/>
         </>
     )
 }
 
-export default MiniCardGrid;
+export default Grid;
