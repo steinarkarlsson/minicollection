@@ -1,4 +1,4 @@
-import {Faction, Figure, GridFigure, ReleaseWave, Set} from "../typings";
+import {Faction, Figure, ReleaseWave, Set} from "../typings";
 import {sanityClient} from "./sanityClient";
 
 export async function getAllCollections() {
@@ -40,7 +40,7 @@ export async function getFigureGridInfo(searchFilter: string = '', factionFilter
         factionFilter,
         releaseWaveFilter
     });
-    return results as GridFigure[];
+    return results as Figure[];
 }
 
 export async function getGridInfo(type: string, searchFilter: string = '', factionFilter: string = '', releaseWaveFilter: string = '', count: number = 32) {
@@ -51,10 +51,17 @@ export async function getGridInfo(type: string, searchFilter: string = '', facti
 
     const results = await sanityClient.fetch(`*[_type == "${type}" ${searchString} ${factionString} ${releaseWaveString}] | order(releaseWave->releaseDate desc, faction[0]->name, type, mainName, defined(image.asset) desc)[0...${count}] {
         _id,
-        mainName,
-        image,
-        releaseWave->{name},
-        faction[]->{name}
+    mainName,
+    image,
+    releaseWave->{name},
+    faction[]->{name},
+    type,
+    material,
+    character[]->{name},
+    description,
+    race,
+    baseSize,
+    alias
     }`, {
         searchFilter,
         factionFilter,
@@ -77,6 +84,7 @@ export async function getSets() {
         mainName,
         image,
         releaseWave->{name},
+        figures[]->{mainName, image, _id}
         }`) as Set[];
 }
 

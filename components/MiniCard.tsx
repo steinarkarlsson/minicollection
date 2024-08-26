@@ -1,18 +1,18 @@
 import Image from "next/image";
-import { GridFigure } from "../typings";
+import { Figure } from "../typings";
 import { useRecoilState } from 'recoil';
-import { modalState, figureState } from '../atoms/modalAtom';
+import {modalState, figureState, itemState} from '../atoms/modalAtom';
 
 interface Props {
-    figure: GridFigure
+    figure: Figure
 }
 
 function MiniCard({ figure }: Props) {
     const [, setShowModal] = useRecoilState(modalState);
-    const [, setFigure] = useRecoilState(figureState);
+    const [, setItem] = useRecoilState(itemState);
 
     const handleClick = () => {
-        setFigure(figure);
+        setItem(figure);
         setShowModal(true);
     };
 
