@@ -16,8 +16,8 @@ export default function IncludedItemCard({figure}: IncludedItemCardProps) {
 
     const handleClick = () => {
         getFigureDetails(figure._id).then(
-            (figure) => {
-                setItem(figure[0]);
+            (figures: Figure[]) => {
+                setItem(figures[0]);
                 setShowModal(true);
             }
         );
