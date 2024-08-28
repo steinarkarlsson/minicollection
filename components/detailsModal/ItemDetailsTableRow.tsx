@@ -5,7 +5,7 @@ interface DetailsTableRowProps {
     figure: Figure;
 }
 
-const DetailsTableRow: React.FC<DetailsTableRowProps> = ({ figure }) => {
+const ItemDetailsTableRow: React.FC<DetailsTableRowProps> = ({ figure }) => {
     return (
         <tr className="border-b border-gray-700">
             <td className="text-md p-2">{figure.mainName}</td>
@@ -22,4 +22,4 @@ const DetailsTableRow: React.FC<DetailsTableRowProps> = ({ figure }) => {
     );
 };
 
-export default DetailsTableRow;
+export default ItemDetailsTableRow;
