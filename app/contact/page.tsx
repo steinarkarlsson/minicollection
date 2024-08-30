@@ -1,7 +1,10 @@
 export default function Contact() {
     return (
-        <div>
-            <h1>Contact</h1>
+        <div className='flex flex-col justify-center space-y-5'>
+            <div className='text-2xl'>Contact Information</div>
+            <div>
+                For any questions, comments, or concerns, please contact me at: steinar@minicollection.app
+            </div>
         </div>
     )
 }
