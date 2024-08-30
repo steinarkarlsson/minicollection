@@ -15,7 +15,8 @@ export default function Page() {
     const searchParams = useSearchParams();
     const pathname = usePathname()
 
-    const id = pathname.slice(6);
+    const id = pathname.split('/').pop();
+    console.log(`id: ${id}`)
 
     useEffect(() => {
         console.log(`useEffect with id: ${id}`)
