@@ -14,7 +14,7 @@ export default async function Miniatures({searchParams}: {
     const releaseWaves = await getReleaseWaves();
 
     return (
-        <div className="flex flex-col items-center mt-10 space-y-2 md:space-y-5 p-4">
+        <div className="flex flex-col items-center space-y-2 md:space-y-5 p-4">
             <MiniatureSearchBar
                 searchFilter={searchFilter}
                 factionFilter={factionFilter}
