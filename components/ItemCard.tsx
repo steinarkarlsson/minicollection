@@ -3,13 +3,14 @@ import Image from "next/image";
 import {Figure, Set} from "../typings";
 import {useRecoilState} from "recoil";
 import {itemState, modalState} from "../atoms/modalAtom";
+import Link from "next/link";
 
 interface Props {
     item: Figure | Set
     type: 'figure' | 'set'
 }
 
-function ItemCard({ item, type }: Props) {
+function ItemCard({item, type}: Props) {
     const [, setShowModal] = useRecoilState(modalState);
     const [, setItem] = useRecoilState(itemState);
 
@@ -22,19 +23,19 @@ function ItemCard({ item, type }: Props) {
     const cardHeight = type === 'set' ? 'h-60' : 'h-80';
 
     return (
-        <div
-            className={`group relative m-2 mx-2 ${cardWidth} overflow-hidden rounded-md pt-2 shadow-xl hover:shadow-yellow-200 transition delay-75 ease-in-out duration-600 border-2  border-gray-800 hover:border-white`}
-            onClick={handleClick}
-        >
-            <div className={`flex flex-col ${cardHeight} items-center justify-center`}>
+        <Link href={`/${type === 'figure' ? 'miniatures' : 'sets'}/${item.mainName}`}>
+            <div
+                className={`group relative m-2 mx-2 ${cardWidth} overflow-hidden rounded-md pt-2 shadow-xl hover:shadow-yellow-200 transition delay-75 ease-in-out duration-600 border-2  border-gray-800 hover:border-white`}
+                onClick={handleClick}
+            >
+                <div className={`flex flex-col ${cardHeight} items-center justify-center`}>
                     {item.image && item.image.asset ? (
                         <Image
                             src={`https://cdn.sanity.io/images/4llymfg7/production/${item.image.asset._ref.slice(6).slice(0, -4)}.png`}
                             alt=""
                             width={136}
                             height={140}
-                            style={{objectFit: 'contain', width: 'auto', maxHeight: '100%'}}
-                        />
+                            style={{objectFit: 'contain', width: 'auto', maxHeight: '100%'}}/>
                     ) : null}
                 </div>
                 <div className="px-6 text-m text-wrap">
@@ -57,7 +58,8 @@ function ItemCard({ item, type }: Props) {
                 </span>
                 </div>
             </div>
-            );
-            }
+        </Link>
+    );
+}
 
-            export default ItemCard;
+export default ItemCard;
