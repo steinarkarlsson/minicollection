@@ -3,11 +3,7 @@ import Image from "next/image";
 function MiniCollectionIcon() {
     return (
         <div className='flex flex-row'>
-            <Image src="/icon.png" width="60" height="60" alt="logo" className="w-10 lg:w-20"/>
-            {/*<div className="flex flex-col">*/}
-            {/*    <p className="text-md lg:text-2xl">Mini Collection</p>*/}
-            {/*    <p className="text-xs lg:text-md">A Strategy Battle Game Collectors Archive</p>*/}
-            {/*</div>*/}
+            <Image src="/icon.png" width="50" height="50" alt="logo" className="w-8 lg:w-16"/>
         </div>
     )
 }
