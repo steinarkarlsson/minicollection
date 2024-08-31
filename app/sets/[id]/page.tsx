@@ -14,7 +14,7 @@ export default function Page() {
     const [set, setSet] = useState<Set>();
     const pathname = usePathname()
 
-    const id = pathname.split('/').pop();
+    const id = pathname?.split('/').pop();
 
     useEffect(() => {
         setIsLoading(true)
