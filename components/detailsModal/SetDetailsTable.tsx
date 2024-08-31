@@ -2,7 +2,7 @@ import {Box, Table, TableContainer} from "@mui/material";
 import DetailsTableRow from './DetailsTableRow';
 import {Set} from "../../typings";
 
-export default function SetDetailsTable({set}: { set: Set | null }) {
+export default function SetDetailsTable({set}: { set: Set | undefined }) {
     return (
         <TableContainer component={Box}>
             <Table size="small" aria-label="simple table">

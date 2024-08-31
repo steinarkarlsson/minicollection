@@ -13,7 +13,7 @@ export default function Header() {
 
     return (
         <header>
-            <nav className="w-full border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800">
+            <nav className="fixed w-full pt-10 px-4 lg:px-6 py-2.5 bg-opacity-50 bg-black">
                 <div className="flex flex-wrap justify-between items-center mx-auto w-full max-w-screen-xl">
                     <a href="/" className="flex items-center">
                         <MiniCollectionIcon/>
