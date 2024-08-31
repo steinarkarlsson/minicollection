@@ -3,7 +3,6 @@ import {Faction, Figure, ReleaseWave} from "../typings";
 import MiniCard from "./MiniCard";
 import {useEffect, useState} from 'react';
 import {getFigureGridInfo} from '../lib/sanityQueries';
-import DetailsModal from './detailsModal/DetailsModal';
 
 interface MiniCardGridProps {
     figures: Figure[]
@@ -67,7 +66,6 @@ function MiniCardGrid({releaseWaveFilter, searchFilter, factionFilter, releaseWa
                     ) : null}
                 </div>
             ))}
-            <DetailsModal type={'figure'}/>
         </>
     )
 }

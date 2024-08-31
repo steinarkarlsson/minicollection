@@ -1,6 +1,5 @@
 'use client'
 import {Figure, ReleaseWave, Set} from "../typings";
-import DetailsModal from './detailsModal/DetailsModal';
 import ItemCard from "./ItemCard";
 
 interface GridProps {
@@ -12,7 +11,7 @@ interface GridProps {
     releaseWaveFilter: string
 }
 
-export default function Grid({items, releaseWaves, type}: GridProps) {
+export default function Grid({items, releaseWaves}: GridProps) {
     return (
         <>
             {releaseWaves.map((releaseWave) => (
@@ -35,7 +34,6 @@ export default function Grid({items, releaseWaves, type}: GridProps) {
                     ) : null}
                 </div>
             ))}
-            <DetailsModal type={type}/>
         </>
     )
 }

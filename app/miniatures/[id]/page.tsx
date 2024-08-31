@@ -2,24 +2,23 @@
 
 import Image from 'next/image';
 import {useEffect, useState} from 'react';
-import {Set} from '../../../typings';
+import {Figure} from '../../../typings';
 import Spinner from "../../../components/Spinner";
-import SetDetailsTable from "../../../components/detailsModal/SetDetailsTable";
-import IncludedItemsGrid from "../../../components/detailsModal/IncludedItemsGrid";
-import {getSetDetails} from "../../../lib/sanityQueries";
+import {getFigureDetails} from "../../../lib/sanityQueries";
 import {usePathname} from "next/navigation";
+import DetailsTable from "../../../components/detailsModal/DetailsTable";
 
 export default function Page() {
     const [isLoading, setIsLoading] = useState<boolean>(true);
-    const [set, setSet] = useState<Set>();
+    const [figure, setFigure] = useState<Figure>();
     const pathname = usePathname()
 
     const id = pathname.split('/').pop();
 
     useEffect(() => {
         setIsLoading(true)
-        id ? getSetDetails(id).then((res) => {
-            setSet(res)
+        id ? getFigureDetails(id).then((res) => {
+            setFigure(res[0])
             setIsLoading(false)
         }) : null;
     }, [id]);
@@ -31,29 +30,28 @@ export default function Page() {
                     {isLoading ? <Spinner/> :
                         <>
                             <div className='flex'>
-                                <p className="text-2xl font-bold">{set?.mainName}</p>
+                                <p className="text-2xl font-bold">{figure?.mainName}</p>
                             </div>
                             <div
-                                className='flex flex-col justify-center lg:space-x-10 lg:flex-row'>
-                                {set && set.image?.asset ? (
+                                className='flex flex-col justify-center items-center justify-items-stretch lg:space-x-10 lg:flex-row'>
+                                {figure && figure.image?.asset ? (
                                     <Image
-                                        src={`https://cdn.sanity.io/images/4llymfg7/production/${set.image.asset._ref.slice(6).slice(0, -4)}.png`}
-                                        alt={set.mainName}
-                                        width={400}
+                                        src={`https://cdn.sanity.io/images/4llymfg7/production/${figure.image.asset._ref.slice(6).slice(0, -4)}.png`}
+                                        alt={figure.mainName}
+                                        width={200}
                                         height={400}
                                         style={{
                                             objectFit: 'contain',
-                                            width: '400px',
+                                            width: '200px',
                                             height: '400px',
                                             paddingTop: '20px'
                                         }}
                                     />
                                 ) : null}
                                 <div className='flex'>
-                                    <SetDetailsTable set={set}/>
+                                    <DetailsTable figure={figure}/>
                                 </div>
                             </div>
-                            <IncludedItemsGrid item={set}/>
                         </>
                     }
                 </div>
