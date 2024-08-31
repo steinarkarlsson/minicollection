@@ -89,7 +89,7 @@ export async function getSets() {
 }
 
 export async function getFigureDetails(id: string) {
-    return await sanityClient.fetch(`*[_type == "figure" && id == $_id]{
+    return await sanityClient.fetch(`*[_type == "figure" && _id == $id]{
     _id,
     mainName,
     image,
@@ -108,10 +108,30 @@ export async function getFigureDetails(id: string) {
 export async function getSetDetails(id: string) {
     console.log('getSetDetails')
     return await sanityClient.fetch(`*[_type == "set" && _id == $id][0] {
-        _id,
-        mainName,
-        image,
-        releaseWave->{name},
-        figures[]->{mainName, image, _id}
-        }`, {id}) as Set;
+    _id,
+    mainName,
+    image,
+    releaseWave->{name},
+    figures[]->{mainName, image, _id}
+    }`, {id}) as Set;
+}
+
+export async function getFeaturedSets() {
+    return await sanityClient.fetch(`*[_type == "set" && featured]{
+    _id,
+    mainName,
+    image,
+    releaseWave->{name}
+    }`) as Set[];
+}
+
+export async function getFeaturedFigures() {
+    return await sanityClient.fetch(`*[_type == "figure" && featured]{
+    _id,
+    mainName,
+    image,
+    releaseWave->{name},
+    faction[]->{name},
+    material,
+    }`) as Figure[];
 }
