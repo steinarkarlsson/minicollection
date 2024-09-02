@@ -23,7 +23,7 @@ export interface Figure {
 }
 
 export interface GridFigure {
-    _id: ObjectId
+    _id: string
     mainName: string
     image?: {
         _type: string,
@@ -37,7 +37,7 @@ export interface GridFigure {
 }
 
 export interface Set {
-    _id: ObjectId
+    _id: string
     _type: string
     mainName: string
     image?: {
@@ -75,37 +75,37 @@ export interface Set {
 }
 
 export interface GridSet {
-    _id: ObjectId
+    _id: string
     _type: string
     mainName: string
 }
 
 export interface Terrain {
-    _id: ObjectId
+    _id: string
     _type: string
     mainName: string
 }
 
 export interface GridTerrain {
-    _id: ObjectId
+    _id: string
     _type: string
     mainName: string
 }
 
 export interface Print {
-    _id: ObjectId
+    _id: string
     _type: string
     mainName: string
 }
 
 export interface GridPrint {
-    _id: ObjectId
+    _id: string
     _type: string
     mainName: string
 }
 
 export interface Character {
-    _id: ObjectId
+    _id: string
     _type: string
     name: string
 }
@@ -118,7 +118,7 @@ export interface Faction {
 }
 
 export interface ReleaseWave {
-    _id: ObjectId
+    _id: string
     _type: string
     name: string
     releaseDate: string
