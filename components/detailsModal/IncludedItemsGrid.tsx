@@ -1,4 +1,4 @@
-import {Set} from "../../typings";
+import {Set} from "../../types";
 import IncludedItemCard from "./IncludedItemCard";
 
 interface IncludedItemsTableProps {

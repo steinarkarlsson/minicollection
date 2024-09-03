@@ -1,8 +1,8 @@
 import Image from "next/image";
-import {Figure} from "../../typings";
+import {DetailedFigure} from "../../types";
 
 interface DetailsTableRowProps {
-    figure: Figure;
+    figure: DetailedFigure;
 }
 
 const ItemDetailsTableRow: React.FC<DetailsTableRowProps> = ({ figure }) => {

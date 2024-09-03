@@ -1,12 +1,12 @@
 'use client'
 import Image from "next/image";
-import {Figure, Set} from "../typings";
+import {DetailedFigure, Set} from "../types";
 import {useRecoilState} from "recoil";
 import {itemState, modalState} from "../atoms/modalAtom";
 import Link from "next/link";
 
 interface Props {
-    item: Figure | Set
+    item: DetailedFigure | Set
     type: 'figure' | 'set'
 }
 

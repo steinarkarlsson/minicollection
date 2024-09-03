@@ -7,8 +7,6 @@ export default async function Home() {
     const featuredFigures = await getFeaturedFigures();
     const featuredSets = await getFeaturedSets();
 
-    console.log(featuredSets)
-    console.log(featuredFigures)
     return (
         <div className="flex flex-col items-center space-y-2 md:space-y-5 p-4">
             <Welcome/>

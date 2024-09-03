@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import {useEffect, useState} from 'react';
-import {Figure} from '../../../typings';
+import {DetailedFigure} from '../../../types';
 import Spinner from "../../../components/Spinner";
 import {getFigureDetails} from "../../../lib/sanityQueries";
 import {usePathname} from "next/navigation";
@@ -10,7 +10,7 @@ import DetailsTable from "../../../components/detailsModal/DetailsTable";
 
 export default function Page() {
     const [isLoading, setIsLoading] = useState<boolean>(true);
-    const [figure, setFigure] = useState<Figure>();
+    const [figure, setFigure] = useState<DetailedFigure>();
     const pathname = usePathname()
 
     const id = pathname.split('/').pop();

@@ -2,7 +2,7 @@
 
 import {Autocomplete, TextField} from "@mui/material";
 import React from "react";
-import {ReleaseWave} from "../../typings";
+import {ReleaseWave} from "../../types";
 import {useRouter} from "next/navigation";
 
 interface ReleaseWaveSelectProps {

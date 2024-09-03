@@ -10,7 +10,6 @@ export default async function Sets({searchParams}: {
     const sets = await getSets();
     const releaseWaves = await getReleaseWaves();
 
-    // console.log('sets rendered', sets)
     return (
         <div className="flex flex-col items-center space-y-2 md:space-y-5 p-4">
             {/*<SetSearchBar searchFilter={searchFilter} releaseWaveFilter={releaseWaveFilter} releaseWaves={releaseWaves} />*/}

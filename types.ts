@@ -1,64 +1,49 @@
-
-export interface Figure {
-    _id: string
-    type?: string
-    releaseWave?: {
-        name: string
-    }
-    mainName: string
-    material?: string[]
-    faction?: {
-        name: string
-    }[]
-    image?: {
-        _type: string,
-        asset?: {
-            _ref: string,
-            _type: string
-        }
-    }
-    character?:{
-        name: string
+export interface Description {
+    _type: string
+    children: {
+        text: string
     }[]
 }
 
-export interface GridFigure {
+export interface SanityImage {
+    _type: string
+    asset: {
+        _ref: string
+        _type: string
+    }
+}
+
+export interface CardFigure {
     _id: string
     mainName: string
-    image?: {
-        _type: string,
-        asset?: {
-            _ref: string,
-            _type: string
-        }
-    }
+    image?: SanityImage
     releaseWave?: { name: string }
-    faction?: { name:string }[]
+    faction?: { name: string }[]
+}
+
+export interface DetailedFigure extends CardFigure {
+    type?: 'Warrior' | 'Hero'
+    material?: ('metal' | 'plastic' | 'resin')[];
+    character?: { name: string }[]
+    race? : { name: string }[]
+    description?: Description
+    baseSize: '25mm' | '40mm' | '60mm';
+    alias?: string
+    featured?: boolean
+
 }
 
 export interface Set {
     _id: string
     _type: string
     mainName: string
-    image?: {
-        _type: string,
-        asset?: {
-            _ref: string,
-            _type: string
-        }
-    }
+    image?: SanityImage
     releaseWave?: { name: string }
-    faction?: { name:string }[]
+    faction?: { name: string }[]
     figures: {
         _id: string,
-        mainName:string,
-        image?: {
-            _type: string,
-            asset?: {
-                _ref: string,
-                _type: string
-            }
-        }
+        mainName: string,
+        image?: SanityImage
     }[]
     print: {
         _ref: string

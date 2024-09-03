@@ -1,4 +1,4 @@
-import {Faction, Figure, ReleaseWave, Set} from "../typings";
+import {Faction, DetailedFigure, ReleaseWave, Set} from "../types";
 import {sanityClient} from "./sanityClient";
 
 export async function getAllCollections() {
@@ -40,7 +40,7 @@ export async function getFigureGridInfo(searchFilter: string = '', factionFilter
         factionFilter,
         releaseWaveFilter
     });
-    return results as Figure[];
+    return results as DetailedFigure[];
 }
 
 export async function getGridInfo(type: string, searchFilter: string = '', factionFilter: string = '', releaseWaveFilter: string = '', count: number = 32) {
@@ -101,11 +101,10 @@ export async function getFigureDetails(id: string) {
     race,
     baseSize,
     alias
-    }`, {id}) as Figure[];
+    }`, {id}) as DetailedFigure[];
 }
 
 export async function getSetDetails(id: string) {
-    console.log('getSetDetails')
     return await sanityClient.fetch(`*[_type == "set" && _id == $id][0] {
     _id,
     mainName,
@@ -132,5 +131,5 @@ export async function getFeaturedFigures() {
     releaseWave->{name},
     faction[]->{name},
     material,
-    }`) as Figure[];
+    }`) as DetailedFigure[];
 }

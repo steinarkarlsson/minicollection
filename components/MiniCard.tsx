@@ -1,11 +1,11 @@
 import Image from "next/image";
-import {Figure} from "../typings";
+import {DetailedFigure} from "../types";
 import {useRecoilState} from 'recoil';
 import {itemState, modalState} from '../atoms/modalAtom';
 import Link from "next/link";
 
 interface Props {
-    figure: Figure
+    figure: DetailedFigure
 }
 
 function MiniCard({figure}: Props) {

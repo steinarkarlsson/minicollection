@@ -1,10 +1,10 @@
 'use client'
-import {Figure, ReleaseWave, Set} from "../typings";
+import {DetailedFigure, ReleaseWave, Set} from "../types";
 import ItemCard from "./ItemCard";
 
 interface GridProps {
     type: 'figure' | 'set'
-    items: Figure[] | Set[]
+    items: DetailedFigure[] | Set[]
     searchFilter: string
     releaseWaves: ReleaseWave[]
     factionFilter: string
