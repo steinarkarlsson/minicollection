@@ -3,6 +3,7 @@
 import {useState} from 'react';
 import CoffeeButton from "./CoffeeButton";
 import MiniCollectionIcon from "./MiniCollectionIcon";
+import GoogleSignIn from "../GoogleSignIn";
 
 export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -13,8 +14,8 @@ export default function Header() {
 
     return (
         <header>
-            <nav className="fixed w-full pt-10 px-4 lg:px-6 py-2.5 bg-opacity-50 bg-black">
-                <div className="flex flex-wrap justify-between items-center mx-auto w-full max-w-screen-xl">
+            <nav className="fixed w-full pt-10 ml-[-16px] px-4 lg:px-6 py-2.5 lg:bg-opacity-50 bg-black">
+                <div className="flex flex-wrap justify-between items-center mx-auto w-full max-w-screen-xl ">
                     <a href="/" className="flex items-center">
                         <MiniCollectionIcon/>
                         <span
@@ -45,38 +46,48 @@ export default function Header() {
                         </button>
                     </div>
                     <div
-                        className={`justify-between items-center w-full lg:flex lg:w-auto lg:order-1 ${isMenuOpen ? 'block' : 'hidden'}`}
+                        className={`justify-between bg-black items-center text-2xl lg:text-md  w-full lg:flex lg:w-auto lg:order-1 ${isMenuOpen ? 'block' : 'hidden'}`}
                         id="mobile-menu-2">
-                        <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
+                        <ul className="flex flex-col fixed lg:static ml-[-16px] w-full font-medium lg:flex-row lg:space-x-8 lg:mt-0">
                             <li>
                                 <a href="/"
-                                   className="block py-2 pr-4 pl-3 lg:text-2xl text-white rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 dark:text-white"
+                                   className="block bg-black py-2 pr-4 pl-3 lg:text-2xl text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-300 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
                                    aria-current="page">
                                     Home
                                 </a>
                             </li>
                             <li>
                                 <a href="/miniatures"
-                                   className="block py-2 pr-4 pl-3 lg:text-2xl text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-300 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">
+                                   className="block bg-black py-2 pr-4 pl-3 lg:text-2xl text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-300 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">
                                     Miniatures
                                 </a>
                             </li>
                             <li>
                                 <a href="/sets"
-                                   className="block py-2 pr-4 pl-3 lg:text-2xl text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-300 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">
+                                   className="block bg-black py-2 pr-4 pl-3 lg:text-2xl text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-300 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">
                                     Sets
                                 </a>
                             </li>
-                            <li className="block py-2 pr-4 pl-3 lg:text-2xl text-gray-900 border-b border-gray-100 lg:border-0 lg:p-0 dark:text-gray-600 dark:border-gray-700">
+                            <li className="block bg-black py-2 pr-4 pl-3 lg:text-2xl text-gray-900 border-b border-gray-100 lg:border-0 lg:p-0 dark:text-gray-600 dark:border-gray-700">
                                 Terrain
                             </li>
-                            <li className="block py-2 pr-4 pl-3 lg:text-2xl text-gray-900 border-b border-gray-100 lg:border-0 lg:p-0 dark:text-gray-600 dark:border-gray-700">
+                            <li className="block bg-black py-2 pr-4 pl-3 lg:text-2xl text-gray-900 border-b border-gray-100 lg:border-0 lg:p-0 dark:text-gray-600 dark:border-gray-700">
                                 Print
                             </li>
+                            <li className="flex bg-black py-2 pr-4 pl-3 lg:text-2xl text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-300 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">
+                                <CoffeeButton/>
+                            </li>
+                            <li className="block bg-black py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 lg:border-0 lg:p-0 dark:text-gray-300 dark:border-gray-700">
+                                <GoogleSignIn/>
+                            </li>
                         </ul>
-                        <div className='flex justify-center lg:ml-40'>
-                            <CoffeeButton/>
-                        </div>
+                        {/*<div className='flex flex-col  lg:flex-row justify-center lg:ml-40 lg:space-y-0 lg:space-x-5'>*/}
+                        {/*    <CoffeeButton/>*/}
+                        {/*</div>*/}
+                        {/*<div*/}
+                        {/*    className='flex flex-col  lg:flex-row justify-center lg:ml-40 lg:space-y-0 lg:space-x-5'>*/}
+                        {/*    <GoogleSignIn/>*/}
+                        {/*</div>*/}
                     </div>
                 </div>
             </nav>

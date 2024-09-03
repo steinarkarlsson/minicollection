@@ -1,7 +1,10 @@
 import React, {useEffect} from 'react';
+import {googleSignIn} from "../app/actions";
 
-function GoogleSignIn() {
+export default function GoogleSignIn() {
 
+    console.log('G Client ID: ' + process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID);
+    console.log('nextauth: ' + process.env.NEXT_PUBLIC_NEXTAUTH_URL);
 
     useEffect(() => {
         const script = document.createElement('script');
@@ -15,23 +18,16 @@ function GoogleSignIn() {
     }, []);
 
     return (
-        <div>
-            <div id="g_id_onload"
-                 data-client_id={`${process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}`}
-                 data-login_uri={`${process.env.NEXTAUTH_URL}`}
-                 // data-auto_prompt="false"
-            >
+        <form action={googleSignIn}>
+            <div className="items-center justify-start font-sans">
+                <button
+                    className="text-sm px-4 py-2 border flex gap-2 border-slate-200 dark:border-slate-700 rounded-lg text-slate-700 dark:text-slate-200 hover:border-slate-400 dark:hover:border-slate-500 hover:text-slate-900 dark:hover:text-slate-300 hover:shadow transition duration-150 dark:bg-gray-800 ">
+                    <img className="w-6 h-6" src="https://www.svgrepo.com/show/475656/google-color.svg" loading="lazy"
+                         alt="google logo"/>
+                    <span className='whitespace-nowrap'>Login with Google</span>
+                </button>
             </div>
-            <div className="g_id_signin"
-                 data-type="standard"
-                 data-size="large"
-                 data-theme="outline"
-                 data-text="sign_in_with"
-                 data-shape="rectangular"
-                 data-logo_alignment="left">
-            </div>
-        </div>
+        </form>
     );
 }
 
-export default GoogleSignIn;
