@@ -18,7 +18,7 @@ export default function Privacy () {
                     provider.</p>
 
                 <p className={headerStyle}>Information We Collect</p>
-                <p className={paragraphStyle}>When you log in to [Your App Name] using your Google account, we collect the following
+                <p className={paragraphStyle}>When you log in to MiniCollection using your Google account, we collect the following
                     information from your Google profile:</p>
                 <p className={indentStyle}>1. Primary Google Account Email Address: This is the email address associated with your
                     Google account.</p>
