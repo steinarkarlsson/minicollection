@@ -1,16 +1,30 @@
 'use client'
 
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import CoffeeButton from "./CoffeeButton";
 import MiniCollectionIcon from "./MiniCollectionIcon";
 import GoogleSignIn from "../GoogleSignIn";
+import {createClient} from "../../utils/supabase/client";
+import {User} from "@supabase/supabase-js";
+import UserProfileIcon from "./UserProfileIcon";
 
 export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [user, setUser] = useState<User | null>(null);
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
     };
+
+    useEffect(() => {
+        const fetchUser = async () => {
+            const supabase = createClient();
+            const { data: { user } } = await supabase.auth.getUser();
+            setUser(user);
+            console.log(user)
+        };
+        fetchUser();
+    }, []);
 
     return (
         <header>
@@ -78,7 +92,7 @@ export default function Header() {
                                 <CoffeeButton/>
                             </li>
                             <li className="block bg-black py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 lg:border-0 lg:p-0 dark:text-gray-300 dark:border-gray-700">
-                                <GoogleSignIn/>
+                                {user ? <UserProfileIcon user={user} /> : <GoogleSignIn/>}
                             </li>
                         </ul>
                         {/*<div className='flex flex-col  lg:flex-row justify-center lg:ml-40 lg:space-y-0 lg:space-x-5'>*/}

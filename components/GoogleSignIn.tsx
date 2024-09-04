@@ -3,9 +3,6 @@ import {googleSignIn} from "../app/actions";
 
 export default function GoogleSignIn() {
 
-    console.log('G Client ID: ' + process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID);
-    console.log('nextauth: ' + process.env.NEXT_PUBLIC_NEXTAUTH_URL);
-
     useEffect(() => {
         const script = document.createElement('script');
         script.src = 'https://accounts.google.com/gsi/client';
