@@ -21,7 +21,6 @@ export default function Header() {
             const supabase = createClient();
             const { data: { user } } = await supabase.auth.getUser();
             setUser(user);
-            console.log(user)
         };
         fetchUser();
     }, []);

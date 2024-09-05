@@ -23,3 +23,40 @@ export const googleSignIn = async () => {
         return redirect(data.url);
     }
 }
+
+export const addToCollection = async (itemId: string) => {
+    console.log('Adding to collection: ', itemId);
+
+    const supabase = createClient();
+    const { data: { user }, error: userError } = await supabase.auth.getUser();
+
+    if (userError) {
+        console.error('Error fetching user: ' + userError.message);
+        return;
+    }
+
+    const userId = user?.id;
+    const { data: collection, error: collectionError } = await supabase
+        .from('collection')
+        .select('owned')
+        .eq('userId', userId)
+        .single();
+
+    if (collectionError) {
+        console.error('Error fetching collection: ' + collectionError.message);
+        return;
+    }
+
+    const updatedOwned = [...collection.owned, { id: itemId }];
+
+    const { error: updateError } = await supabase
+        .from('collection')
+        .update({ owned: updatedOwned })
+        .eq('userId', userId);
+
+    if (updateError) {
+        console.error('Error updating collection: ' + updateError.message);
+    } else {
+        console.log('Added to collection: ', itemId);
+    }
+}
