@@ -1,13 +1,13 @@
 'use client'
 import Image from "next/image";
-import {Figure} from "../../typings";
+import {DetailedFigure} from "../../types";
 import {useRecoilState} from "recoil";
 import {itemState, modalState} from "../../atoms/modalAtom";
 import {getFigureDetails} from "../../lib/sanityQueries";
 import Link from "next/link";
 
 interface IncludedItemCardProps {
-    figure: Figure;
+    figure: DetailedFigure;
 }
 
 export default function IncludedItemCard({figure}: IncludedItemCardProps) {
@@ -16,7 +16,7 @@ export default function IncludedItemCard({figure}: IncludedItemCardProps) {
 
     const handleClick = () => {
         getFigureDetails(figure._id).then(
-            (figures: Figure[]) => {
+            (figures: DetailedFigure[]) => {
                 setItem(figures[0]);
                 setShowModal(true);
             }

@@ -1,4 +1,4 @@
-import {Faction, Figure, ReleaseWave, Set} from "../typings";
+import {Faction, DetailedFigure, ReleaseWave, Set} from "../types";
 import {sanityClient} from "./sanityClient";
 
 export async function getAllCollections() {
@@ -40,7 +40,7 @@ export async function getFigureGridInfo(searchFilter: string = '', factionFilter
         factionFilter,
         releaseWaveFilter
     });
-    return results as Figure[];
+    return results as DetailedFigure[];
 }
 
 export async function getGridInfo(type: string, searchFilter: string = '', factionFilter: string = '', releaseWaveFilter: string = '', count: number = 32) {
@@ -49,7 +49,7 @@ export async function getGridInfo(type: string, searchFilter: string = '', facti
     const factionString = factionFilter ? `&& $factionFilter in faction[]->name` : ``;
     const releaseWaveString = releaseWaveFilter ? `&& releaseWave->name== $releaseWaveFilter` : ``;
 
-    const results = await sanityClient.fetch(`*[_type == "${type}" ${searchString} ${factionString} ${releaseWaveString}] | order(releaseWave->releaseDate desc, faction[0]->name, type, mainName, defined(image.asset) desc)[0...${count}] {
+    return await sanityClient.fetch(`*[_type == "${type}" ${searchString} ${factionString} ${releaseWaveString}] | order(releaseWave->releaseDate desc, faction[0]->name, type, mainName, defined(image.asset) desc)[0...${count}] {
         _id,
     mainName,
     image,
@@ -67,7 +67,6 @@ export async function getGridInfo(type: string, searchFilter: string = '', facti
         factionFilter,
         releaseWaveFilter
     });
-    return results;
 }
 
 export async function getFactions() {
@@ -79,7 +78,7 @@ export async function getReleaseWaves() {
 }
 
 export async function getSets() {
-    return await sanityClient.fetch(`*[_type == "set"] | order(defined(image.asset) desc) {
+    return await sanityClient.fetch(`*[_type == "set" && defined(image.asset)] {
         _id,
         mainName,
         image,
@@ -102,11 +101,10 @@ export async function getFigureDetails(id: string) {
     race,
     baseSize,
     alias
-    }`, {id}) as Figure[];
+    }`, {id}) as DetailedFigure[];
 }
 
 export async function getSetDetails(id: string) {
-    console.log('getSetDetails')
     return await sanityClient.fetch(`*[_type == "set" && _id == $id][0] {
     _id,
     mainName,
@@ -133,5 +131,5 @@ export async function getFeaturedFigures() {
     releaseWave->{name},
     faction[]->{name},
     material,
-    }`) as Figure[];
+    }`) as DetailedFigure[];
 }

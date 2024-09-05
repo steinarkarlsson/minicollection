@@ -1,9 +1,9 @@
-import {Figure, Set} from "../typings";
+import {DetailedFigure, Set} from "../types";
 import ItemCard from "./ItemCard";
 import Link from "next/link";
 
 interface CarouselProps {
-    items: Figure[] | Set[]
+    items: DetailedFigure[] | Set[]
     type: 'figure' | 'set'
 }
 

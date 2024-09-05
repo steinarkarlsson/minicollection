@@ -2,7 +2,7 @@
 
 import {Autocomplete, TextField} from "@mui/material";
 import React from "react";
-import {Faction} from "../../typings";
+import {Faction} from "../../types";
 import {useRouter} from "next/navigation";
 
 interface FactionSelectProps {

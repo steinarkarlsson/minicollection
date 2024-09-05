@@ -1,5 +1,5 @@
 import React from 'react';
-import {Faction, ReleaseWave} from "../../typings";
+import {Faction, ReleaseWave} from "../../types";
 import Search from "./Search";
 import {FactionSelect} from "./FactionSelect";
 import {ReleaseWaveSelect} from "./ReleaseWaveSelect";
