@@ -1,6 +1,8 @@
 import Grid from "../../components/Grid";
 import {getReleaseWaves, getSets} from "../../lib/sanityQueries";
 
+export const revalidate = 3600
+
 export default async function Sets({searchParams}: {
     searchParams: { [key: string]: string | string[] | undefined }
 }) {
