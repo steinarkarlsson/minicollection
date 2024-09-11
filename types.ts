@@ -59,6 +59,13 @@ export interface Set {
     }[]
 }
 
+export interface Collection {
+    owned: {
+        id:string
+        quantity: number
+    }[]
+}
+
 export interface GridSet {
     _id: string
     _type: string
