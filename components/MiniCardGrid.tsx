@@ -116,11 +116,11 @@ function MiniCardGrid({ releaseWaveFilter, searchFilter, factionFilter, releaseW
                 if (operation === 'add') {
                     updatedOwnedFigures = [...prevOwnedFigures, { id: itemId, quantity: 1 }];
                 } else {
-                    return prevOwnedFigures;
+                    updatedOwnedFigures = prevOwnedFigures; // Return the previous state if no changes
                 }
             }
 
-            return updatedOwnedFigures;
+            return updatedOwnedFigures || prevOwnedFigures;
         });
     };
 
