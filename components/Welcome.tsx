@@ -1,10 +1,15 @@
 import MailchimpForm from "./MailchimpForm";
+import MiniCollectionIcon from "./header/MiniCollectionIcon";
+import Image from "next/image";
 
 const Welcome: React.FC = () => {
     return (
         <div className="lg:flex lg:justify-center lg:items-center">
             <div className="text-center">
-                <h1 className="header text-2xl lg:text-4xl lg:mb-5">Welcome to the MESBG Collection Database</h1>
+                <div className='flex justify-center'>
+                    <Image src="/icon.png" width={500} height={500} alt="logo" className="w-24 lg:w-48"/>
+                </div>
+                <h1 className="header text-2xl lg:text-4xl lg:mb-5">Welcome to the MiniCollection - The MESBG Collection Database</h1>
                 <div
                     className="flex flex-col lg:flex-row container justify-center align-center mb-20">
                     <div className="flex justify-center items-center">

@@ -13,14 +13,14 @@ interface GridProps {
 
 export default function Grid({items, releaseWaves}: GridProps) {
     return (
-        <>
+        <div className='flex flex-wrap'>
             {releaseWaves.map((releaseWave) => (
                 <div key={releaseWave.name}>
                     {items.some(item => item.releaseWave?.name === releaseWave.name) ? (
-                        <div key={releaseWave.name}>
+                        <div key={releaseWave.name} className='lg:mx-8'>
                             <hr className="my-12 h-px border-t-0 bg-transparent bg-gradient-to-r from-transparent via-gray-400 to-transparent opacity-25 dark:via-gray-400"/>
-                            <div className="text-2xl lg:text-3xl pt-5 pl-5 lg:mx-24">{releaseWave.name}</div>
-                            <div className="flex flex-wrap justify-center">
+                            <div className="text-2xl lg:text-3xl pt-5">{releaseWave.name}</div>
+                            <div className="flex flex-wrap justify-center lg:justify-start">
                                 {items.map((item) => (
                                     item.releaseWave?.name === releaseWave.name ?
                                         <ItemCard
@@ -34,7 +34,7 @@ export default function Grid({items, releaseWaves}: GridProps) {
                     ) : null}
                 </div>
             ))}
-        </>
+        </div>
     )
 }
 

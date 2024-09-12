@@ -7,7 +7,7 @@ import Spinner from "../../../components/Spinner";
 import SetDetailsTable from "../../../components/detailsModal/SetDetailsTable";
 import IncludedItemsGrid from "../../../components/detailsModal/IncludedItemsGrid";
 import {getSetDetails} from "../../../lib/sanityQueries";
-import {usePathname} from "next/navigation";
+import {usePathname, useRouter} from "next/navigation";
 
 export default function Page() {
     const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -16,6 +16,7 @@ export default function Page() {
 
     const id = pathname?.split('/').pop();
 
+    const router = useRouter();
     useEffect(() => {
         setIsLoading(true)
         id ? getSetDetails(id).then((res) => {
@@ -24,12 +25,25 @@ export default function Page() {
         }) : null;
     }, [id]);
 
+    const handleBack = () => {
+        const searchParams = sessionStorage.getItem('searchParams');
+        if (searchParams) {
+            const params = new URLSearchParams(searchParams);
+            router.push(`/?${params.toString()}`);
+        } else {
+            router.back();
+        }
+    };
+
     return (
         <>
             {isLoading ? <Spinner/> :
                 <div className="flex flex-col px-6 text-left max-h-full lg:mt-24">
                     {isLoading ? <Spinner/> :
                         <>
+                            <button onClick={handleBack} className="flex lg:text-lg mb-4 hover:underline">
+                                ← Back
+                            </button>
                             <div className='flex'>
                                 <p className="text-2xl font-bold">{set?.mainName}</p>
                             </div>

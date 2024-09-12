@@ -4,13 +4,13 @@ import MiniCard from "./MiniCard";
 import { useEffect, useState } from 'react';
 import { getFigureGridInfo } from '../lib/sanityQueries';
 import { createClient } from "../utils/supabase/client";
+import Spinner from "./Spinner";
 
 interface MiniCardGridProps {
     figures: DetailedFigure[];
     searchFilter: string;
     factionFilter: string;
     releaseWaveFilter: string;
-    ownedFilter: string;
     factions: Faction[];
     releaseWaves: ReleaseWave[];
 }
@@ -33,7 +33,7 @@ function useScrollToEnd(callback: () => void, isLoading: boolean) {
     }, [isLoading]);
 }
 
-function MiniCardGrid({ releaseWaveFilter, searchFilter, factionFilter, ownedFilter, releaseWaves }: MiniCardGridProps) {
+function MiniCardGrid({ releaseWaveFilter, searchFilter, factionFilter, releaseWaves }: MiniCardGridProps) {
     const [displayedFigures, setDisplayedFigures] = useState<DetailedFigure[]>([]);
     const [ownedFigures, setOwnedFigures] = useState<{ id: string, quantity: number }[]>([]);
     const [count, setCount] = useState<number>(32);
@@ -106,7 +106,7 @@ function MiniCardGrid({ releaseWaveFilter, searchFilter, factionFilter, ownedFil
             }
         }
 
-        setOwnedFigures(updatedOwnedFigures);
+        setOwnedFigures(updatedOwnedFigures as { id: string, quantity: number }[]);
 
         const { data: { user } } = await supabase.auth.getUser();
         if (user) {
@@ -119,7 +119,8 @@ function MiniCardGrid({ releaseWaveFilter, searchFilter, factionFilter, ownedFil
 
     return (
         <>
-            {releaseWaves.map((releaseWave) => (
+            {isLoading ? <Spinner/> :
+            releaseWaves.map((releaseWave) => (
                 <div key={releaseWave.name}>
                     {displayedFigures.some(figure => figure.releaseWave?.name === releaseWave.name) ? (
                         <>

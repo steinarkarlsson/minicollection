@@ -21,7 +21,7 @@ export default function UserProfileIcon({ user }: { user: User }) {
     return (
         <div className="relative">
             <Image
-                className='rounded-full cursor-pointer'
+                className={`rounded-full cursor-pointer ${isDropdownOpen ? 'ring-2 ring-white' : ''}`}
                 width={40}
                 height={40}
                 src={profileImagePath || '/icon'}
@@ -29,10 +29,10 @@ export default function UserProfileIcon({ user }: { user: User }) {
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
             />
             {isDropdownOpen && (
-                <div className="absolute left-0 bg-gray-800 mt-2 w-48 text-lg rounded-md shadow-lg z-10 hover:bg-gray-700 transition duration-200">
+                <div className="absolute left-0 bg-gray-800 mt-2 w-24 text-lg rounded-md shadow-lg z-10 hover:bg-gray-700 transition duration-200">
                     <button
                         onClick={handleLogout}
-                        className="block w-full px-4 py-2 text-left text-sm text-white "
+                        className="block w-full px-4 py-2 text-sm text-center text-white "
                     >
                         Log out
                     </button>

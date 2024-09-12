@@ -98,7 +98,7 @@ export async function getFigureDetails(id: string) {
     material,
     character[]->{name},
     description,
-    race,
+    race[]->{name},
     baseSize,
     alias
     }`, {id}) as DetailedFigure[];
