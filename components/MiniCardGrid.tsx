@@ -10,6 +10,7 @@ interface MiniCardGridProps {
     searchFilter: string;
     factionFilter: string;
     releaseWaveFilter: string;
+    ownedFilter: string;
     factions: Faction[];
     releaseWaves: ReleaseWave[];
 }
@@ -32,9 +33,9 @@ function useScrollToEnd(callback: () => void, isLoading: boolean) {
     }, [isLoading]);
 }
 
-function MiniCardGrid({ releaseWaveFilter, searchFilter, factionFilter, releaseWaves }: MiniCardGridProps) {
+function MiniCardGrid({ releaseWaveFilter, searchFilter, factionFilter, ownedFilter, releaseWaves }: MiniCardGridProps) {
     const [displayedFigures, setDisplayedFigures] = useState<DetailedFigure[]>([]);
-    const [ownedFigures, setOwnedFigures] = useState<string[]>([]);
+    const [ownedFigures, setOwnedFigures] = useState<{ id: string, quantity: number }[]>([]);
     const [count, setCount] = useState<number>(32);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [visibleCards, setVisibleCards] = useState<number>(0);
@@ -51,11 +52,10 @@ function MiniCardGrid({ releaseWaveFilter, searchFilter, factionFilter, releaseW
                     .eq('user_id', user.id)
                     .maybeSingle();
                 if (collection) {
-                    setOwnedFigures(collection.owned.map((item: { id: string }) => item.id));
+                    setOwnedFigures(collection.owned);
                 }
             }
         };
-
         fetchOwnedFigures();
     }, []);
 
@@ -80,33 +80,40 @@ function MiniCardGrid({ releaseWaveFilter, searchFilter, factionFilter, releaseW
     }, isLoading);
 
     const handleUpdateOwnedFigures = async (itemId: string, operation: 'add' | 'remove') => {
-        if (operation === 'add') {
-            setOwnedFigures(prev => [...prev, itemId]);
-        } else if (operation === 'remove') {
-            setOwnedFigures(prev => prev.filter(id => id !== itemId));
+        const itemIndex = ownedFigures.findIndex((item: { id: string }) => item.id === itemId);
+
+        let updatedOwnedFigures;
+        if (itemIndex !== -1) {
+            // Item exists
+            if (operation === 'add') {
+                // Increase the quantity
+                updatedOwnedFigures = ownedFigures.map((item: { id: string, quantity: number }, index: number) =>
+                    index === itemIndex ? { ...item, quantity: item.quantity + 1 } : item
+                );
+            } else if (operation === 'remove') {
+                // Decrease the quantity
+                updatedOwnedFigures = ownedFigures.map((item: { id: string, quantity: number }, index: number) =>
+                    index === itemIndex ? { ...item, quantity: item.quantity - 1 } : item
+                ).filter((item: { id: string, quantity: number }) => item.quantity > 0);
+            }
+        } else {
+            // Item does not exist, add it to the array
+            if (operation === 'add') {
+                updatedOwnedFigures = [...ownedFigures, { id: itemId, quantity: 1 }];
+            } else {
+                console.error('Item not found in collection');
+                return;
+            }
         }
+
+        setOwnedFigures(updatedOwnedFigures);
 
         const { data: { user } } = await supabase.auth.getUser();
         if (user) {
-            const { data: collection } = await supabase
+            await supabase
                 .from('collection')
-                .select('owned')
-                .eq('user_id', user.id)
-                .maybeSingle();
-
-            if (collection) {
-                let updatedOwned;
-                if (operation === 'add') {
-                    updatedOwned = [...collection.owned, { id: itemId, quantity: 1 }];
-                } else if (operation === 'remove') {
-                    updatedOwned = collection.owned.filter((item: { id: string }) => item.id !== itemId);
-                }
-
-                await supabase
-                    .from('collection')
-                    .update({ owned: updatedOwned })
-                    .eq('user_id', user.id);
-            }
+                .update({ owned: updatedOwnedFigures })
+                .eq('user_id', user.id);
         }
     };
 
@@ -125,7 +132,8 @@ function MiniCardGrid({ releaseWaveFilter, searchFilter, factionFilter, releaseW
                                             <MiniCard
                                                 figure={figure}
                                                 key={figure.mainName + releaseWave.name + figure._id}
-                                                isOwned={ownedFigures.includes(figure._id)}
+                                                isOwned={ownedFigures.some(item => item.id === figure._id)}
+                                                quantity={ownedFigures.find(item => item.id === figure._id)?.quantity || 0}
                                                 onUpdateOwnedFigures={handleUpdateOwnedFigures}/>
                                         </div>
                                         : null

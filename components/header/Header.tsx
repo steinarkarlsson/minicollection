@@ -23,7 +23,7 @@ export default function Header() {
             setUser(user);
         };
         fetchUser();
-    }, []);
+    }, [user]);
 
     return (
         <header>
@@ -94,13 +94,6 @@ export default function Header() {
                                 {user ? <UserProfileIcon user={user} /> : <GoogleSignIn/>}
                             </li>
                         </ul>
-                        {/*<div className='flex flex-col  lg:flex-row justify-center lg:ml-40 lg:space-y-0 lg:space-x-5'>*/}
-                        {/*    <CoffeeButton/>*/}
-                        {/*</div>*/}
-                        {/*<div*/}
-                        {/*    className='flex flex-col  lg:flex-row justify-center lg:ml-40 lg:space-y-0 lg:space-x-5'>*/}
-                        {/*    <GoogleSignIn/>*/}
-                        {/*</div>*/}
                     </div>
                 </div>
             </nav>

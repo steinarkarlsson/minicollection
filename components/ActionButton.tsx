@@ -16,8 +16,8 @@ const ActionButton = ({label, children, itemId, operation, onUpdateOwnedFigures}
     };
 
     return (
-        <div className="flex flex-row justify-end p-1">
-            <div className="flex items-center p-2 text-sm">{label}</div>
+        <div className="flex flex-row justify-end">
+            <div className="flex items-center text-sm">{label}</div>
             <button
                 onClick={handleClick}
                 className="h-10 w-10 items-center rounded-full border-2 border-gray-700 text-gray-400 hover:text-white hover:border-gray-400 transition-opacity delay-200">

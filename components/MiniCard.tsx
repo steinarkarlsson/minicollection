@@ -3,15 +3,16 @@ import { DetailedFigure } from "../types";
 import { useRecoilState } from 'recoil';
 import { itemState, modalState } from '../atoms/modalAtom';
 import Link from "next/link";
-import ActionButton from "./ActionButton";
+import ActionBar from "./ActionBar";
 
 interface Props {
     figure: DetailedFigure;
     isOwned: boolean;
+    quantity: number;
     onUpdateOwnedFigures: (itemId: string, operation: 'add' | 'remove') => void;
 }
 
-function MiniCard({ figure, isOwned, onUpdateOwnedFigures }: Props) {
+function MiniCard({ figure, isOwned, quantity, onUpdateOwnedFigures }: Props) {
     const [, setShowModal] = useRecoilState(modalState);
     const [, setItem] = useRecoilState(itemState);
 
@@ -41,10 +42,12 @@ function MiniCard({ figure, isOwned, onUpdateOwnedFigures }: Props) {
                     {figure.mainName}
                 </div>
             </Link>
-            <div className="action-buttons-container hidden group-hover:flex justify-center space-x-2 py-2">
-                <ActionButton label={''} children={'+'} itemId={figure._id} operation={'add'} onUpdateOwnedFigures={onUpdateOwnedFigures}/>
-                <ActionButton label={''} children={'-'} itemId={figure._id} operation={'remove'} onUpdateOwnedFigures={onUpdateOwnedFigures}/>
-            </div>
+            {isOwned && (
+                <div className="absolute top-2 right-2 text-white text-md font-semibold px-2 py-1 rounded-full">
+                    {quantity}
+                </div>
+            )}
+            <ActionBar figureId={figure._id} onUpdateOwnedFigures={onUpdateOwnedFigures} />
             <div className="absolute bottom-0 w-full">
                 <div className="factions-container group-hover:hidden flex flex-row pt-2">
                     {figure.faction?.map((faction, index) => (
