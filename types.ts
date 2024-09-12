@@ -27,7 +27,7 @@ export interface DetailedFigure extends CardFigure {
     character?: { name: string }[]
     race? : { name: string }[]
     description?: Description
-    baseSize: '25mm' | '40mm' | '60mm';
+    baseSize?: '25mm' | '40mm' | '60mm';
     alias?: string
     featured?: boolean
 
