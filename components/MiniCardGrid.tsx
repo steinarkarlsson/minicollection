@@ -1,10 +1,14 @@
 'use client'
-import { Faction, DetailedFigure, ReleaseWave } from "../types";
-import MiniCard from "./MiniCard";
-import { useEffect, useState } from 'react';
-import { getFigureGridInfo } from '../lib/sanityQueries';
-import { createClient } from "../utils/supabase/client";
+
+import { useEffect, useState, useCallback } from 'react';
 import Spinner from "./Spinner";
+import MiniCard from "./MiniCard";
+import { getFigureGridInfo } from '../lib/sanityQueries';
+import { Faction, DetailedFigure, ReleaseWave } from '../types';
+import { createClient } from "../utils/supabase/client";
+import { useDebounce } from 'use-debounce';
+
+const supabase = createClient();
 
 interface MiniCardGridProps {
     figures: DetailedFigure[];
@@ -40,7 +44,7 @@ function MiniCardGrid({ releaseWaveFilter, searchFilter, factionFilter, releaseW
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [visibleCards, setVisibleCards] = useState<number>(0);
 
-    const supabase = createClient();
+    const [debouncedOwnedFigures] = useDebounce(ownedFigures, 10);
 
     useEffect(() => {
         const fetchOwnedFigures = async () => {
@@ -79,71 +83,74 @@ function MiniCardGrid({ releaseWaveFilter, searchFilter, factionFilter, releaseW
         setCount(prevCount => prevCount + 6);
     }, isLoading);
 
-    const handleUpdateOwnedFigures = async (itemId: string, operation: 'add' | 'remove') => {
-        const itemIndex = ownedFigures.findIndex((item: { id: string }) => item.id === itemId);
-
-        let updatedOwnedFigures;
-        if (itemIndex !== -1) {
-            // Item exists
-            if (operation === 'add') {
-                // Increase the quantity
-                updatedOwnedFigures = ownedFigures.map((item: { id: string, quantity: number }, index: number) =>
-                    index === itemIndex ? { ...item, quantity: item.quantity + 1 } : item
-                );
-            } else if (operation === 'remove') {
-                // Decrease the quantity
-                updatedOwnedFigures = ownedFigures.map((item: { id: string, quantity: number }, index: number) =>
-                    index === itemIndex ? { ...item, quantity: item.quantity - 1 } : item
-                ).filter((item: { id: string, quantity: number }) => item.quantity > 0);
+    useEffect(() => {
+        const updateDatabase = async () => {
+            const { data: { user } } = await supabase.auth.getUser();
+            if (user) {
+                await supabase
+                    .from('collection')
+                    .update({ owned: debouncedOwnedFigures })
+                    .eq('user_id', user.id);
             }
-        } else {
-            // Item does not exist, add it to the array
-            if (operation === 'add') {
-                updatedOwnedFigures = [...ownedFigures, { id: itemId, quantity: 1 }];
+        };
+
+        updateDatabase();
+    }, [debouncedOwnedFigures]);
+
+    const handleUpdateOwnedFigures = (itemId: string, operation: 'add' | 'remove') => {
+        setOwnedFigures(prevOwnedFigures => {
+            const itemIndex = prevOwnedFigures.findIndex((item: { id: string }) => item.id === itemId);
+
+            let updatedOwnedFigures;
+            if (itemIndex !== -1) {
+                if (operation === 'add') {
+                    updatedOwnedFigures = prevOwnedFigures.map((item, index) =>
+                        index === itemIndex ? { ...item, quantity: item.quantity + 1 } : item
+                    );
+                } else if (operation === 'remove') {
+                    updatedOwnedFigures = prevOwnedFigures.map((item, index) =>
+                        index === itemIndex ? { ...item, quantity: item.quantity - 1 } : item
+                    ).filter(item => item.quantity > 0);
+                }
             } else {
-                console.error('Item not found in collection');
-                return;
+                if (operation === 'add') {
+                    updatedOwnedFigures = [...prevOwnedFigures, { id: itemId, quantity: 1 }];
+                } else {
+                    return prevOwnedFigures;
+                }
             }
-        }
 
-        setOwnedFigures(updatedOwnedFigures as { id: string, quantity: number }[]);
-
-        const { data: { user } } = await supabase.auth.getUser();
-        if (user) {
-            await supabase
-                .from('collection')
-                .update({ owned: updatedOwnedFigures })
-                .eq('user_id', user.id);
-        }
+            return updatedOwnedFigures;
+        });
     };
 
     return (
         <>
             {isLoading ? <Spinner/> :
-            releaseWaves.map((releaseWave) => (
-                <div key={releaseWave.name}>
-                    {displayedFigures.some(figure => figure.releaseWave?.name === releaseWave.name) ? (
-                        <>
-                            <hr className="my-12 h-px border-t-0 bg-transparent bg-gradient-to-r from-transparent via-gray-400 to-transparent opacity-25 dark:via-gray-400" />
-                            <div className="text-2xl lg:text-3xl pt-5 pl-5 lg:mx-24">{releaseWave.name}</div>
-                            <div className="flex flex-wrap justify-center lg:justify-start">
-                                {displayedFigures.map((figure, index) => (
-                                    figure.releaseWave?.name === releaseWave.name ?
-                                        <div key={figure.mainName + releaseWave.name + figure._id} className={`${index < visibleCards ? 'fade-in' : 'opacity-0'}`}>
-                                            <MiniCard
-                                                figure={figure}
-                                                key={figure.mainName + releaseWave.name + figure._id}
-                                                isOwned={ownedFigures.some(item => item.id === figure._id)}
-                                                quantity={ownedFigures.find(item => item.id === figure._id)?.quantity || 0}
-                                                onUpdateOwnedFigures={handleUpdateOwnedFigures}/>
-                                        </div>
-                                        : null
-                                ))}
-                            </div>
-                        </>
-                    ) : null}
-                </div>
-            ))}
+                releaseWaves.map((releaseWave) => (
+                    <div key={releaseWave.name}>
+                        {displayedFigures.some(figure => figure.releaseWave?.name === releaseWave.name) ? (
+                            <>
+                                <hr className="my-12 h-px border-t-0 bg-transparent bg-gradient-to-r from-transparent via-gray-400 to-transparent opacity-25 dark:via-gray-400" />
+                                <div className="text-2xl lg:text-3xl pt-5 pl-5 lg:mx-24">{releaseWave.name}</div>
+                                <div className="flex flex-wrap justify-center lg:justify-start">
+                                    {displayedFigures.map((figure, index) => (
+                                        figure.releaseWave?.name === releaseWave.name ?
+                                            <div key={figure.mainName + releaseWave.name + figure._id} className={`${index < visibleCards ? 'fade-in' : 'opacity-0'}`}>
+                                                <MiniCard
+                                                    figure={figure}
+                                                    key={figure.mainName + releaseWave.name + figure._id}
+                                                    isOwned={ownedFigures.some(item => item.id === figure._id)}
+                                                    quantity={ownedFigures.find(item => item.id === figure._id)?.quantity || 0}
+                                                    onUpdateOwnedFigures={handleUpdateOwnedFigures}/>
+                                            </div>
+                                            : null
+                                    ))}
+                                </div>
+                            </>
+                        ) : null}
+                    </div>
+                ))}
         </>
     );
 }

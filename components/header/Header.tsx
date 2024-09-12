@@ -27,7 +27,7 @@ export default function Header() {
 
     return (
         <header>
-            <nav className="fixed w-full pt-10 ml-[-16px] px-4 lg:px-6 py-2.5 lg:bg-opacity-50 bg-black">
+            <nav className="fixed w-full pt-10 ml-[-36px] px-4 lg:px-6 py-2.5 lg:bg-opacity-50 bg-black">
                 <div className="flex flex-wrap justify-between items-center mx-auto w-full max-w-screen-xl ">
                     <a href="/" className="flex items-center">
                         <MiniCollectionIcon/>
@@ -59,7 +59,7 @@ export default function Header() {
                         </button>
                     </div>
                     <div
-                        className={`justify-between bg-black items-center text-2xl lg:text-md  w-full lg:flex lg:w-auto lg:order-1 ${isMenuOpen ? 'block' : 'hidden'}`}
+                        className={`justify-between bg-opacity-50 bg-black items-center text-2xl lg:text-md  w-full lg:flex lg:w-auto lg:order-1 ${isMenuOpen ? 'block' : 'hidden'}`}
                         id="mobile-menu-2">
                         <ul className="flex flex-col fixed lg:static ml-[-16px] w-full font-medium lg:flex-row lg:space-x-8 lg:mt-0">
                             <li>

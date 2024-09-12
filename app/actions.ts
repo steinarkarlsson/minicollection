@@ -86,7 +86,7 @@ export const updateCollection = async (itemId: string, operation: 'add' | 'remov
         if (operation === 'add') {
             updatedOwned = [...collection.owned, { id: itemId, quantity: 1 }];
         } else {
-            console.error('Item not found in collection');
+            // Item not found in collection
             return;
         }
     }

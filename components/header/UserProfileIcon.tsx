@@ -19,7 +19,7 @@ export default function UserProfileIcon({ user }: { user: User }) {
     };
 
     return (
-        <div className="relative">
+        <div className="relative rounded-full ring-2 ring-gray-500">
             <Image
                 className={`rounded-full cursor-pointer ${isDropdownOpen ? 'ring-2 ring-white' : ''}`}
                 width={40}
