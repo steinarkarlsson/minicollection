@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState } from 'react';
 import Spinner from "./Spinner";
 import MiniCard from "./MiniCard";
 import { getFigureGridInfo } from '../lib/sanityQueries';
@@ -8,6 +8,7 @@ import { Faction, DetailedFigure, ReleaseWave } from '../types';
 import { createClient } from "../utils/supabase/client";
 import { useDebounce } from 'use-debounce';
 
+console.log('createClient()')
 const supabase = createClient();
 
 interface MiniCardGridProps {
@@ -38,7 +39,7 @@ function useScrollToEnd(callback: () => void, isLoading: boolean) {
 }
 
 function MiniCardGrid({ releaseWaveFilter, searchFilter, factionFilter, releaseWaves }: MiniCardGridProps) {
-    const [displayedFigures, setDisplayedFigures] = useState<DetailedFigure[]>([]);
+    const [displayedFigures, setDisplayedFigures] = useState<ReturnType<typeof getFigureGridInfo>[]>([]);
     const [ownedFigures, setOwnedFigures] = useState<{ id: string, quantity: number }[]>([]);
     const [count, setCount] = useState<number>(32);
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -48,8 +49,10 @@ function MiniCardGrid({ releaseWaveFilter, searchFilter, factionFilter, releaseW
 
     useEffect(() => {
         const fetchOwnedFigures = async () => {
+            console.log('GRID await Supabase getUser')
             const { data: { user } } = await supabase.auth.getUser();
             if (user) {
+                console.log('GRID await Supabase get collection')
                 const { data: collection } = await supabase
                     .from('collection')
                     .select('owned')
@@ -62,6 +65,22 @@ function MiniCardGrid({ releaseWaveFilter, searchFilter, factionFilter, releaseW
         };
         fetchOwnedFigures();
     }, []);
+
+    useEffect(() => {
+        const updateDatabase = async () => {
+            console.log('GRID await Supabase getUser')
+            const { data: { user } } = await supabase.auth.getUser();
+            if (user) {
+                console.log('GRID await Supabase update collection')
+                await supabase
+                    .from('collection')
+                    .update({ owned: debouncedOwnedFigures })
+                    .eq('user_id', user.id);
+            }
+        };
+
+        updateDatabase();
+    }, [debouncedOwnedFigures]);
 
     useEffect(() => {
         getFigureGridInfo(searchFilter, factionFilter, releaseWaveFilter, count).then((figures) => {
@@ -82,20 +101,6 @@ function MiniCardGrid({ releaseWaveFilter, searchFilter, factionFilter, releaseW
     useScrollToEnd(() => {
         setCount(prevCount => prevCount + 6);
     }, isLoading);
-
-    useEffect(() => {
-        const updateDatabase = async () => {
-            const { data: { user } } = await supabase.auth.getUser();
-            if (user) {
-                await supabase
-                    .from('collection')
-                    .update({ owned: debouncedOwnedFigures })
-                    .eq('user_id', user.id);
-            }
-        };
-
-        updateDatabase();
-    }, [debouncedOwnedFigures]);
 
     const handleUpdateOwnedFigures = (itemId: string, operation: 'add' | 'remove') => {
         setOwnedFigures(prevOwnedFigures => {
