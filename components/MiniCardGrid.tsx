@@ -39,7 +39,7 @@ function useScrollToEnd(callback: () => void, isLoading: boolean) {
 }
 
 function MiniCardGrid({ releaseWaveFilter, searchFilter, factionFilter, releaseWaves }: MiniCardGridProps) {
-    const [displayedFigures, setDisplayedFigures] = useState<ReturnType<typeof getFigureGridInfo>[]>([]);
+    const [displayedFigures, setDisplayedFigures] = useState<Awaited<ReturnType<typeof getFigureGridInfo>>>([]);
     const [ownedFigures, setOwnedFigures] = useState<{ id: string, quantity: number }[]>([]);
     const [count, setCount] = useState<number>(32);
     const [isLoading, setIsLoading] = useState<boolean>(false);
