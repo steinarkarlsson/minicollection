@@ -25,27 +25,30 @@ export const googleSignIn = async () => {
 }
 
 export const updateCollection = async (itemId: string, operation: 'add' | 'remove') => {
-    console.log(` ${operation} ${itemId} in collection`);
+    // console.log(` ${operation} ${itemId} in collection`);
 
+    console.log('ACTIONS createClient()')
     const supabase = createClient();
 
     // Fetch the user
+    console.log('ACTIONS await Supabase getUser')
     const { data: { user }, error: userError } = await supabase.auth.getUser();
 
     if (userError) {
-        console.error('Error fetching user: ' + userError.message);
+        // console.error('Error fetching user: ' + userError.message);
         return;
     }
 
     const userId = user?.id;
 
-    console.log('User ID: ', userId);
+    // console.log('User ID: ', userId);
 
     if (!userId) {
-        console.error('User ID is null or undefined');
+        // console.error('User ID is null or undefined');
         return;
     }
 
+    console.log('ACTIONS await supabase get collection')
     // Fetch the user's collection
     const { data: collection, error: collectionError } = await supabase
         .from('collection')
@@ -62,7 +65,7 @@ export const updateCollection = async (itemId: string, operation: 'add' | 'remov
         return;
     }
 
-    console.log('Previous owned: ', collection.owned);
+    // console.log('Previous owned: ', collection.owned);
 
     // Check if item exists in the owned array
     const itemIndex = collection.owned.findIndex((item: { id: string }) => item.id === itemId);
@@ -91,8 +94,9 @@ export const updateCollection = async (itemId: string, operation: 'add' | 'remov
         }
     }
 
-    console.log('Updated owned: ', updatedOwned);
+    // console.log('Updated owned: ', updatedOwned);
 
+    console.log('ACTIONS await Supabase update collection')
     const { error: updateError } = await supabase
         .from('collection')
         .update({ owned: updatedOwned })

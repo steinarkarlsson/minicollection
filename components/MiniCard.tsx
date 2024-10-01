@@ -1,7 +1,5 @@
 import Image from "next/image";
-import { DetailedFigure } from "../types";
-import { useRecoilState } from 'recoil';
-import { itemState, modalState } from '../atoms/modalAtom';
+import {DetailedFigure} from "../types";
 import Link from "next/link";
 import ActionBar from "./ActionBar";
 
@@ -13,18 +11,10 @@ interface Props {
 }
 
 function MiniCard({ figure, isOwned, quantity, onUpdateOwnedFigures }: Props) {
-    const [, setShowModal] = useRecoilState(modalState);
-    const [, setItem] = useRecoilState(itemState);
-
-    const handleClick = () => {
-        setItem(figure);
-        setShowModal(true);
-    };
 
     return (
         <div
             className={`group relative m-2 mx-2 w-60 h-96 overflow-hidden rounded-md pt-2 shadow-lg ${isOwned ? 'hover:shadow-yellow-200' : 'hover:shadow-yellow-600'} transition delay-75 ease-in-out duration-600 border-2 ${isOwned ? 'shadow-yellow-200' : 'border-gray-800'} hover:border-white`}
-            onClick={handleClick}
         >
             <Link href={`/miniatures/${figure._id}`}>
                 <div className="flex h-60 flex-col items-center justify-center">

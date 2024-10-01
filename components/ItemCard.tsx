@@ -1,8 +1,6 @@
 'use client'
 import Image from "next/image";
 import {DetailedFigure, Set} from "../types";
-import {useRecoilState} from "recoil";
-import {itemState, modalState} from "../atoms/modalAtom";
 import Link from "next/link";
 
 interface Props {
@@ -11,13 +9,6 @@ interface Props {
 }
 
 function ItemCard({item, type}: Props) {
-    const [, setShowModal] = useRecoilState(modalState);
-    const [, setItem] = useRecoilState(itemState);
-
-    const handleClick = () => {
-        setItem(item);
-        setShowModal(true);
-    };
 
     const cardWidth = type === 'set' ? 'w-80' : 'w-60';
     const cardHeight = type === 'set' ? 'h-60' : 'h-80';
@@ -26,7 +17,6 @@ function ItemCard({item, type}: Props) {
         <Link href={`/${type === 'figure' ? 'miniatures' : 'sets'}/${item._id}`}>
             <div
                 className={`group relative m-2 mx-2 ${cardWidth} overflow-hidden rounded-md pt-2 shadow-xl hover:shadow-yellow-200 transition delay-75 ease-in-out duration-600 border-2  border-gray-800 hover:border-white`}
-                onClick={handleClick}
             >
                 <div className={`flex flex-col ${cardHeight} items-center justify-center`}>
                     {item.image && item.image.asset ? (
