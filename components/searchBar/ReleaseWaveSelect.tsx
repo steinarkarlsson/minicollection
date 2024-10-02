@@ -18,7 +18,7 @@ export function ReleaseWaveSelect({filterObject, searchFilter, factionFilter, re
 
     const router = useRouter();
 
-    const query = `?${searchFilter ? `searchFilter=${searchFilter}` : ''}${factionFilter ? `&factionFilter=${factionFilter}` : ''}${releaseWaveFilter ? `&releaseWaveFilter=${releaseWaveFilter}` : ''}`;
+    const query = `?${searchFilter ? `searchFilter=${searchFilter}` : ''}${factionFilter ? `&factionFilter=${factionFilter}` : ''}`;
 
     const handleChange = (event: any, value: any) => {
         if (value) {
