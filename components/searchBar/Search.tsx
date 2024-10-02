@@ -22,8 +22,8 @@ const Search = ({type, searchFilter, factionFilter, releaseWaveFilter}: SearchPr
 
     useEffect(() => {
         if (initialRender.current) {
-            initialRender.current = false
-            return
+            initialRender.current = false;
+            return;
         }
 
         const url = `?${releaseWaveFilter ? `releaseWaveFilter=${releaseWaveFilter}` : ''}${factionFilter ? `&factionFilter=${factionFilter}` : ''}${factionFilter || releaseWaveFilter ? '&' : ''}`;
@@ -31,7 +31,7 @@ const Search = ({type, searchFilter, factionFilter, releaseWaveFilter}: SearchPr
         if (!query) {
             router.push(`/${collection}${url}`)
         } else {
-            router.push(`${url}searchFilter=${query}`);
+            router.push(`${url}searchFilter=${query}${factionFilter ? `&factionFilter=${factionFilter}` : ''}${releaseWaveFilter ? `&releaseWaveFilter=${releaseWaveFilter}` : ''}`);
         }
     }, [query])
 
