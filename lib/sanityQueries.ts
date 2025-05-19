@@ -23,9 +23,18 @@ export async function getAllCollections() {
     };
 }
 
+
+export function parseString(str: string) {
+    // Replace any 'e' or 'a' characters (both lowercase and uppercase) with *
+    return str.replace(/[aeiAEI]/g, '*');
+}
+
 export async function getFigureGridInfo(searchFilter: string = '', factionFilter: string = '', releaseWaveFilter: string = '', count: number = 32) {
 
-    const searchString = searchFilter ? `&& mainName match $searchFilter || character[]->name match $searchFilter` : ``;
+    const parsedSearchFilter = parseString(searchFilter);
+    console.log(parsedSearchFilter);
+
+    const searchString = parsedSearchFilter ? `&& mainName match $parsedSearchFilter || character[]->name match $parsedSearchFilter` : ``;
     const factionString = factionFilter ? `&& $factionFilter in faction[]->name` : ``;
     const releaseWaveString = releaseWaveFilter ? `&& releaseWave->name== $releaseWaveFilter` : ``;
 
@@ -36,7 +45,7 @@ export async function getFigureGridInfo(searchFilter: string = '', factionFilter
         releaseWave->{name},
         faction[]->{name}
     }`, {
-        searchFilter,
+        parsedSearchFilter,
         factionFilter,
         releaseWaveFilter
     });
