@@ -34,7 +34,8 @@ export async function getFigureGridInfo(searchFilter: string = '', factionFilter
         mainName,
         image,
         releaseWave->{name},
-        faction[]->{name}
+        faction[]->{name},
+        armyList[]->{name},
     }`, {
         searchFilter,
         factionFilter,
