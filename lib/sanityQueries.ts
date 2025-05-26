@@ -56,7 +56,9 @@ export async function getPrints(count: number = 100) {
         releaseWave->{name},
         edition->{name},
         featured
-    } | order(mainName asc)[0...${count}]`) as Print[];
+    } | order(mainName asc)[0...${count}]`,
+        {},
+        {next: {tags: ['prints']}}) as Print[];
 }
 
 export async function getAccessories(count: number = 100) {

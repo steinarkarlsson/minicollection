@@ -1,9 +1,9 @@
 //@ts-nocheck
 'use client'
 import Image from "next/image";
-import {Accessory, Figure, Print, SanityImage, Set, Terrain} from "../typings";
+import {SanityImage} from "../typings";
 import {useRecoilState} from "recoil";
-import {itemState, modalState} from "../atoms/modalAtom";
+import {modalState} from "../atoms/modalAtom";
 import Link from "next/link";
 import CardBadge from "./CardBadge";
 

@@ -1,6 +1,6 @@
 //@ts-nocheck
 'use client'
-import {Figure, Set, Terrain, Print, Accessory} from "../typings";
+import {Accessory, Figure, Print, Set, Terrain} from "../typings";
 import Link from "next/link";
 import Card from "./Card";
 
