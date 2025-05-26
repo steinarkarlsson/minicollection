@@ -43,12 +43,12 @@ export function GroupedGrid({type, items, grouping, groupBy}: GenericGridProps) 
     }
 
     return (
-        <div className="flex flex-row flex-wrap border-2 border-red-500">
+        <div className="flex flex-row flex-wrap">
             {grouping.map((group) => (
                 items.some(item => checkIfItemInGroup(item, group, groupBy)) ? (
-                        <div key={type+'-'+group.name} className="flex flex-col border-2 border-yellow-500">
+                        <div key={type+'-'+group.name} className="flex flex-col">
                             <Title label={group.name}/>
-                            <div className="flex flex-wrap border-2 border-blue-500">
+                            <div className="flex flex-wrap">
                                 {items.map((item) => {
                                 // Handle array of objects (like faction)
                                     if (Array.isArray(item[groupBy])) {
