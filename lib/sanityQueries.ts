@@ -30,7 +30,9 @@ export async function getSets(count: number = 100) {
         image,
         releaseWave->{name},
         figures[]->{mainName, image, _id}
-        }[0...${count}]`) as Set[];
+        }[0...${count}]`,
+        {},
+        {next: {tags: ['sets']}}) as Set[];
 }
 
 export async function getTerrain(count: number = 100) {
@@ -42,7 +44,9 @@ export async function getTerrain(count: number = 100) {
         gallery,
         releaseWave->{name},
         featured
-    } | order(mainName asc)[0...${count}]`) as Terrain[];
+    } | order(mainName asc)[0...${count}]`,
+        {},
+        {next: {tags: ['terrain']}}) as Terrain[];
 }
 
 export async function getPrints(count: number = 100) {
@@ -71,19 +75,27 @@ export async function getAccessories(count: number = 100) {
         description,
         releaseWave->{name},
         featured
-    } | order(mainName asc)[0...${count}]`) as Accessory[];
+    } | order(mainName asc)[0...${count}]`,
+        {},
+        {next: {tags: ['accessories']}}) as Accessory[];
 }
 
 export async function getFactions() {
-    return await sanityClient.fetch(`*[_type == "faction"] | order(alignment desc, name asc)`) as Faction[];
+    return await sanityClient.fetch(`*[_type == "faction"] | order(alignment desc, name asc)`,
+        {},
+        {next: {tags: ['factions']}}) as Faction[];
 }
 
 export async function getReleaseWaves() {
-    return await sanityClient.fetch(`*[_type == "releaseWave"] | order(releaseDate desc)`) as ReleaseWave[];
+    return await sanityClient.fetch(`*[_type == "releaseWave"] | order(releaseDate desc)`,
+        {},
+        {next: {tags: ['releaseWaves']}}) as ReleaseWave[];
 }
 
 export async function getEditions() {
-    return await sanityClient.fetch(`*[_type == "edition"]`) as Edition[];
+    return await sanityClient.fetch(`*[_type == "edition"]`,
+        {},
+        {next: {tags: ['editions']}}) as Edition[];
 }
 
 export async function getFigureDetails(id: string) {
@@ -176,7 +188,9 @@ export async function getFeaturedTerrain() {
     mainName,
     image,
     releaseWave->{name},
-    }`) as Terrain[];
+    }`,
+    {},
+    {next: {tags: ['terrain']}}) as Terrain[];
 }
 
 export async function getFeaturedAccessories() {
@@ -186,7 +200,9 @@ export async function getFeaturedAccessories() {
     mainName,
     image,
     releaseWave->{name},
-    }`) as Accessory[];
+    }`,
+    {},
+    {next: {tags: ['accessories']}}) as Accessory[];
 }
 
 export async function getFeaturedPrint() {
@@ -197,5 +213,7 @@ export async function getFeaturedPrint() {
     image,
     releaseWave->{name},
     edition->{name},
-    }`) as Print[];
+    }`,
+    {},
+    {next: {tags: ['prints']}}) as Print[];
 }

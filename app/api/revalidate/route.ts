@@ -13,7 +13,6 @@ export async function POST(request: NextRequest) {
             return NextResponse.json({ message: 'Invalid token' }, { status: 401 });
         }
 
-        // Check what document type was changed
         if (body && body._type) {
 
             if (body._type === 'print') {
@@ -25,6 +24,37 @@ export async function POST(request: NextRequest) {
                 revalidateTag('editions');
                 console.log('✅ Revalidated editions tag');
             }
+
+            if (body._type === 'terrain') {
+                revalidateTag('terrain');
+                console.log('✅ Revalidated terrain tag');
+            }
+
+            if (body._type === 'set') {
+                revalidateTag('sets');
+                console.log('✅ Revalidated sets tag');
+            }
+
+            if (body._type === 'releaseWave') {
+                revalidateTag('releaseWaves');
+                console.log('✅ Revalidated releaseWaves tag');
+            }
+
+            if (body._type === 'accessory') {
+                revalidateTag('accessories');
+                console.log('✅ Revalidated accessories tag');
+            }
+
+            if (body._type === 'faction') {
+                revalidateTag('factions');
+                console.log('✅ Revalidated factions tag');
+            }
+
+            if (body._type === 'armyList') {
+                revalidateTag('armyLists');
+                console.log('✅ Revalidated armyLists tag');
+            }
+
         } else {
             console.log('⚠️ No document type found in request body');
         }
