@@ -19,6 +19,9 @@ export async function POST(request: NextRequest) {
         console.log('🔑 Expected token configured:', expectedToken ? 'Yes' : 'No');
         console.log('🔑 Tokens match:', token === expectedToken ? 'Yes' : 'No');
 
+        console.log('🔐 Token value (first 2 chars only):', token ? token.substring(0, 2) + '...' : 'No token');
+        console.log('🔐 Expected token value (first 2 chars only):', expectedToken ? expectedToken.substring(0, 2) + '...' : 'No expected token');
+
         if (token !== expectedToken) {
             console.log('❌ Authentication failed: Invalid token');
             return NextResponse.json({ message: 'Invalid token' }, { status: 401 });
