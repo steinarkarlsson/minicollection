@@ -5,10 +5,9 @@ interface IncludedItemsTableProps {
     item: Set | undefined;
 }
 
-const IncludedItemsGrid: React.FC<IncludedItemsTableProps> = ({item}) => {
+export const IncludedItemsGrid = ({item}: IncludedItemsTableProps) => {
     return (
         <>
-            {/*Miniature Section*/}
             {item && item.figures && item.figures.length > 0 ?
                 <div>
                     <div className='text-xl'> Included Miniatures
@@ -23,5 +22,3 @@ const IncludedItemsGrid: React.FC<IncludedItemsTableProps> = ({item}) => {
         </>
     );
 };
-
-export default IncludedItemsGrid;

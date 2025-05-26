@@ -2,24 +2,23 @@
 
 import Image from 'next/image';
 import {useEffect, useState} from 'react';
-import {Set} from '../../../typings';
+import {Accessory} from '../../../typings';
 import Spinner from "../../../components/Spinner";
 import {SetDetailsTable} from "../../../components/detailsModal/SetDetailsTable";
-import {IncludedItemsGrid} from "../../../components/detailsModal/IncludedItemsGrid";
-import {getSetDetails} from "../../../lib/sanityQueries";
+import {getAccessoryDetails} from "../../../lib/sanityQueries";
 import {usePathname} from "next/navigation";
 
 export default function Page() {
     const [isLoading, setIsLoading] = useState<boolean>(true);
-    const [set, setSet] = useState<Set>();
+    const [accessory, setAccessory] = useState<Accessory>();
     const pathname = usePathname()
 
     const id = pathname.split('/').pop();
 
     useEffect(() => {
         setIsLoading(true)
-        id ? getSetDetails(id).then((res) => {
-            setSet(res)
+        id ? getAccessoryDetails(id).then((res) => {
+            setAccessory(res)
             setIsLoading(false)
         }) : null;
     }, [id]);
@@ -31,14 +30,14 @@ export default function Page() {
                     {isLoading ? <Spinner/> :
                         <>
                             <div className='flex'>
-                                <p className="text-2xl font-bold">{set?.mainName}</p>
+                                <p className="text-2xl font-bold">{accessory?.mainName}</p>
                             </div>
                             <div
                                 className='flex flex-col justify-center lg:space-x-10 lg:flex-row'>
-                                {set && set.image?.asset ? (
+                                {accessory && accessory.image?.asset ? (
                                     <Image
-                                        src={`https://cdn.sanity.io/images/4llymfg7/production/${set.image.asset._ref.slice(6).slice(0, -4)}.png`}
-                                        alt={set.mainName}
+                                        src={`https://cdn.sanity.io/images/4llymfg7/production/${accessory.image.asset._ref.slice(6).slice(0, -4)}.png`}
+                                        alt={accessory.mainName}
                                         width={400}
                                         height={400}
                                         style={{
@@ -50,10 +49,9 @@ export default function Page() {
                                     />
                                 ) : null}
                                 <div className='flex'>
-                                    <SetDetailsTable set={set}/>
+                                    <SetDetailsTable set={accessory}/>
                                 </div>
                             </div>
-                            <IncludedItemsGrid item={set}/>
                         </>
                     }
                 </div>

@@ -12,9 +12,8 @@ export default function Header() {
     };
 
     return (
-        <header>
-            <nav className="fixed w-full pt-10 px-4 lg:px-6 py-2.5 bg-opacity-50 bg-black">
-                <div className="flex flex-wrap justify-between items-center mx-auto w-full max-w-screen-xl">
+        <header className={'fixed w-full bg-black'}>
+                <div className="flex flex-wrap justify-between items-center mx-auto w-full">
                     <a href="/" className="flex items-center">
                         <MiniCollectionIcon/>
                         <span
@@ -67,11 +66,23 @@ export default function Header() {
                                     Sets
                                 </a>
                             </li>
-                            <li className="block py-2 pr-4 pl-3 lg:text-2xl text-gray-900 border-b border-gray-100 lg:border-0 lg:p-0 dark:text-gray-600 dark:border-gray-700">
-                                Terrain
+                            <li>
+                                <a href="/terrain"
+                                   className="block py-2 pr-4 pl-3 lg:text-2xl text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-300 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">
+                                    Terrain
+                                </a>
                             </li>
-                            <li className="block py-2 pr-4 pl-3 lg:text-2xl text-gray-900 border-b border-gray-100 lg:border-0 lg:p-0 dark:text-gray-600 dark:border-gray-700">
-                                Print
+                            <li>
+                                <a href="/print"
+                                   className="block py-2 pr-4 pl-3 lg:text-2xl text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-300 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">
+                                    Print
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/accessories"
+                                   className="block py-2 pr-4 pl-3 lg:text-2xl text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-300 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">
+                                    Accessories
+                                </a>
                             </li>
                         </ul>
                         <div className='flex justify-center lg:ml-40'>
@@ -79,7 +90,6 @@ export default function Header() {
                         </div>
                     </div>
                 </div>
-            </nav>
         </header>
     );
 }

@@ -2,24 +2,23 @@
 
 import Image from 'next/image';
 import {useEffect, useState} from 'react';
-import {Set} from '../../../typings';
+import {Terrain} from '../../../typings';
 import Spinner from "../../../components/Spinner";
 import {SetDetailsTable} from "../../../components/detailsModal/SetDetailsTable";
-import {IncludedItemsGrid} from "../../../components/detailsModal/IncludedItemsGrid";
-import {getSetDetails} from "../../../lib/sanityQueries";
+import {getTerrainDetails} from "../../../lib/sanityQueries";
 import {usePathname} from "next/navigation";
 
 export default function Page() {
     const [isLoading, setIsLoading] = useState<boolean>(true);
-    const [set, setSet] = useState<Set>();
+    const [terrain, setTerrain] = useState<Terrain>();
     const pathname = usePathname()
 
     const id = pathname.split('/').pop();
 
     useEffect(() => {
         setIsLoading(true)
-        id ? getSetDetails(id).then((res) => {
-            setSet(res)
+        id ? getTerrainDetails(id).then((res) => {
+            setTerrain(res)
             setIsLoading(false)
         }) : null;
     }, [id]);
@@ -31,14 +30,14 @@ export default function Page() {
                     {isLoading ? <Spinner/> :
                         <>
                             <div className='flex'>
-                                <p className="text-2xl font-bold">{set?.mainName}</p>
+                                <p className="text-2xl font-bold">{terrain?.mainName}</p>
                             </div>
                             <div
                                 className='flex flex-col justify-center lg:space-x-10 lg:flex-row'>
-                                {set && set.image?.asset ? (
+                                {terrain && terrain.image?.asset ? (
                                     <Image
-                                        src={`https://cdn.sanity.io/images/4llymfg7/production/${set.image.asset._ref.slice(6).slice(0, -4)}.png`}
-                                        alt={set.mainName}
+                                        src={`https://cdn.sanity.io/images/4llymfg7/production/${terrain.image.asset._ref.slice(6).slice(0, -4)}.png`}
+                                        alt={terrain.mainName}
                                         width={400}
                                         height={400}
                                         style={{
@@ -50,10 +49,9 @@ export default function Page() {
                                     />
                                 ) : null}
                                 <div className='flex'>
-                                    <SetDetailsTable set={set}/>
+                                    <SetDetailsTable set={terrain}/>
                                 </div>
                             </div>
-                            <IncludedItemsGrid item={set}/>
                         </>
                     }
                 </div>

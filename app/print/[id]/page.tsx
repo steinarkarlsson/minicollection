@@ -2,24 +2,23 @@
 
 import Image from 'next/image';
 import {useEffect, useState} from 'react';
-import {Set} from '../../../typings';
+import {Print} from '../../../typings';
 import Spinner from "../../../components/Spinner";
 import {SetDetailsTable} from "../../../components/detailsModal/SetDetailsTable";
-import {IncludedItemsGrid} from "../../../components/detailsModal/IncludedItemsGrid";
-import {getSetDetails} from "../../../lib/sanityQueries";
+import {getPrintDetails} from "../../../lib/sanityQueries";
 import {usePathname} from "next/navigation";
 
 export default function Page() {
     const [isLoading, setIsLoading] = useState<boolean>(true);
-    const [set, setSet] = useState<Set>();
+    const [print, setPrint] = useState<Print>();
     const pathname = usePathname()
 
     const id = pathname.split('/').pop();
 
     useEffect(() => {
         setIsLoading(true)
-        id ? getSetDetails(id).then((res) => {
-            setSet(res)
+        id ? getPrintDetails(id).then((res) => {
+            setPrint(res)
             setIsLoading(false)
         }) : null;
     }, [id]);
@@ -31,14 +30,14 @@ export default function Page() {
                     {isLoading ? <Spinner/> :
                         <>
                             <div className='flex'>
-                                <p className="text-2xl font-bold">{set?.mainName}</p>
+                                <p className="text-2xl font-bold">{print?.mainName}</p>
                             </div>
                             <div
                                 className='flex flex-col justify-center lg:space-x-10 lg:flex-row'>
-                                {set && set.image?.asset ? (
+                                {print && print.image?.asset ? (
                                     <Image
-                                        src={`https://cdn.sanity.io/images/4llymfg7/production/${set.image.asset._ref.slice(6).slice(0, -4)}.png`}
-                                        alt={set.mainName}
+                                        src={`https://cdn.sanity.io/images/4llymfg7/production/${print.image.asset._ref.slice(6).slice(0, -4)}.png`}
+                                        alt={print.mainName}
                                         width={400}
                                         height={400}
                                         style={{
@@ -50,10 +49,9 @@ export default function Page() {
                                     />
                                 ) : null}
                                 <div className='flex'>
-                                    <SetDetailsTable set={set}/>
+                                    <SetDetailsTable set={print}/>
                                 </div>
                             </div>
-                            <IncludedItemsGrid item={set}/>
                         </>
                     }
                 </div>

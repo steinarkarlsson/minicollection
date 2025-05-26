@@ -5,20 +5,26 @@ import {useRouter} from 'next/navigation'
 import {useDebounce} from 'use-debounce'
 
 interface SearchProps {
-    type: 'figure' | 'set',
+    type: 'miniature' | 'set' | 'terrain' | 'print' | 'accessory',
     searchFilter?: string,
     factionFilter?: string,
     releaseWaveFilter?: string,
+    editionFilter?: string
 }
 
-const Search = ({type, searchFilter, factionFilter, releaseWaveFilter}: SearchProps) => {
+const Search = ({type, searchFilter, factionFilter, releaseWaveFilter, editionFilter}: SearchProps) => {
     const router = useRouter()
     const initialRender = useRef(true)
 
     const [text, setText] = useState(searchFilter || '')
     const [query] = useDebounce(text, 500)
 
-    const collection = type === 'figure' ? 'miniatures' : 'sets'
+    const collection =
+        type === 'miniature' ? 'miniatures' :
+            type === 'accessory' ? 'accessories' :
+                type === 'set' ? 'sets' :
+                    type === 'terrain' ? 'terrain' :
+                        type === 'print' ? 'print' : type;
 
     useEffect(() => {
         if (initialRender.current) {
@@ -26,7 +32,7 @@ const Search = ({type, searchFilter, factionFilter, releaseWaveFilter}: SearchPr
             return
         }
 
-        const url = `?${releaseWaveFilter ? `releaseWaveFilter=${releaseWaveFilter}` : ''}${factionFilter ? `&factionFilter=${factionFilter}` : ''}${factionFilter || releaseWaveFilter ? '&' : ''}`;
+        const url = `?${releaseWaveFilter ? `releaseWaveFilter=${releaseWaveFilter}` : ''}${factionFilter ? `&factionFilter=${factionFilter}` : ''}${factionFilter || releaseWaveFilter ? '&' : ''}${editionFilter || editionFilter ? '&' : ''}`;
 
         if (!query) {
             router.push(`/${collection}${url}`)

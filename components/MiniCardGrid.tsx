@@ -1,9 +1,9 @@
 'use client'
 
-import { useEffect, useState } from 'react';
-import { Faction, Figure, ReleaseWave } from "../typings";
-import MiniCard from "./MiniCard";
-import { getFigureGridInfo } from '../lib/sanityQueries';
+import {useEffect, useState} from 'react';
+import {Faction, Figure, ReleaseWave} from "../typings";
+import {getFigures} from '../lib/sanityQueries';
+import Card from "./Card";
 
 interface MiniCardGridProps {
     figures: Figure[];
@@ -54,7 +54,7 @@ function MiniCardGrid({ releaseWaveFilter, searchFilter, factionFilter, releaseW
     }, []);
 
     useEffect(() => {
-        getFigureGridInfo(searchFilter, factionFilter, releaseWaveFilter, count).then((figures) => {
+        getFigures(searchFilter, factionFilter, releaseWaveFilter, count).then((figures: Figure[]) => {
             setDisplayedFigures(figures);
             setIsLoading(false);
         });
@@ -85,7 +85,8 @@ function MiniCardGrid({ releaseWaveFilter, searchFilter, factionFilter, releaseW
                                 {displayedFigures.map((figure, index) => (
                                     figure.releaseWave?.name === releaseWave.name ? (
                                         <div key={figure.mainName + releaseWave.name + figure._id} className={`${index < visibleCards ? 'fade-in' : 'opacity-0'}`}>
-                                            <MiniCard figure={figure} />
+                                            {/*<MiniCard figure={figure} />*/}
+                                            <Card type={'miniature'} name={figure.mainName} image={figure.image} detail1={figure.releaseWave} detail2={figure.faction} id={figure._id}/>
                                         </div>
                                     ) : null
                                 ))}

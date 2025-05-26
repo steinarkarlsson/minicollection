@@ -1,40 +1,35 @@
 'use client'
-import {Figure, ReleaseWave, Set} from "../typings";
-import ItemCard from "./ItemCard";
+import {Accessory, Figure, Print, ReleaseWave, Set, Terrain} from "../typings";
+import Card from "./Card";
 
 interface GridProps {
-    type: 'figure' | 'set'
-    items: Figure[] | Set[]
-    searchFilter: string
-    releaseWaves: ReleaseWave[]
-    factionFilter: string
-    releaseWaveFilter: string
+    type: 'miniature' | 'set' | 'terrain' | 'print' | 'accessory'
+    items: Figure[] | Set[] | Terrain[] | Print[] | Accessory[]
 }
 
-export default function Grid({items, releaseWaves}: GridProps) {
+export function Grid({type, items}: GridProps) {
+
+    const detail1 =
+        type === 'miniature' ? 'faction' :
+            type === 'set' ? 'releaseWave' :
+                type === 'print' ? 'releaseWave' :
+                        null;
+
+    const detail2 =
+        type === 'miniature' ? 'releaseWave' :
+            type === 'print' ? 'edition' :
+                type === 'terrain' ? 'releaseWave' :
+                    type === 'accessory' ? 'releaseWave' :
+                    null;
+
+    const name =
+        type === 'miniature' || type === 'accessory' || type === 'set' || type === 'terrain' || type === 'print' ? 'mainName' : 'name';
+
     return (
-        <>
-            {releaseWaves.map((releaseWave) => (
-                <div key={releaseWave.name}>
-                    {items.some(item => item.releaseWave?.name === releaseWave.name) ? (
-                        <div key={releaseWave.name}>
-                            <hr className="my-12 h-px border-t-0 bg-transparent bg-gradient-to-r from-transparent via-gray-400 to-transparent opacity-25 dark:via-gray-400"/>
-                            <div className="text-2xl lg:text-3xl pt-5 pl-5 lg:mx-24">{releaseWave.name}</div>
-                            <div className="flex flex-wrap justify-center">
-                                {items.map((item) => (
-                                    item.releaseWave?.name === releaseWave.name ?
-                                        <ItemCard
-                                            item={item}
-                                            type={"set"}
-                                            key={item.mainName + releaseWave.name + item._id}
-                                        /> : null
-                                ))}
-                            </div>
-                        </div>
-                    ) : null}
-                </div>
+        <div className="flex flex-row flex-wrap gap-6 border-2 border-red-500">
+            {items.map((item) => (
+                <Card type={type} name={item[name]} image={item.image} detail1={item[detail1]} detail2={item[detail2]} id={item._id}/>
             ))}
-        </>
+        </div>
     )
 }
-

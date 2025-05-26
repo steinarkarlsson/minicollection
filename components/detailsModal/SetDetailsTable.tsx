@@ -1,8 +1,8 @@
 import {Box, Table, TableContainer} from "@mui/material";
 import DetailsTableRow from './DetailsTableRow';
-import {Set} from "../../typings";
+import {Print, Set, Accessory, Terrain} from "../../typings";
 
-export default function SetDetailsTable({set}: { set: Set | undefined }) {
+export function SetDetailsTable({set}: { set: Set | Print | Accessory | Terrain | undefined }) {
     return (
         <TableContainer component={Box}>
             <Table size="small" aria-label="simple table">

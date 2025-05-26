@@ -1,5 +1,5 @@
 import MiniCardGrid from "../../components/MiniCardGrid";
-import {getFactions, getFigureGridInfo, getReleaseWaves} from "../../lib/sanityQueries";
+import {getFactions, getFigures, getReleaseWaves} from "../../lib/sanityQueries";
 import {MiniatureSearchBar} from "../../components/searchBar/MiniatureSearchBar";
 
 export default async function Miniatures({searchParams}: {
@@ -9,7 +9,7 @@ export default async function Miniatures({searchParams}: {
     const factionFilter = typeof searchParams.factionFilter === 'string' ? searchParams.factionFilter : undefined;
     const releaseWaveFilter = typeof searchParams.releaseWaveFilter === 'string' ? searchParams.releaseWaveFilter : undefined;
 
-    const figures = await getFigureGridInfo();
+    const figures = await getFigures();
     const factions = await getFactions();
     const releaseWaves = await getReleaseWaves();
 
