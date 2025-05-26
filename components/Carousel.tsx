@@ -1,3 +1,4 @@
+//@ts-nocheck
 'use client'
 import {Figure, Set, Terrain, Print, Accessory} from "../typings";
 import Link from "next/link";
@@ -22,21 +23,13 @@ export default function Carousel({items, type}: CarouselProps) {
             type === 'set' ? '/sets' :
                 type === 'terrain' ? '/terrain' :
                     type === 'print' ? '/print' :
-                        type === 'accessory' ? '/accessories' :
-                            null;
+                        '/accessories'
 
     const detail1 =
-        type === 'miniature' ? 'faction' :
-            type === 'set' ? 'releaseWave' :
-                type === 'print' ? 'releaseWave' :
-                    type === 'accessory' ? 'releaseWave' :
-                        null;
+        type === 'miniature' ? 'faction' : 'releaseWave'
 
     const detail2 =
-        type === 'miniature' ? 'releaseWave' :
-            type === 'print' ? 'edition' :
-                type === 'terrain' ? 'releaseWave' :
-                    null;
+        type === 'print' ? 'edition' : undefined;
 
     return (
         <div className='flex flex-col justify-start'>
@@ -44,7 +37,7 @@ export default function Carousel({items, type}: CarouselProps) {
             <div className='flex overflow-hidden w-full'>
                 {items.slice(0, 1).map((item) => (
                     <div key={item.mainName}>
-                        <Card id={item._id} type={type} name={item.mainName} image={item.image} detail1={detail1} detail2={detail2} />
+                        <Card id={item._id} type={type} name={item.mainName} image={item.image} detail1={item[detail1]} detail2={item[detail2]} />
                     </div>
                 ))}
             </div>

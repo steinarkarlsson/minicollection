@@ -8,8 +8,7 @@ import {
     getTerrain
 } from "../../lib/sanityQueries";
 import {MiniatureSearchBar} from "../../components/searchBar/MiniatureSearchBar";
-import Card from "../../components/Card";
-import GroupedGrid from "../../components/GroupedGrid";
+import {GroupedGrid} from "../../components/GroupedGrid";
 
 export default async function componentLibrary() {
     const searchFilter = 'aragorn'

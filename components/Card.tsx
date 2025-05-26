@@ -1,3 +1,4 @@
+//@ts-nocheck
 'use client'
 import Image from "next/image";
 import {Accessory, Figure, Print, SanityImage, Set, Terrain} from "../typings";

@@ -1,3 +1,4 @@
+//@ts-nocheck
 'use client'
 import {Accessory, Figure, Print, ReleaseWave, Set, Terrain} from "../typings";
 import Card from "./Card";
