@@ -27,7 +27,7 @@ export function Grid({type, items}: GridProps) {
         type === 'miniature' || type === 'accessory' || type === 'set' || type === 'terrain' || type === 'print' ? 'mainName' : 'name';
 
     return (
-        <div className="flex flex-row flex-wrap gap-6 border-2 border-red-500">
+        <div className="flex flex-row flex-wrap gap-6">
             {items.map((item) => (
                 <Card type={type} name={item[name]} image={item.image} detail1={item[detail1]} detail2={item[detail2]} id={item._id}/>
             ))}
