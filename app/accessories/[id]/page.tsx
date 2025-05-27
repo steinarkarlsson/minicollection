@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import {useEffect, useState} from 'react';
-import {Accessory} from '../../../typings';
+import {AccessoryFull} from '../../../typings';
 import Spinner from "../../../components/Spinner";
 import {SetDetailsTable} from "../../../components/detailsModal/SetDetailsTable";
 import {getAccessoryDetails} from "../../../lib/sanityQueries";
@@ -10,7 +10,7 @@ import {usePathname} from "next/navigation";
 
 export default function Page() {
     const [isLoading, setIsLoading] = useState<boolean>(true);
-    const [accessory, setAccessory] = useState<Accessory>();
+    const [accessory, setAccessory] = useState<AccessoryFull>();
     const pathname = usePathname()
 
     const id = pathname.split('/').pop();

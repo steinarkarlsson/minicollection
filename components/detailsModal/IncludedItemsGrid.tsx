@@ -1,8 +1,8 @@
-import {Set} from "../../typings";
+import {SetFull} from "../../typings";
 import IncludedItemCard from "./IncludedItemCard";
 
 interface IncludedItemsTableProps {
-    item: Set | undefined;
+    item: SetFull | undefined;
 }
 
 export const IncludedItemsGrid = ({item}: IncludedItemsTableProps) => {

@@ -1,117 +1,85 @@
 
-export interface Figure {
+export interface FigureCard {
     _id: string
-    type?: string
-    releaseWave?: {
-        name: string
-    }
-    mainName: string
-    material?: string[]
-    faction?: {
-        name: string
-    }[]
-    image?: SanityImage
-    character?:{
-        name: string
-    }[]
-    status?: string
-}
-
-export interface GridFigure {
-    _id: string
+    _type: string
     mainName: string
     image?: SanityImage
     releaseWave?: { name: string }
     faction?: { name:string }[]
+    armyList?: { name: string }[]
     status?:string
 }
 
-export interface Set {
-    _id: string
-    _type: string
-    mainName: string
-    image?: SanityImage
-    releaseWave?: { name: string }
-    faction?: { name:string }[]
-    figures: {
-        _id: string,
-        mainName:string,
-        image?: SanityImage
-    }[]
-    print: {
-        _ref: string
-    }[]
-    terrain: {
-        _ref: string
-    }[]
-    description: {
-        _type: string
-        children: {
-            text: string
-        }[]
-    }[]
-}
-
-export interface GridSet {
-    _id: string
-    _type: string
-    mainName: string
-}
-
-export interface Terrain {
-    _id: string
-    _type: string
-    mainName: string
-    image?: SanityImage
+export interface FigureFull extends FigureCard {
     gallery?: SanityImage[]
-    releaseWave?: { name: string }
+    type?: string
+    material?: string[]
+    character?:{ name: string }[]
+    baseSize?: string
+    race?: {name: string}[]
+    description?: Description
+    officialDescription?: Description
+    references?: string[]
+    alias?: string
+    sculptor?: { name: string}[]
     featured?: boolean
 }
 
-export interface GridTerrain {
-    _id: string
-    _type: string
-    mainName: string
-}
-
-export interface Print {
+export interface SetCard {
     _id: string
     _type: string
     mainName: string
     image?: SanityImage
+    releaseWave?: { name: string }
+}
+
+export interface SetFull extends SetCard {
+    figures: FigureCard[]
+    print: PrintCard[]
+    terrain: TerrainCard[]
+    accessory: AccessoryCard[]
+    description: Description
+}
+
+export interface TerrainCard {
+    _id: string
+    _type: string
+    mainName: string
+    image?: SanityImage
+    releaseWave?: { name: string }
+    featured?:boolean
+}
+
+export interface TerrainFull extends TerrainCard {
     gallery?: SanityImage[]
-    description: {
-        _type: string
-        children: {
-            text: string
-        }[]
-    }[]
+}
+
+export interface PrintCard {
+    _id: string
+    _type: string
+    mainName: string
+    image?: SanityImage
     edition?: {name: string}
     releaseWave?: { name: string }
 }
 
-export interface Accessory {
+export interface PrintFull extends PrintCard {
+    gallery?: SanityImage[]
+    description: Description
+}
+
+export interface AccessoryCard {
     _id: string
     _type: string
     mainName: string
     image?: SanityImage
-    gallery?:  SanityImage[]
-    description?: {
-        _type: string
-        children: {
-            text: string
-        }[]
-    }[]
-    releaseWave?: {
-        name: string
-    }
-    featured?: boolean
+    releaseWave?: { name: string }
 }
 
-export interface GridPrint {
-    _id: string
-    _type: string
-    mainName: string
+export interface AccessoryFull extends AccessoryCard {
+    gallery?:  SanityImage[]
+    description?: Description
+    featured?: boolean
 }
 
 export interface Character {
@@ -123,28 +91,32 @@ export interface Character {
 export interface Faction {
     _id: string
     _type: string
-    alignment: string
     name: string
+    alignment?: string
+    icon?: SanityImage
+}
+
+export interface ArmyList {
+    _id: string
+    _type: string
+    name: string
+    alignment?: string
+    icon?: SanityImage
 }
 
 export interface ReleaseWave {
     _id: string
     _type: string
     name: string
-    releaseDate: string
+    releaseDate?: string
 }
 
 export interface Edition {
     _id: string
     _type: string
     name: string
-    releaseDate: string
-    description: {
-        _type: string
-        children: {
-            text: string
-        }[]
-    }[]
+    releaseDate?: string
+    description?: Description
 }
 
 export interface SanityImage {
@@ -153,4 +125,25 @@ export interface SanityImage {
             _ref: string,
             _type: string
         }
+}
+
+export interface Description {
+    _type: string
+    children: {
+        text: string
+    }[]
+}[]
+
+export interface Sculptor {
+    _id: string
+    _type: string
+    name: string
+}
+
+export interface Packaging {
+    _id: string
+    _type: string
+    name: string
+    image?: SanityImage
+    description?: Description
 }

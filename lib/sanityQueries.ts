@@ -1,4 +1,16 @@
-import {Accessory, Edition, Faction, Figure, Print, ReleaseWave, Set, Terrain} from "../typings";
+import {
+    AccessoryCard,
+    AccessoryFull,
+    ArmyList,
+    Edition,
+    Faction,
+    FigureCard,
+    FigureFull, PrintCard,
+    PrintFull,
+    ReleaseWave, SetCard,
+    SetFull, TerrainCard,
+    TerrainFull
+} from "../typings";
 import {sanityClient} from "./sanityClient";
 
 export async function getFigures(searchFilter: string = '', factionFilter: string = '', releaseWaveFilter: string = '', count: number = 32) {
@@ -9,30 +21,32 @@ export async function getFigures(searchFilter: string = '', factionFilter: strin
 
     const results = await sanityClient.fetch(`*[_type == "figure" ${searchString} ${factionString} ${releaseWaveString}] | order(releaseWave->releaseDate desc, faction[0]->name, type, mainName, defined(image.asset) desc)[0...${count}] {
         _id,
+        _type,
         mainName,
         image,
         releaseWave->{name},
         faction[]->{name},
         armyList[]->{name},
+        status,
     }`, {
         searchFilter,
         factionFilter,
         releaseWaveFilter
     });
-    return results as Figure[];
+    return results as FigureCard[];
 }
 
 
 export async function getSets(count: number = 100) {
     return await sanityClient.fetch(`*[_type == "set"] | order(defined(image.asset) desc) {
         _id,
+        _type,
         mainName,
         image,
         releaseWave->{name},
-        figures[]->{mainName, image, _id}
         }[0...${count}]`,
         {},
-        {next: {tags: ['sets']}}) as Set[];
+        {next: {tags: ['sets']}}) as SetCard[];
 }
 
 export async function getTerrain(count: number = 100) {
@@ -41,12 +55,11 @@ export async function getTerrain(count: number = 100) {
         _type,
         mainName,
         image,
-        gallery,
         releaseWave->{name},
         featured
     } | order(mainName asc)[0...${count}]`,
         {},
-        {next: {tags: ['terrain']}}) as Terrain[];
+        {next: {tags: ['terrain']}}) as TerrainCard[];
 }
 
 export async function getPrints(count: number = 100) {
@@ -55,14 +68,11 @@ export async function getPrints(count: number = 100) {
         _type,
         mainName,
         image,
-        gallery,
-        description,
-        releaseWave->{name},
         edition->{name},
-        featured
+        releaseWave->{name},
     } | order(mainName asc)[0...${count}]`,
         {},
-        {next: {tags: ['prints']}}) as Print[];
+        {next: {tags: ['prints']}}) as PrintCard[];
 }
 
 export async function getAccessories(count: number = 100) {
@@ -71,19 +81,22 @@ export async function getAccessories(count: number = 100) {
         _type,
         mainName,
         image,
-        gallery,
-        description,
         releaseWave->{name},
-        featured
     } | order(mainName asc)[0...${count}]`,
         {},
-        {next: {tags: ['accessories']}}) as Accessory[];
+        {next: {tags: ['accessories']}}) as AccessoryCard[];
 }
 
 export async function getFactions() {
     return await sanityClient.fetch(`*[_type == "faction"] | order(alignment desc, name asc)`,
         {},
         {next: {tags: ['factions']}}) as Faction[];
+}
+
+export async function getArmyLists() {
+    return await sanityClient.fetch(`*[_type == "armyList"] | order(alignment desc, name asc)`,
+        {},
+        {next: {tags: ['armyLists']}}) as ArmyList[];
 }
 
 export async function getReleaseWaves() {
@@ -101,52 +114,91 @@ export async function getEditions() {
 export async function getFigureDetails(id: string) {
     return await sanityClient.fetch(`*[_type == "figure" && _id == $id]{
     _id,
+    _type,
     mainName,
     image,
     releaseWave->{name},
     faction[]->{name},
+    armyList[]->{name},
+    status,
+    gallery,
     type,
     material,
     character[]->{name},
-    description,
-    race,
     baseSize,
-    alias
-    }`, {id}) as Figure[];
+    race[]->{name},
+    description,
+    officialDescription,
+    references,
+    alias,
+    sculptor[]->{name},
+    featured,
+    }`, {id}) as FigureFull[];
 }
 
 export async function getSetDetails(id: string) {
     return await sanityClient.fetch(`*[_type == "set" && _id == $id][0] {
     _id,
+    _type,
     mainName,
     image,
     releaseWave->{name},
-    figures[]->{mainName, image, _id}
-    }`, {id}) as Set;
+    figures[]->{
+        _id,
+        mainName, 
+        image, 
+        releaseWave->{name},
+        faction[]->{name},
+        armyList[]->{name},
+        status,
+     },
+     print[]->{
+        _id,
+        mainName,
+        image,
+        edition->{name},
+        releaseWave->{name},
+     },
+     terrain[]->{
+        _id,
+        mainName,
+        image,
+        releaseWave->{name},
+     },
+     accessory[]->{
+        _id,
+        mainName,
+        image,
+        releaseWave->{name},
+     },
+     description,
+    }`, {id}) as SetFull;
 }
 
 export async function getPrintDetails(id: string) {
     return await sanityClient.fetch(`*[_type == "print" && _id == $id][0] {
     _id,
+    _type,
     mainName,
     image,
+    edition->{name},
+    releaseWave->{name},
     gallery,
     description,
-    releaseWave->{name},
-    }`, {id}) as Print;
+    }`, {id}) as PrintFull;
 }
 
 export async function getAccessoryDetails(id: string) {
     return await sanityClient.fetch(`*[_type == "accessory" && _id == $id][0] {
     _id,
     _type,
-    name,
+    mainName,
     image,
+    releaseWave->{name},
     gallery,
     description,
-    releaseWave->{name},
     featured
-    }`, {id}) as Accessory;
+    }`, {id}) as AccessoryFull;
 }
 
 export async function getTerrainDetails(id: string) {
@@ -155,65 +207,71 @@ export async function getTerrainDetails(id: string) {
     _type,
     mainName,
     image,
-    gallery,
     releaseWave->{name},
-    featured
-    }`, {id}) as Terrain;
+    featured,
+    gallery
+    }`, {id}) as TerrainFull;
 }
 
 export async function getFeaturedSets() {
     return await sanityClient.fetch(`*[_type == "set" && featured]{
     _id,
+    _type,
     mainName,
     image,
     releaseWave->{name}
-    }`) as Set[];
+    }`) as SetFull[];
 }
 
 export async function getFeaturedFigures() {
     return await sanityClient.fetch(`*[_type == "figure" && featured]{
     _id,
+    _type,
     mainName,
     image,
     releaseWave->{name},
     faction[]->{name},
-    material,
-    }`) as Figure[];
+    armyList[]->{name},
+    status,
+    }`) as FigureCard[];
 }
 
 export async function getFeaturedTerrain() {
     console.log("getFeaturedTerrain");
     return await sanityClient.fetch(`*[_type == "terrain" && featured]{
     _id,
+    _type,
     mainName,
     image,
-    releaseWave->{name},
+    releaseWave->{name}
     }`,
     {},
-    {next: {tags: ['terrain']}}) as Terrain[];
+    {next: {tags: ['terrain']}}) as TerrainCard[];
 }
 
 export async function getFeaturedAccessories() {
     console.log("getFeaturedAccessories");
     return await sanityClient.fetch(`*[_type == "accessory" && featured]{
     _id,
+    _type,
     mainName,
     image,
     releaseWave->{name},
     }`,
     {},
-    {next: {tags: ['accessories']}}) as Accessory[];
+    {next: {tags: ['accessories']}}) as AccessoryCard[];
 }
 
 export async function getFeaturedPrint() {
     console.log("getFeaturedPrint");
     return await sanityClient.fetch(`*[_type == "print" && featured]{
     _id,
+    _type,
     mainName,
     image,
-    releaseWave->{name},
     edition->{name},
+    releaseWave->{name}
     }`,
     {},
-    {next: {tags: ['prints']}}) as Print[];
+    {next: {tags: ['prints']}}) as PrintCard[];
 }

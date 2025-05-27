@@ -1,8 +1,8 @@
 import {Box, Table, TableContainer} from "@mui/material";
 import DetailsTableRow from './DetailsTableRow';
-import {Figure} from "../../typings";
+import {FigureFull} from "../../typings";
 
-function DetailsTable({figure}: { figure: Figure | undefined }) {
+function DetailsTable({figure}: { figure: FigureFull | undefined }) {
     return (
         <TableContainer component={Box}>
             <Table size="small" aria-label="simple table">

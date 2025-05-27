@@ -1,11 +1,11 @@
 //@ts-nocheck
 'use client'
-import {Accessory, Figure, Print, ReleaseWave, Set, Terrain} from "../typings";
+import {AccessoryFull, FigureFull, PrintFull, SetFull, TerrainFull} from "../typings";
 import Card from "./Card";
 
 interface GridProps {
     type: 'miniature' | 'set' | 'terrain' | 'print' | 'accessory'
-    items: Figure[] | Set[] | Terrain[] | Print[] | Accessory[]
+    items: FigureFull[] | SetFull[] | TerrainFull[] | PrintFull[] | AccessoryFull[]
 }
 
 export function Grid({type, items}: GridProps) {

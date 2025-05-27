@@ -1,12 +1,12 @@
 //@ts-nocheck
 'use client'
-import {Accessory, Edition, Faction, Figure, Print, ReleaseWave, Set, Terrain} from "../typings";
+import {AccessoryFull, Edition, Faction, FigureFull, PrintFull, ReleaseWave, SetFull, TerrainFull} from "../typings";
 import Card from "./Card";
 import Title from "./gridComponents/Title";
 
 interface GenericGridProps {
     type: 'miniature' | 'set' | 'terrain' | 'print' | 'accessory'
-    items: Figure[] | Set[] | Terrain[] | Print[] | Accessory[]
+    items: FigureFull[] | SetFull[] | TerrainFull[] | PrintFull[] | AccessoryFull[]
     grouping: ReleaseWave[] | Faction[] | Edition[]
     groupBy: 'releaseWave' | 'faction' | 'edition'
 }
@@ -34,7 +34,7 @@ export function GroupedGrid({type, items, grouping, groupBy}: GenericGridProps) 
         type === 'print'
             ? 'mainName' : 'name';
 
-    function checkIfItemInGroup(item: Figure | Set | Terrain | Print | Accessory, group: ReleaseWave | Faction | Edition, groupBy: 'releaseWave' | 'faction' | 'edition') {
+    function checkIfItemInGroup(item: FigureFull | SetFull | TerrainFull | PrintFull | AccessoryFull, group: ReleaseWave | Faction | Edition, groupBy: 'releaseWave' | 'faction' | 'edition') {
         const groupValue = item[groupBy];
         if (Array.isArray(groupValue)) {
             return groupValue.some(obj => obj.name === group.name);

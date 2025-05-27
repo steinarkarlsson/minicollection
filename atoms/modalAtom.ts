@@ -1,17 +1,17 @@
 import { atom } from 'recoil';
-import { Figure, Set } from '../typings';
+import { FigureFull, SetFull } from '../typings';
 
 export const modalState = atom<boolean>({
     key: 'modalState',
     default: false,
 });
 
-export const figureState = atom<Figure | null>({
+export const figureState = atom<FigureFull | null>({
     key: 'figureState',
     default: null,
 });
 
-export const itemState = atom<Figure | Set | null>({
+export const itemState = atom<FigureFull | SetFull | null>({
     key: 'itemState',
     default: null,
 });

@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import {useEffect, useState} from 'react';
-import {Terrain} from '../../../typings';
+import {TerrainFull} from '../../../typings';
 import Spinner from "../../../components/Spinner";
 import {SetDetailsTable} from "../../../components/detailsModal/SetDetailsTable";
 import {getTerrainDetails} from "../../../lib/sanityQueries";
@@ -10,7 +10,7 @@ import {usePathname} from "next/navigation";
 
 export default function Page() {
     const [isLoading, setIsLoading] = useState<boolean>(true);
-    const [terrain, setTerrain] = useState<Terrain>();
+    const [terrain, setTerrain] = useState<TerrainFull>();
     const pathname = usePathname()
 
     const id = pathname.split('/').pop();

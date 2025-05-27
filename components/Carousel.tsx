@@ -1,11 +1,11 @@
 //@ts-nocheck
 'use client'
-import {Accessory, Figure, Print, Set, Terrain} from "../typings";
+import {AccessoryFull, FigureFull, PrintFull, SetFull, TerrainFull} from "../typings";
 import Link from "next/link";
 import Card from "./Card";
 
 interface CarouselProps {
-    items: Figure[] | Set[] | Terrain[] | Print[] | Accessory[]
+    items: FigureFull[] | SetFull[] | TerrainFull[] | PrintFull[] | AccessoryFull[]
     type: 'miniature' | 'set' | 'terrain' | 'print' | 'accessory'
 }
 

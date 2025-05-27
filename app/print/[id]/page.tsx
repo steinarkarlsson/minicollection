@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import {useEffect, useState} from 'react';
-import {Print} from '../../../typings';
+import {PrintFull} from '../../../typings';
 import Spinner from "../../../components/Spinner";
 import {SetDetailsTable} from "../../../components/detailsModal/SetDetailsTable";
 import {getPrintDetails} from "../../../lib/sanityQueries";
@@ -10,7 +10,7 @@ import {usePathname} from "next/navigation";
 
 export default function Page() {
     const [isLoading, setIsLoading] = useState<boolean>(true);
-    const [print, setPrint] = useState<Print>();
+    const [print, setPrint] = useState<PrintFull>();
     const pathname = usePathname()
 
     const id = pathname.split('/').pop();

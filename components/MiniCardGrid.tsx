@@ -1,12 +1,12 @@
 'use client'
 
 import {useEffect, useState} from 'react';
-import {Faction, Figure, ReleaseWave} from "../typings";
+import {Faction, FigureFull, ReleaseWave} from "../typings";
 import {getFigures} from '../lib/sanityQueries';
 import Card from "./Card";
 
 interface MiniCardGridProps {
-    figures: Figure[];
+    figures: FigureFull[];
     searchFilter: string;
     factionFilter: string;
     releaseWaveFilter: string;
@@ -33,7 +33,7 @@ function useScrollToEnd(callback: () => void, isLoading: boolean) {
 }
 
 function MiniCardGrid({ releaseWaveFilter, searchFilter, factionFilter, releaseWaves }: MiniCardGridProps) {
-    const [displayedFigures, setDisplayedFigures] = useState<Figure[]>([]);
+    const [displayedFigures, setDisplayedFigures] = useState<FigureFull[]>([]);
     const [count, setCount] = useState<number>(32);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [visibleCards, setVisibleCards] = useState<number>(0);
@@ -54,7 +54,7 @@ function MiniCardGrid({ releaseWaveFilter, searchFilter, factionFilter, releaseW
     }, []);
 
     useEffect(() => {
-        getFigures(searchFilter, factionFilter, releaseWaveFilter, count).then((figures: Figure[]) => {
+        getFigures(searchFilter, factionFilter, releaseWaveFilter, count).then((figures: FigureFull[]) => {
             setDisplayedFigures(figures);
             setIsLoading(false);
         });
