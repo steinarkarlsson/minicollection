@@ -14,24 +14,6 @@ interface MiniCardGridProps {
     releaseWaves: ReleaseWave[];
 }
 
-function useScrollToEnd(callback: () => void, isLoading: boolean) {
-    useEffect(() => {
-        const handleScroll = () => {
-            const currentPosition = window.scrollY;
-            const bottomPosition = document.documentElement.scrollHeight - window.innerHeight - 50;
-
-            if (currentPosition >= bottomPosition && !isLoading) {
-                callback();
-            }
-        };
-
-        window.addEventListener('scroll', handleScroll);
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
-    }, [isLoading]);
-}
-
 function MiniCardGrid({ releaseWaveFilter, searchFilter, factionFilter, releaseWaves }: MiniCardGridProps) {
     const [displayedFigures, setDisplayedFigures] = useState<FigureFull[]>([]);
     const [count, setCount] = useState<number>(32);
@@ -69,9 +51,11 @@ function MiniCardGrid({ releaseWaveFilter, searchFilter, factionFilter, releaseW
         }
     }, [visibleCards, displayedFigures.length]);
 
-    useScrollToEnd(() => {
-        setCount(prevCount => prevCount + 6 * cardsPerRow);
-    }, isLoading);
+    function updateCount() {
+        !isLoading ? setCount(prevCount => prevCount + 6 * cardsPerRow) : null;
+    }
+
+
 
     return (
         <>
@@ -95,6 +79,7 @@ function MiniCardGrid({ releaseWaveFilter, searchFilter, factionFilter, releaseW
                     ) : null}
                 </div>
             ))}
+            <button onClick={updateCount}>See More</button>
         </>
     );
 }

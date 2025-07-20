@@ -33,10 +33,6 @@ function Card({type, id, name, image, detail1, detail2, badgeType}: Props) {
         type === 'terrain' ? 'terrain' :
         type === 'print' ? 'print' : type;
 
-    //console.log('Rendering card with props: type:', type, 'id:', id, 'name:', name, 'detail1:', detail1, 'detail2:', detail2)
-    // console.log(`detail1 - isArray:${Array.isArray(detail1)}, typeof:${typeof detail1} value:`, detail1)
-    // console.log(`detail2 - isArray:${Array.isArray(detail2)}, typeof:${typeof detail2} value:`, detail2)
-
     return (
         <Link href={`/${path}/${id}`}>
             <div
