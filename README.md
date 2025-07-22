@@ -26,7 +26,7 @@ To run this website locally, follow these steps:
 * Clone the repository: 
 
 ```Bash 
-git clone https://github.com/Devonquendi/minicollection.git
+git clone https://github.com/steinarkarlsson/minicollection.git
 ```
 * Install the dependencies: 
 ```Bash
