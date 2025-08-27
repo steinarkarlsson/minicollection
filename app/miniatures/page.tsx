@@ -2,9 +2,12 @@ import MiniCardGrid from "../../components/MiniCardGrid";
 import {getFactions, getFigures, getReleaseWaves} from "../../lib/sanityQueries";
 import {MiniatureSearchBar} from "../../components/searchBar/MiniatureSearchBar";
 
-export default async function Miniatures({searchParams}: {
-    searchParams: { [key: string]: string | string[] | undefined }
+export default async function Miniatures({
+                                             searchParams: searchParamsPromise
+                                         }: {
+    searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }) {
+    const searchParams = await searchParamsPromise;
     const searchFilter = typeof searchParams.searchFilter === 'string' ? searchParams.searchFilter : undefined;
     const factionFilter = typeof searchParams.factionFilter === 'string' ? searchParams.factionFilter : undefined;
     const releaseWaveFilter = typeof searchParams.releaseWaveFilter === 'string' ? searchParams.releaseWaveFilter : undefined;

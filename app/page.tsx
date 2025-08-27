@@ -8,9 +8,6 @@ export default async function Home() {
     const featuredAccessories = await getFeaturedAccessories();
     const featuredPrint = await getFeaturedPrint();
 
-    console.log('featuredAccessories:',featuredAccessories);
-    console.log('featuredPrint:',featuredPrint);
-
     return (
         <div className="flex items-center space-y-2 md:space-y-5 p-4">
             <div className="flex flex-wrap">

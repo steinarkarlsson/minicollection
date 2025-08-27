@@ -3,7 +3,6 @@ import Footer from "../components/Footer";
 import {SpeedInsights} from "@vercel/speed-insights/next";
 import {Analytics} from "@vercel/analytics/react"
 import React from "react";
-import RecoilRootWrapper from "./RecoilRootWrapper";
 import Header from "../components/header/Header";
 
 export const metadata = {
@@ -18,7 +17,6 @@ export default function RootLayout({children}: { children: React.ReactNode }) {
             <link rel="icon" href="/icon.png"/>
         </head>
         <body>
-        <RecoilRootWrapper>
             <div className='flex flex-col min-h-screen justify-between bg-gradient-to-b lg:h-[140vh] !h-screen'>
                 <Header/>
                 <main
@@ -29,7 +27,6 @@ export default function RootLayout({children}: { children: React.ReactNode }) {
             </div>
             <Analytics/>
             <SpeedInsights/>
-        </RecoilRootWrapper>
         </body>
         </html>
 

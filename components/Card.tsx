@@ -2,10 +2,9 @@
 'use client'
 import Image from "next/image";
 import {SanityImage} from "../typings";
-import {useRecoilState} from "recoil";
-import {modalState} from "../atoms/modalAtom";
 import Link from "next/link";
 import CardBadge from "./CardBadge";
+import {useRouter} from "next/navigation";
 
 interface Props {
     type: 'miniature' | 'set' | 'terrain' | 'print' | 'accessory'
@@ -18,10 +17,10 @@ interface Props {
 }
 
 function Card({type, id, name, image, detail1, detail2, badgeType}: Props) {
-    const [, setShowModal] = useRecoilState(modalState);
+    const router = useRouter();
 
     const handleClick = () => {
-        setShowModal(true);
+        router.push(`/miniatures/${id}`);
     };
 
     const cardWidth = type === 'set' || type === 'terrain' || type === 'accessory' ? 'w-80' : 'w-60';
@@ -32,10 +31,6 @@ function Card({type, id, name, image, detail1, detail2, badgeType}: Props) {
         type === 'set' ? 'sets' :
         type === 'terrain' ? 'terrain' :
         type === 'print' ? 'print' : type;
-
-    //console.log('Rendering card with props: type:', type, 'id:', id, 'name:', name, 'detail1:', detail1, 'detail2:', detail2)
-    // console.log(`detail1 - isArray:${Array.isArray(detail1)}, typeof:${typeof detail1} value:`, detail1)
-    // console.log(`detail2 - isArray:${Array.isArray(detail2)}, typeof:${typeof detail2} value:`, detail2)
 
     return (
         <Link href={`/${path}/${id}`}>
