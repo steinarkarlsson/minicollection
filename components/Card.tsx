@@ -28,15 +28,15 @@ function Card({type, id, name, image, detail1, detail2, badgeType}: Props) {
     const cardHeight = type === 'set' || type === 'terrain' || type === 'accessory' ? 'h-60' : 'h-80';
     const path =
         type === 'miniature' ? 'miniatures' :
-        type === 'accessory' ? 'accessories' :
-        type === 'set' ? 'sets' :
-        type === 'terrain' ? 'terrain' :
-        type === 'print' ? 'print' : type;
+            type === 'accessory' ? 'accessories' :
+                type === 'set' ? 'sets' :
+                    type === 'terrain' ? 'terrain' :
+                        type === 'print' ? 'print' : type;
 
     return (
         <Link href={`/${path}/${id}`}>
             <div
-                className={`group relative m-2 mx-2 ${cardWidth} overflow-hidden rounded-md pt-2 shadow-xl hover:shadow-yellow-200 transition delay-75 ease-in-out duration-600 border-2  border-gray-800 hover:border-white`}
+                className={`group border-2 relative m-2 mx-2 ${cardWidth} overflow-hidden rounded-md pt-2 shadow-xl hover:shadow-yellow-200 transition delay-75 ease-in-out duration-600 border-2 border-gray-800 hover:border-white`}
                 onClick={handleClick}
             >
                 <div className="absolute top-0 right-0 p-5">
@@ -53,30 +53,30 @@ function Card({type, id, name, image, detail1, detail2, badgeType}: Props) {
                             style={{objectFit: 'contain', width: 'auto', maxHeight: '100%'}}/>
                     ) : null}
                 </div>
-                <div className="px-6 text-m text-wrap">
+                <div className="px-4 h-16 text-m break-words overflow-hidden text-ellipsis line-clamp-2">
                     {name}
                 </div>
-                <div className="flex flex-row pt-4 pb-2">
-                    {Array.isArray(detail1) ?
-                        detail1.map((property, index) => (
-                            <div key={index} className="px-1">
-                                <span
-                                    className="inline-block w-auto whitespace-nowrap rounded-full bg-gray-800 px-3 pb-1 text-xs font-semibold text-gray-400">
-                                    {property.name}
-                                </span>
-                            </div>
-                            )) : null
-                    }
-                    {typeof detail1 === 'object' && detail1 !== null && name in detail1 ?
-                        <div key={detail1[name]} className="px-1">
-                                <span
-                                    className="inline-block w-auto whitespace-nowrap rounded-full bg-gray-800 px-3 pb-1 text-xs font-semibold text-gray-400">
-                                    {detail1[name]}
-                                </span>
-                        </div> : null
-                    }
-                </div>
-                <div className="flex flex-row pt-4 pb-2">
+                {/*<div className="flex flex-row border-white border-2 pt-4 pb-2">*/}
+                {/*    {Array.isArray(detail1) ?*/}
+                {/*        detail1.map((property, index) => (*/}
+                {/*            <div key={index} className="px-1">*/}
+                {/*                <span*/}
+                {/*                    className="inline-block w-auto whitespace-nowrap rounded-full bg-gray-800 px-3 pb-1 text-xs font-semibold text-gray-400">*/}
+                {/*                    {property.name}*/}
+                {/*                </span>*/}
+                {/*            </div>*/}
+                {/*        )) : null*/}
+                {/*    }*/}
+                {/*    {typeof detail1 === 'object' && detail1 !== null && name in detail1 ?*/}
+                {/*        <div key={detail1[name]} className="px-1">*/}
+                {/*                <span*/}
+                {/*                    className="inline-block w-auto whitespace-nowrap rounded-full bg-gray-800 px-3 pb-1 text-xs font-semibold text-gray-400">*/}
+                {/*                    {detail1[name]}*/}
+                {/*                </span>*/}
+                {/*        </div> : null*/}
+                {/*    }*/}
+                {/*</div>*/}
+                <div className="flex flex-row py-2 px-2">
                     {Array.isArray(detail2) ?
                         detail2.map((property, index) => (
                             <div key={index} className="px-1">

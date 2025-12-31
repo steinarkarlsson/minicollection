@@ -23,7 +23,7 @@ function MiniCardGrid({ releaseWaveFilter, searchFilter, factionFilter, releaseW
 
     useEffect(() => {
         const updateCardsPerRow = () => {
-            const cardWidth = 200; // Adjust this value based on your card width
+            const cardWidth = 200;
             const containerWidth = window.innerWidth;
             setCardsPerRow(Math.floor(containerWidth / cardWidth));
         };
@@ -68,8 +68,7 @@ function MiniCardGrid({ releaseWaveFilter, searchFilter, factionFilter, releaseW
                             <div className="flex flex-wrap justify-center lg:justify-start">
                                 {displayedFigures.map((figure, index) => (
                                     figure.releaseWave?.name === releaseWave.name ? (
-                                        <div key={figure.mainName + releaseWave.name + figure._id} className={`${index < visibleCards ? 'fade-in' : 'opacity-0'}`}>
-                                            {/*<MiniCard figure={figure} />*/}
+                                        <div key={figure.mainName + releaseWave.name + figure._id}>
                                             <Card type={'miniature'} name={figure.mainName} image={figure.image} detail1={figure.releaseWave} detail2={figure.faction} id={figure._id}/>
                                         </div>
                                     ) : null
@@ -80,6 +79,14 @@ function MiniCardGrid({ releaseWaveFilter, searchFilter, factionFilter, releaseW
                 </div>
             ))}
             <button onClick={updateCount}>See More</button>
+            <div className="flex justify-center">
+                <button
+                    onClick={updateCount}
+                    className="mt-8 mb-8 px-6 py-3 bg-black text-white font-semibold rounded-lg border-2 border-gray-800 hover:bg-gray-900 hover:border-white focus:outline-none focus:ring-2 focus:ring-gray-200 transition"
+                >
+                    See More
+                </button>
+            </div>
         </>
     );
 }
