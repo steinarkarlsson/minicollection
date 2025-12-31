@@ -78,7 +78,6 @@ function MiniCardGrid({ releaseWaveFilter, searchFilter, factionFilter, releaseW
                     ) : null}
                 </div>
             ))}
-            <button onClick={updateCount}>See More</button>
             <div className="flex justify-center">
                 <button
                     onClick={updateCount}
