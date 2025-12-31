@@ -4,6 +4,7 @@ import {Autocomplete, TextField} from "@mui/material";
 import React from "react";
 import {Faction} from "../../typings";
 import {useRouter} from "next/navigation";
+import Paper from '@mui/material/Paper';
 
 interface FactionSelectProps {
     filterObject: Faction[],
@@ -38,6 +39,9 @@ export function FactionSelect({filterObject, searchFilter, releaseWaveFilter}: F
             options={options}
             sx={{width: 300, input: {color: 'white'}, label: {color: 'gray'}}}
             onChange={handleChange}
+            PaperComponent={(props) => (
+                <Paper {...props} className="bg-gray-800 text-white" />
+            )}
             renderInput={(params) => <TextField {...params} label="Faction"/>}
         />
     )

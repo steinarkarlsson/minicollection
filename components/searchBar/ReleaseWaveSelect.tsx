@@ -4,6 +4,7 @@ import {Autocomplete, TextField} from "@mui/material";
 import React from "react";
 import {ReleaseWave} from "../../typings";
 import {useRouter} from "next/navigation";
+import Paper from '@mui/material/Paper';
 
 interface ReleaseWaveSelectProps {
     filterObject: ReleaseWave[],
@@ -36,6 +37,9 @@ export function ReleaseWaveSelect({filterObject, searchFilter, factionFilter}: R
             options={options}
             sx={{width: 300, input: {color: 'white'}, label: {color: 'gray'}}}
             onChange={handleChange}
+            PaperComponent={(props) => (
+                <Paper {...props} className="bg-gray-800 text-white" />
+            )}
             renderInput={(params) => <TextField {...params} label="Release Wave"/>}
         />
     )
