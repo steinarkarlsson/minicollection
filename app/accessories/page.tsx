@@ -1,9 +1,12 @@
 import {getAccessories, getEditions, getReleaseWaves} from "../../lib/sanityQueries";
 import {GroupedGrid} from "../../components/GroupedGrid";
 
-export default async function Accessories({searchParams}: {
-    searchParams: { [key: string]: string | string[] | undefined }
-}) {
+export default async function Accessories(
+    props: {
+        searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+    }
+) {
+    const searchParams = await props.searchParams;
     const searchFilter = typeof searchParams.searchFilter === 'string' ? searchParams.searchFilter : undefined;
     const releaseWaveFilter = typeof searchParams.releaseWaveFilter === 'string' ? searchParams.releaseWaveFilter : undefined;
     const editionFilter = typeof searchParams.editionFilter === 'string' ? searchParams.editionFilter : undefined;
